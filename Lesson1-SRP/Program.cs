@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace Lesson1_SRP
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
