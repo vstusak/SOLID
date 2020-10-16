@@ -13,11 +13,13 @@ namespace Lesson1_SRP
         static void Main(string[] args)
         {
             var retirementCalculator = new RetirementCalculator();
+            SalariesProvider salariesProvider = new SalariesProviderDb();
 
             //retirementCalculator.GenerateSalaries();
-            retirementCalculator.Process();
+            var salaries = salariesProvider.GetData();
+            var retirementSalary = retirementCalculator.CalculateRetirementMonthlySalary(salaries);
 
-            Console.WriteLine(retirementCalculator.RetirementSalary > 20000
+            Console.WriteLine(retirementSalary > 20000
                 ? "Congratulations and have a nice retirement"
                 : "You will need additional work now or in retirement, sorry");
 
@@ -26,15 +28,12 @@ namespace Lesson1_SRP
 
     public class RetirementCalculator
     {
-        public int RetirementSalary { get; set; }
-
-        public void Process()
+        public int CalculateRetirementMonthlySalary(IEnumerable<Salary> salaries)
         {
             var baseSalary = 10000;
             double multiplication = 1;
             var bonuses = new List<int>();
 
-            var salaries = JsonSerializer.Deserialize<IEnumerable<Salary>>(File.ReadAllText("salaries.json")).ToList();
 
             if (salaries.Count() > 50)
             {
@@ -51,10 +50,33 @@ namespace Lesson1_SRP
                 bonuses.Add(2000);
             }
 
-            RetirementSalary = Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+        }
+    }
+
+    public class Salary
+    {
+        public DateTime DateTime { get; set; }
+        public int Value { get; set; }
+    }
+
+    public class SalariesProvider
+    {
+        public virtual IEnumerable<Salary> GetData()
+        {
+            //system.io.abstractions
+            return JsonSerializer.Deserialize<IEnumerable<Salary>>(File.ReadAllText("salaries.json")).ToList();
+        }
+    }
+
+    public class SalariesProviderDb : SalariesProvider
+    {
+        public override IEnumerable<Salary> GetData()
+        {
+            return GenerateSalaries();
         }
 
-        public void GenerateSalaries()
+        private List<Salary> GenerateSalaries()
         {
             var salaryGenerator = new Random();
 
@@ -65,14 +87,9 @@ namespace Lesson1_SRP
                     { DateTime = new DateTime(2020, 9, 13).AddMonths(i * -1), Value = salaryGenerator.Next(5000, 50000) });
             }
 
-            var json = JsonSerializer.Serialize(salaries);
-            File.AppendAllText("salaries.json", json);
+            return salaries;
+            //var json = JsonSerializer.Serialize(salaries);
+            //File.AppendAllText("salaries.json", json);
         }
-    }
-
-    public class Salary
-    {
-        public DateTime DateTime { get; set; }
-        public int Value { get; set; }
     }
 }
