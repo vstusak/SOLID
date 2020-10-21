@@ -13,10 +13,11 @@ namespace Lesson1_SRP
             var retirementCalculator = new RetirementCalculator();
             var logger = new Logger();
 
-            var salaries = new SalariesGenerator().Load();
-            retirementCalculator.Process(salaries);
+            var salaries = new SalariesProvider().Load();
+            var retirementSalary = retirementCalculator.Process(salaries);
 
-            logger.Log(retirementCalculator.RetirementSalary > 20000
+            logger.Log($"Your retirement salary will be {retirementSalary}");
+            logger.Log(retirementSalary > 20000
                 ? "Congratulations and have a nice retirement"
                 : "You will need additional work now or in retirement, sorry");
         }
@@ -60,9 +61,7 @@ namespace Lesson1_SRP
 
     public class RetirementCalculator
     {
-        public int RetirementSalary { get; set; }
-
-        public void Process(IEnumerable<Salary> salaries)
+        public int Process(IEnumerable<Salary> salaries)
         {
             var baseSalary = 10000;
             double multiplication = 1;
@@ -83,10 +82,8 @@ namespace Lesson1_SRP
                 bonuses.Add(2000);
             }
 
-            RetirementSalary = Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
         }
-
-        
     }
 
     public class Salary
