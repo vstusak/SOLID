@@ -30,7 +30,11 @@ namespace Lesson1_SRP
     {
         public int CalculateRetirementMonthlySalary(IEnumerable<Salary> salaries)
         {
-            var baseSalary = 10000;
+            return CalculateRetirementMonthlySalary(salaries, 10000);
+        }
+
+        public int CalculateRetirementMonthlySalary(IEnumerable<Salary> salaries, int baseSalary)
+        {
             double multiplication = 1;
             var bonuses = new List<int>();
 

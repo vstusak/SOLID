@@ -1,9 +1,14 @@
 ﻿using System;
+using Lesson2_OCP.GreetingsServices;
 
 namespace Lesson2_OCP
 {
     public class Program
     {
+        //comment line/block/selected rows -> CTRL + K, C
+        //uncomment - || - -> CTRL + K, U
+        //complexita kodu -> Code Metrices
+
         static void Main(string[] args)
         {
             OCPApproaches ocpApproaches = new OCPApproaches();
@@ -12,14 +17,29 @@ namespace Lesson2_OCP
 
             ocpApproaches.ParameterBased("Hello world! Parameter.");
 
+            //Log(ocpApproaches);
             ocpApproaches.InheritanceBased();
             ocpApproaches = new OCPApproachesInherited();
             ocpApproaches.InheritanceBased();
+            //Log(new OCPApproachesInherited());
 
-            ocpApproaches = new OCPApproachesInjection(new GreetingsService());
+            ocpApproaches = new OCPApproachesInjection(new GoodbyeService());
             ((OCPApproachesInjection)ocpApproaches).InjectedBased();
         }
+
+        //public static void Log(OCPApproaches messageWriter)
+        //{
+        //    messageWriter.InheritanceBased();
+        //}
     }
+
+    //internal class GoodbyeService : GreetingsService
+    //{
+    //    public override string GetMessage()
+    //    {
+    //        return "Good bye!";
+    //    }
+    //}
 
     public class OCPApproaches
     {
@@ -49,9 +69,9 @@ namespace Lesson2_OCP
 
     public class OCPApproachesInjection : OCPApproaches
     {
-        private readonly GreetingsService _greetingsService;
+        private readonly IGreetingsService _greetingsService;
 
-        public OCPApproachesInjection(GreetingsService greetingsService)
+        public OCPApproachesInjection(IGreetingsService greetingsService)
         {
             _greetingsService = greetingsService;
         }
@@ -64,7 +84,7 @@ namespace Lesson2_OCP
 
     public class GreetingsService
     {
-        public string GetMessage()
+        public virtual string GetMessage()
         {
             return "Hello World! Injected.";
         }
