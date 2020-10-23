@@ -13,8 +13,11 @@ namespace Lesson1_SRP
             var retirementCalculator = new RetirementCalculator();
             var logger = new Logger();
 
-            var salaries = new SalariesProvider().Load();
-            var retirementSalary = retirementCalculator.Process(salaries);
+            SalariesProvider provider = new SalariesGeneratorCEO();
+            //SalariesGenerator salariesGenerator = new SalariesGenerator();
+            var salaries = provider.Load();
+
+            var retirementSalary = retirementCalculator.Process(salaries, 10000);
 
             logger.Log($"Your retirement salary will be {retirementSalary}");
             logger.Log(retirementSalary > 20000
@@ -22,7 +25,7 @@ namespace Lesson1_SRP
                 : "You will need additional work now or in retirement, sorry");
         }
     }
-
+    
     public class SalariesProvider
     {
         public virtual IEnumerable<Salary> Load()
@@ -51,6 +54,25 @@ namespace Lesson1_SRP
         }
     }
 
+    public class SalariesGeneratorCEO : SalariesProvider
+    {
+        public override IEnumerable<Salary> Load()
+        {
+            var salaryGenerator = new Random();
+
+            var salaries = new List<Salary>();
+            for (int i = 0; i < 100; i++)
+            {
+                salaries.Add(new Salary
+                    { DateTime = new DateTime(2020, 9, 13).AddMonths(i * -1), Value = salaryGenerator.Next(500000, 5000000) });
+            }
+
+            return salaries;
+            //var json = JsonSerializer.Serialize(salaries);
+            //File.AppendAllText("salaries.json", json);
+        }
+    }
+
     internal class Logger
     {
         public void Log(string message)
@@ -61,9 +83,8 @@ namespace Lesson1_SRP
 
     public class RetirementCalculator
     {
-        public int Process(IEnumerable<Salary> salaries)
+        public int Process(IEnumerable<Salary> salaries, int baseSalary)
         {
-            var baseSalary = 10000;
             double multiplication = 1;
             var bonuses = new List<int>();
             
