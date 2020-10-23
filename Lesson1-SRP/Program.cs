@@ -38,6 +38,10 @@ namespace Lesson1_SRP
             double multiplication = 1;
             var bonuses = new List<int>();
 
+            //move rules to rules provider (icnluding base salary)
+            //drive rules provider based on roles (based/manager/ceo)
+            //move rules to roles
+
 
             if (salaries.Count() > 50)
             {
