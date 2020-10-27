@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lesson2_OCP
 {
@@ -6,7 +7,7 @@ namespace Lesson2_OCP
     {
         static void Main(string[] args)
         {
-            OCPApproaches ocpApproaches = new OCPApproaches();
+            var ocpApproaches = new OCPApproaches();
 
             ocpApproaches.ExtremelyConcrete();
 
@@ -16,9 +17,34 @@ namespace Lesson2_OCP
             ocpApproaches = new OCPApproachesInherited();
             ocpApproaches.InheritanceBased();
 
-            ocpApproaches = new OCPApproachesInjection(new GreetingsService());
+            ocpApproaches = new OCPApproachesInjection(new HiGreetingsService());
             ((OCPApproachesInjection)ocpApproaches).InjectedBased();
         }
+    }
+
+    internal class GoodByeGreetingsService : IGreetingService
+    {
+        //public override string GetMessage()
+        //{
+        //    return base.GetMessage();
+        //}
+
+        public string GetMessage()
+        {
+            return "Good Bye!";
+        }
+    }
+
+    class HiGreetingsService : IGreetingService
+    {
+        public string GetMessage()
+        {
+            List<string> list = new List<string>();
+
+            return "Hi!";
+        }
+
+        
     }
 
     public class OCPApproaches
@@ -37,7 +63,13 @@ namespace Lesson2_OCP
         {
             Console.WriteLine("Hello World! Inherited parent.");
         }
+
+        //public virtual void InjectedBased()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
+
 
     public class OCPApproachesInherited : OCPApproaches
     {
@@ -49,24 +81,29 @@ namespace Lesson2_OCP
 
     public class OCPApproachesInjection : OCPApproaches
     {
-        private readonly GreetingsService _greetingsService;
+        private readonly IGreetingService _greetingService;
 
-        public OCPApproachesInjection(GreetingsService greetingsService)
+        public OCPApproachesInjection(IGreetingService greetingService)
         {
-            _greetingsService = greetingsService;
+            _greetingService = greetingService;
         }
 
         public void InjectedBased()
         {
-            Console.WriteLine(_greetingsService.GetMessage());
+            Console.WriteLine(_greetingService.GetMessage());
         }
     }
 
-    public class GreetingsService
+    public class GreetingsService : IGreetingService
     {
         public string GetMessage()
         {
             return "Hello World! Injected.";
         }
+    }
+
+    public interface IGreetingService
+    {
+        string GetMessage();
     }
 }

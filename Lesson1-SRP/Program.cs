@@ -13,6 +13,7 @@ namespace Lesson1_SRP
             var retirementCalculator = new RetirementCalculator();
             var logger = new Logger();
 
+            //logic to set correct role salaries
             SalariesProvider provider = new SalariesGeneratorCEO();
             //SalariesGenerator salariesGenerator = new SalariesGenerator();
             var salaries = provider.Load();
