@@ -46,13 +46,11 @@ namespace Lesson1_SRP
 
         public int CalculateRetirementMonthlySalary(IEnumerable<Salary> salaries, IEmployee employee)
         {
-            double multiplicationDefault = 1;
-            
             //move rules to rules provider (icnluding base salary)
             //drive rules provider based on roles (based/manager/ceo)
             //move rules to roles
 
-            var multiplicationResult = _multiplicationProvider.ApplyRules(multiplicationDefault, salaries);
+            var multiplicationResult = _multiplicationProvider.ApplyRules(employee.MultiplicationDefault, salaries);
             var bonusesResult = _bonusesProvider.ApplyRules(salaries);
             
             //example how to use more returning types
