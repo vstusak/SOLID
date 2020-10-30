@@ -12,12 +12,14 @@ namespace Lesson1_SRP
     {
         static void Main(string[] args)
         {
-            var retirementCalculator = new RetirementCalculator();
+            var multiplicationProvider = new MultiplicationProvider();
+            var bonusesProvider = new BonusesProvider();
+            var retirementCalculator = new RetirementCalculator(multiplicationProvider, bonusesProvider);
             SalariesProvider salariesProvider = new SalariesProviderDb();
 
             //retirementCalculator.GenerateSalaries();
             var salaries = salariesProvider.GetData();
-            var retirementSalary = retirementCalculator.CalculateRetirementMonthlySalary(salaries);
+            var retirementSalary = retirementCalculator.CalculateRetirementMonthlySalary(salaries, new Employee());
 
             Console.WriteLine(retirementSalary > 20000
                 ? "Congratulations and have a nice retirement"
@@ -28,37 +30,78 @@ namespace Lesson1_SRP
 
     public class RetirementCalculator
     {
-        public int CalculateRetirementMonthlySalary(IEnumerable<Salary> salaries)
+        private readonly MultiplicationProvider _multiplicationProvider;
+        private readonly BonusesProvider _bonusesProvider;
+
+        public RetirementCalculator(MultiplicationProvider multiplicationProvider, BonusesProvider bonusesProvider)
         {
-            return CalculateRetirementMonthlySalary(salaries, 10000);
+            _multiplicationProvider = multiplicationProvider;
+            _bonusesProvider = bonusesProvider;
         }
 
-        public int CalculateRetirementMonthlySalary(IEnumerable<Salary> salaries, int baseSalary)
-        {
-            double multiplication = 1;
-            var bonuses = new List<int>();
+        //public int CalculateRetirementMonthlySalary(IEnumerable<Salary> salaries)
+        //{
+        //    return CalculateRetirementMonthlySalary(salaries, new Employee());
+        //}
 
+        public int CalculateRetirementMonthlySalary(IEnumerable<Salary> salaries, IEmployee employee)
+        {
+            double multiplicationDefault = 1;
+            
             //move rules to rules provider (icnluding base salary)
             //drive rules provider based on roles (based/manager/ceo)
             //move rules to roles
 
+            var multiplicationResult = _multiplicationProvider.ApplyRules(multiplicationDefault, salaries);
+            var bonusesResult = _bonusesProvider.ApplyRules(salaries);
+            
+            //example how to use more returning types
+            //var result = GetSomething(salaries);
+            //Console.WriteLine(result.multiplication);
 
-            if (salaries.Count() > 50)
+            return Convert.ToInt32(employee.BaseRetirementSalary * multiplicationResult + bonusesResult.Sum());
+        }
+
+        //public (int multiplication, int bonuses) GetSomething(IEnumerable<Salary> salaries)
+        //{
+        //    return (0, 1000);
+        //}
+    }
+
+    public class BonusesProvider
+    {
+        public IEnumerable<int> ApplyRules(IEnumerable<Salary> salaries)
+        {
+            var bonuses = new List<int>();
+
+            if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
+            {
+                
+                bonuses.Add(2000);
+            }
+
+            return bonuses;
+        }
+    }
+
+    public class MultiplicationProvider
+    {
+
+        //todo: data vs reference types
+        public double ApplyRules(double multiplication, IEnumerable<Salary> salaries)
+        {
+            var enumerable = salaries.ToList();
+            if (enumerable.Count() > 50)
             {
                 multiplication += 0.3;
             }
 
-            if (salaries.Select(salary => salary.Value).Average() > 30000)
+            if (enumerable.Select(salary => salary.Value).Average() > 30000)
             {
                 multiplication += 1;
             }
 
-            if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
-            {
-                bonuses.Add(2000);
-            }
-
-            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+            return multiplication;
         }
     }
 
