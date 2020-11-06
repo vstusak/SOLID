@@ -6,24 +6,47 @@ namespace Lesson3_LSP
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Rectangle square = new Square();
+            square.Height = 4;
+            square.Width = 9;
+
+            var area = square.Area;
+            Console.WriteLine(area);
+            
+            //if(square is Square)
+            //{
+            //    Indikátor toho, že jsme nedodrželi principy dědičnosti
+            //}
         }
 
         public class Rectangle
         {
-            
+            protected int _height;
+            protected int _width;
+
+            public virtual int Height { get => _height; set => _height = value; }
+            public virtual int Width { get => _width; set => _width = value; }
+            public bool IsSquare => Height == Width;
+            public int Area => Height * Width;
         }
 
-        public class Square
+        public class Square : Rectangle
         {
-
+            //public override int Height { get => _height; set { _height = value; _width = value; } }
+            //public override int Width { get => _height; set { _height = value; } }
+            
         }
 
         public class Calculator
         {
-            public int CalculateArea()
+            public int CalculateArea(Rectangle rectangle)
             {
-                return 0;
+                return rectangle.Height * rectangle.Width;
+            }
+
+            public int CalculateArea(Square rectangle)
+            {
+                return rectangle.Height * rectangle.Height;
             }
         }
     }
