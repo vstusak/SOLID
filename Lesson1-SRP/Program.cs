@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 
 namespace Lesson1_SRP
 {
@@ -10,7 +8,9 @@ namespace Lesson1_SRP
     {
         static void Main(string[] args)
         {
-            var retirementCalculator = new RetirementCalculator();
+            var multiplicationRulesProvider = new MultiplicationRulesProvider();
+            var bonusesRulesProvider = new BonusesRulesProvider();
+            var retirementCalculator = new RetirementCalculator(multiplicationRulesProvider, bonusesRulesProvider);
             var logger = new Logger();
 
             //logic to set correct role salaries
@@ -26,51 +26,19 @@ namespace Lesson1_SRP
                 : "You will need additional work now or in retirement, sorry");
         }
     }
-    
-    public class SalariesProvider
-    {
-        public virtual IEnumerable<Salary> Load()
-        {
-            //using system.io.abstraction
-            return JsonSerializer.Deserialize<IEnumerable<Salary>>(File.ReadAllText("salaries.json"));
-        }
-    }
 
-    public class SalariesGenerator : SalariesProvider
+    internal class BonusesRulesProvider : IBonusesRulesProvider
     {
-        public override IEnumerable<Salary> Load()
+        public IEnumerable<int> ApplyRules(IEnumerable<Salary> salaries)
         {
-            var salaryGenerator = new Random();
+            var bonuses = new List<int>();
 
-            var salaries = new List<Salary>();
-            for (int i = 0; i < 100; i++)
+            if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
             {
-                salaries.Add(new Salary
-                    { DateTime = new DateTime(2020, 9, 13).AddMonths(i * -1), Value = salaryGenerator.Next(5000, 50000) });
+                bonuses.Add(2000);
             }
 
-            return salaries;
-            //var json = JsonSerializer.Serialize(salaries);
-            //File.AppendAllText("salaries.json", json);
-        }
-    }
-
-    public class SalariesGeneratorCEO : SalariesProvider
-    {
-        public override IEnumerable<Salary> Load()
-        {
-            var salaryGenerator = new Random();
-
-            var salaries = new List<Salary>();
-            for (int i = 0; i < 100; i++)
-            {
-                salaries.Add(new Salary
-                    { DateTime = new DateTime(2020, 9, 13).AddMonths(i * -1), Value = salaryGenerator.Next(500000, 5000000) });
-            }
-
-            return salaries;
-            //var json = JsonSerializer.Serialize(salaries);
-            //File.AppendAllText("salaries.json", json);
+            return bonuses;
         }
     }
 
@@ -84,11 +52,77 @@ namespace Lesson1_SRP
 
     public class RetirementCalculator
     {
-        public int Process(IEnumerable<Salary> salaries, int baseSalary)
+        private readonly IMultiplicationRulesProvider _multiplicationRulesProvider;
+        private readonly IBonusesRulesProvider _bonusesRulesProvider;
+
+        public RetirementCalculator(IMultiplicationRulesProvider multiplicationRulesProvider, IBonusesRulesProvider bonusesRulesProvider)
         {
-            double multiplication = 1;
-            var bonuses = new List<int>();
+            _multiplicationRulesProvider = multiplicationRulesProvider;
+            _bonusesRulesProvider = bonusesRulesProvider;
+        }
+
+        public int Process(IEnumerable<Salary> salaries, Employe emplyoee)
+        {
+            //double multiplication;
+            //switch (employeType)
+            //{
+            //    case EmployeType.Employee:
+            //        multiplication = 1;
+            //        break;
+            //    case EmployeType.CEO:
+            //        multiplication = 1.5;
+            //        break;
+            //    default:
+            //        throw new ArgumentOutOfRangeException(nameof(employeType), employeType, null);
+            //}
+
+            //var bonuses = new List<int>();
+
+            //1. neni dodrzeno SRP - presun pryc do vlastnich objektu
+            //if (salaries.Count() > 50)
+            //{
+            //    multiplication += 0.3;
+            //}
+
+            //if (salaries.Select(salary => salary.Value).Average() > 30000)
+            //{
+            //    multiplication += 1;
+            //}
+
+            //if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
+            //{
+            //    bonuses.Add(2000);
+            //}
+
             
+            var resultMultiplication = _multiplicationRulesProvider.ApplyRules(salaries, multiplication);
+            var resultBonuses = _bonusesRulesProvider.ApplyRules(salaries);
+
+            return Convert.ToInt32(baseSalary * resultMultiplication + resultBonuses.Sum());
+        }
+    }
+
+    //public enum EmployeType
+    //{
+    //    Employee,
+    //    CEO,
+    //    Manager
+    //}
+
+    public interface IBonusesRulesProvider
+    {
+        IEnumerable<int> ApplyRules(IEnumerable<Salary> salaries);
+    }
+
+    public interface IMultiplicationRulesProvider
+    {
+        double ApplyRules(IEnumerable<Salary> salaries, double multiplication);
+    }
+
+    public class MultiplicationRulesProvider : IMultiplicationRulesProvider
+    {
+        public double ApplyRules(IEnumerable<Salary> salaries, double multiplication)
+        {
             if (salaries.Count() > 50)
             {
                 multiplication += 0.3;
@@ -99,12 +133,7 @@ namespace Lesson1_SRP
                 multiplication += 1;
             }
 
-            if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
-            {
-                bonuses.Add(2000);
-            }
-
-            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+            return multiplication;
         }
     }
 
