@@ -38,17 +38,14 @@ namespace Lesson3_LSP
 
     public class Person
     {
-
     }
 
     public class Male : Person
     {
-
     }
 
     public class Female : Person
     {
-
     }
 }
 
