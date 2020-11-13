@@ -3,6 +3,22 @@ using System.Collections.Generic;
 
 namespace Lesson3_LSP
 {
+
+    public static class LspExtensions
+    {
+        public static string GetInfo(this Person person)
+        {
+            return person switch
+            {
+                Male _ => "It's male",
+                Female _ => "It's female",
+                Children _ => "It's children",
+                _ => "It's undefined"
+            };
+        }
+    }
+
+
     public class Violations
     {
         public void DoSomething()
@@ -11,18 +27,7 @@ namespace Lesson3_LSP
 
             foreach (Person person in people)
             {
-                if (person is Male)
-                {
-                    Console.WriteLine("It's male");
-                }
-                else if (person is Female)
-                {
-                    Console.WriteLine("It's female");
-                }
-                else
-                {
-                    Console.WriteLine("It's undefined");
-                }
+                Console.WriteLine(person.GetInfo()); 
             }
 
         }
@@ -45,6 +50,10 @@ namespace Lesson3_LSP
     }
 
     public class Female : Person
+    {
+    }
+
+    public class Children : Person
     {
     }
 }
