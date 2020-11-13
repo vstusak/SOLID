@@ -23,7 +23,7 @@ namespace Lesson3_LSP
         {
             var people = GeneratePeople();
 
-            foreach (Person person in people)
+            foreach (var person in people)
             {
                 Console.WriteLine(person.GetInfo()); 
             }
