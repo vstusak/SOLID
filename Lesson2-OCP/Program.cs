@@ -12,6 +12,15 @@ namespace Lesson2_OCP
         static void Main(string[] args)
         {
             OCPApproaches ocpApproaches = new OCPApproaches();
+            int? nullableInteger = null;
+            if (nullableInteger.HasValue)
+            {
+                Console.WriteLine($"Value of the integer: {nullableInteger.Value}");
+            }
+            else
+            {
+                Console.WriteLine($"Integer is null.");
+            }
 
             ocpApproaches.ExtremelyConcrete();
 

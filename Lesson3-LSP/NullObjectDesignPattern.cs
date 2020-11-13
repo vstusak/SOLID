@@ -9,7 +9,7 @@ namespace Lesson3_LSP
             var factory = new CalculatorFactory();
             var calculator = factory.Create("kids");
 
-            var result = calculator?.Calculate();
+            var result = calculator.Calculate();
             Console.WriteLine(result);
             
         }
@@ -19,15 +19,21 @@ namespace Lesson3_LSP
     {
         public Calculator Create(string type)
         {
-            switch (type)
+            //TODO argument null check
+            return type switch
             {
-                case "standard":
-                    return new Calculator();
-                case "science":
-                    return new ScienceCalculator();
-                default:
-                    return null;
-            }
+                "standard" => new Calculator(),
+                "science" => new ScienceCalculator(),
+                _ => new NullCalculator()
+            };
+        }
+    }
+
+    internal class NullCalculator : Calculator
+    {
+        public override int Calculate()
+        {
+            throw new Exception("This is non-generic NULL!");
         }
     }
 
@@ -35,7 +41,7 @@ namespace Lesson3_LSP
     {
         public override int Calculate()
         {
-            return 0;
+            return 42;
         }
     }
 
@@ -43,7 +49,7 @@ namespace Lesson3_LSP
     {
         public virtual int Calculate()
         {
-            return 1;
+            return 69;
         }
     }
 }
