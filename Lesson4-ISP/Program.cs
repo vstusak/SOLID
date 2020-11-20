@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Lesson4_ISP
+﻿namespace Lesson4_ISP
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-        }
-    }
+            var emailNotificationService = new EmailNotificationService();
+            var notificationServiceAdapter = new EmailNotificationServiceAdapter(emailNotificationService);
 
-    public interface INotificationService
-    {
-        void SendEmail(string address, string message);
-        void SendEmail(IEnumerable<string> addresses, string message);
-        void SendText(string phoneNumber, string message);
-        void SendPostcard(string name, string street, string town, string message);
-        void ShowPopup(string clientUri, string message);
+            Email email = new("example@mail.com", "Hello!");
+            notificationServiceAdapter.SendEmail(email);
+        }
     }
 }
