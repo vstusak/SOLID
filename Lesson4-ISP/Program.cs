@@ -7,7 +7,7 @@
             var emailNotificationService = new EmailNotificationService();
             var notificationServiceAdapter = new EmailNotificationServiceAdapter(emailNotificationService);
 
-            Email email = new("example@mail.com", "Hello!");
+            var email = new Email("example@mail.com", "Hello!");
             notificationServiceAdapter.SendEmail(email);
         }
     }
