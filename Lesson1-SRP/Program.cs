@@ -30,10 +30,10 @@ namespace Lesson1_SRP
 
     public class RetirementCalculator
     {
-        private readonly MultiplicationProvider _multiplicationProvider;
-        private readonly BonusesProvider _bonusesProvider;
+        private readonly IMultiplicationProvider _multiplicationProvider;
+        private readonly IBonusesProvider _bonusesProvider;
 
-        public RetirementCalculator(MultiplicationProvider multiplicationProvider, BonusesProvider bonusesProvider)
+        public RetirementCalculator(IMultiplicationProvider multiplicationProvider, IBonusesProvider bonusesProvider)
         {
             _multiplicationProvider = multiplicationProvider;
             _bonusesProvider = bonusesProvider;
@@ -66,7 +66,7 @@ namespace Lesson1_SRP
         //}
     }
 
-    public class BonusesProvider
+    public class BonusesProvider : IBonusesProvider
     {
         public IEnumerable<int> ApplyRules(IEnumerable<Salary> salaries)
         {
@@ -82,7 +82,7 @@ namespace Lesson1_SRP
         }
     }
 
-    public class MultiplicationProvider
+    public class MultiplicationProvider : IMultiplicationProvider
     {
 
         //todo: data vs reference types
