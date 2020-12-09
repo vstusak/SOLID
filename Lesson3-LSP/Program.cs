@@ -7,14 +7,20 @@ namespace Lesson3_LSP
     {
         static void Main(string[] args)
         {
-            var rectangle = new Square();
-            rectangle.Height = 5;
-            rectangle.Width = 9;
+            //var rectangle = new Square();
+            //rectangle.Height = 5;
+            //rectangle.Width = 9;
 
-            // cannot instantiate abstract class here: var shape = new Shape();
+            //// cannot instantiate abstract class here: var shape = new Shape();
 
-            Console.WriteLine(rectangle.IsSquare ? "Is square." : "Is rectangle.");
-            Console.WriteLine(rectangle.Area());
+            //Console.WriteLine(rectangle.IsSquare ? "Is square." : "Is rectangle.");
+            //Console.WriteLine(rectangle.Area());
+
+            //var violations = new Violations();
+            //violations.DoSomething("");
+
+            var nullObject = new NullObjectDesignPattern();
+            nullObject.DoSomething();
         }
 
         public abstract class Shape

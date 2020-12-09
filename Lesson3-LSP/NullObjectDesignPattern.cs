@@ -10,8 +10,7 @@ namespace Lesson3_LSP
             var calculator = factory.Create("kids");
 
             var result = calculator?.Calculate();
-            Console.WriteLine(result);
-            
+            Console.WriteLine($"Result: [{result}]");            
         }
     }
 
@@ -26,8 +25,24 @@ namespace Lesson3_LSP
                 case "science":
                     return new ScienceCalculator();
                 default:
-                    return null;
+                    return new UnknownCalculator(type);
             }
+        }
+    }
+
+    public class UnknownCalculator : Calculator
+    {
+        private string _message;
+
+        public UnknownCalculator(string message)
+        {
+            _message = message;
+        }
+        public override int Calculate()
+        {
+            Console.WriteLine($"Input type [{_message}] not recognized.");
+            //Good place for error log information
+            return -1; //Better to return an exception
         }
     }
 
@@ -39,7 +54,7 @@ namespace Lesson3_LSP
         }
     }
 
-    public class Calculator
+    public class Calculator : object
     {
         public virtual int Calculate()
         {

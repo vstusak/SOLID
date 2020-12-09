@@ -12,19 +12,31 @@ namespace Lesson3_LSP
         /// <param name="text"></param>
         public static void WriteInfo(this Person person, string text)
         {
+            switch (person) // Must be extended when something is changed in code - added child turtle etc.
+            {
+                case Male male:
+                    Console.WriteLine("It's male");
+                    break;
+                case Female _:
+                    Console.WriteLine("It's female");
+                    break;
+                default:
+                    Console.WriteLine("It's undefined");
+                    break;
+            }
             //if (person is Male) - equivalent to 
-            if (person.GetType() == typeof(Male) && person != null)
-            {
-                Console.WriteLine("It's male");
-            }
-            else if (person is Female)
-            {
-                Console.WriteLine("It's female");
-            }
-            else
-            {
-                Console.WriteLine("It's undefined");
-            }
+            //if (person.GetType() == typeof(Male) && person != null)
+            //{
+            //    Console.WriteLine("It's male");
+            //}
+            //else if (person is Female)
+            //{
+            //    Console.WriteLine("It's female");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("It's undefined");
+            //}
         }
 
         public static void NotNullOrArgumentNullException(this string text)
@@ -56,8 +68,8 @@ namespace Lesson3_LSP
             {
                 //TODO show the quick help - CTRL+SHIFT+F1 alternative
                 person.WriteInfo(inputParameter);
+                person.ShowDescription(inputParameter);
             }
-
         }
 
         private IEnumerable<Person> GeneratePeople()
@@ -71,22 +83,42 @@ namespace Lesson3_LSP
 
     public class Person
     {
-
+        public virtual void ShowDescription(string infoText)
+        {
+            Console.WriteLine("It's undefined");
+        }
     }
 
     public class Male : Person
     {
-
+        public override void ShowDescription(string infoText)
+        {
+            Console.WriteLine("It's male");
+        }
     }
 
     public class Female : Person
     {
-
+        public override void ShowDescription(string infoText)
+        {
+            Console.WriteLine("It's female");
+        }
     }
 
-    public class Child: Person
+    public class Child : Person
     {
+        public override void ShowDescription(string infoText)
+        {
+            Console.WriteLine("It's child");
+        }
+    }
 
+    public class Turtle: Person
+    {
+        public override void ShowDescription(string infoText)
+        {
+            Console.WriteLine("It's turtle");
+        }
     }
 }
 
