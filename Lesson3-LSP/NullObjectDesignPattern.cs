@@ -9,7 +9,7 @@ namespace Lesson3_LSP
             var factory = new CalculatorFactory();
             var calculator = factory.Create("kids");
 
-            var result = calculator?.Calculate();
+            var result = calculator.Calculate();
             Console.WriteLine($"Result: [{result}]");            
         }
     }
