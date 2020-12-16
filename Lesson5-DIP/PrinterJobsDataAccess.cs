@@ -6,10 +6,10 @@ namespace Lesson5_DIP
 {
     public class PrinterJobsDataAccess : IPrinterJobsDataAccess
     {
-        private SqlDataReader _dataReader;
+        private IDataReader _dataReader;
         //private readonly IFileSystem _fileSystem;
 
-        public PrinterJobsDataAccess(SqlDataReader dataReader)
+        public PrinterJobsDataAccess(IDataReader dataReader)
         {
             _dataReader = dataReader;
             //_fileSystem = fileSystem;
