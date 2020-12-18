@@ -7,7 +7,7 @@ namespace SOLID
         static void Main(string[] args)
         {
             var logger = new HistoryFileLogger();
-            var calculator = new BaseCalculator();
+            var calculator = new BaseCalculator(logger);
             var result = calculator.Calculate();
 
             logger.LogHistory($"Result: {result}");

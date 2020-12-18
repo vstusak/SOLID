@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SOLID.Exceptions;
+using System;
 
 namespace SOLID
 {
@@ -6,6 +7,13 @@ namespace SOLID
     {
         public class BaseCalculator : ICalculator
         {
+            private readonly ICalculatorLogger _logger;
+
+            public BaseCalculator(ICalculatorLogger logger)
+            {
+                _logger = logger;
+            }
+
             private (int,int) GetInputs()
             {
                 Console.WriteLine("\nset value 1");
@@ -34,7 +42,16 @@ namespace SOLID
             {
                 (var a, var b) = GetInputs();
                 var operation = GetOperation(a, b);
-                return operation.Execute();
+                try
+                {
+                    return operation.Execute();
+                } 
+                catch (CalculatorInputException e)
+                {
+                    _logger.LogHistory(e.Message);
+                    return 0;
+                }
+                
             }
         }
     }
