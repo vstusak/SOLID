@@ -1,5 +1,8 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using SOLID.Enums;
+using SOLID.InputReader;
+using SOLID.Logger;
 
 namespace SOLID
 {
@@ -7,70 +10,21 @@ namespace SOLID
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Set Command (+. -, *, /");
-            var key = Console.ReadKey();
+            var loggers = new List<ILogger>() {new ConsoleLogger(), new FileLogger()};
+            var calculator = new Calculator.Calculator(new ConsoleReader(), loggers);
 
-            switch (key.KeyChar)
+            try
             {
-                case '+':
-                    Add();
-                    break;
-                case '-':
-                    Sub();
-                    break;
-                case '*':
-                    Mul();
-                    break;
-                case '/':
-                    Div();
-                    break;
-                default:
-                    Console.WriteLine("Not supported");
-                    break;
+                calculator.Calculate();
             }
-        }
-
-        private static void Add()
-        {
-            Console.WriteLine("\nset value 1");
-            var value1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("set value 2");
-            var value2 = int.Parse(Console.ReadLine());
-
-            var result = value1 + value2;
-
-            var output = $"{value1} + {value2} = {result}";
-            Console.WriteLine(output);
-            LogHistory(output);
-        }
-
-        private static void Sub()
-        {
-            Console.WriteLine("\nset value 1");
-            var value1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("set value 2");
-            var value2 = int.Parse(Console.ReadLine());
-
-            var result = value1 - value2;
-
-            var output = $"{value1} - {value2} = {result}";
-            Console.WriteLine(output);
-            LogHistory(output);
-        }
-
-        private static void Mul()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void Div()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void LogHistory(string output)
-        {
-            File.AppendAllText("log.json", $"{DateTime.UtcNow} : {output}\n");
+            catch (NotSupportedException)
+            {
+                Environment.Exit(ExitCode.NotSupportedOperation);
+            }
+            catch (DivideByZeroException)
+            {
+                Environment.Exit(ExitCode.InvalidArgument);
+            }
         }
     }
 }
