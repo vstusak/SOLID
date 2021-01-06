@@ -14,7 +14,7 @@ namespace Lesson4_ISP
         }
     }
 
-    public class EmailAndPostcardNotificationService : IEmailNotificationService, IPostcardNotificationService
+    public class EmailAndPostcardNotificationService : IEmailAndPostcardNotificationService
     {
         void IEmailNotificationService.Send(string address, string message)
         {
@@ -35,6 +35,10 @@ namespace Lesson4_ISP
         {
             throw new NotImplementedException();
         }
+    }
+
+    public interface IEmailAndPostcardNotificationService : IEmailNotificationService, IPostcardNotificationService
+    {
     }
 
     public interface IEmailNotificationService
