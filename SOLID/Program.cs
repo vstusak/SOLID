@@ -1,4 +1,6 @@
 ﻿using System;
+using SOLID.Logging;
+using SOLID.Util;
 
 namespace SOLID
 {

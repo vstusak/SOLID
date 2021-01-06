@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SOLID
+namespace SOLID.Util
 {
     public class ValueGetter
     {

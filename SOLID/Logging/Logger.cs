@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace SOLID
+namespace SOLID.Logging
 {
     public class Logger : ILogger
     {
