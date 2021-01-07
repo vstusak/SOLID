@@ -2,14 +2,20 @@
 {
     public class AddOperation : IOperation
     {
-        public int Calculate(int value1, int value2)
+        private const string OperationName = "Summation";
+        public string GetOperationName()
         {
-            return value1 + value2;
+            return OperationName;
+        }
+        
+        public int Calculate(int addend1, int addend2)
+        {
+            return addend1 + addend2;
         }
 
-        public string GetCalculationString(int value1, int value2)
+        public string GetCalculationString(int addend1, int addend2)
         {
-            return $"{value1} + {value2} = {Calculate(value1,value2)}";
+            return $"{addend1} + {addend2} = {Calculate(addend1, addend2)}";
         }
     }
 }

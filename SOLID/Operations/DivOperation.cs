@@ -4,26 +4,32 @@ namespace SOLID.Operations
 {
     public class DivOperation : IOperation
     {
-        public int Calculate(int value1, int value2)
+        private const string OperationName = "Division";
+        public string GetOperationName()
         {
-            if (value2 == 0)
+            return OperationName;
+        }
+        
+        public int Calculate(int dividend, int divisor)
+        {
+            if (divisor == 0)
             {
                 throw new NotSupportedException("Division by zero is not supported.");
             }
-            return value1 / value2;
+            return dividend / divisor;
         }
 
-        private static int CalculateRemainder(int value1, int value2)
+        private static int CalculateRemainder(int dividend, int divisor)
         {
-            return value1 % value2;
+            return dividend % divisor;
         }
 
-        public string GetCalculationString(int value1, int value2)
+        public string GetCalculationString(int dividend, int divisor)
         {
-            var division = Calculate(value1, value2);
-            var remainder = CalculateRemainder(value1, value2);
-            var divisionString = $"{value1} / {value2} = {division}";
-            var remainderString = remainder == 0 ? string.Empty : $" (Remainder: {CalculateRemainder(value1, value2)})";
+            var division = Calculate(dividend, divisor);
+            var remainder = CalculateRemainder(dividend, divisor);
+            var divisionString = $"{dividend} / {divisor} = {division}";
+            var remainderString = remainder == 0 ? string.Empty : $" (Remainder: {CalculateRemainder(dividend, divisor)})";
             return $"{divisionString}{remainderString}";
         }
     }

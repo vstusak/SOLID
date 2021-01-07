@@ -2,14 +2,20 @@
 {
     public class MulOperation : IOperation
     {
-        public int Calculate(int value1, int value2)
+        private const string OperationName = "Multiplication";
+        public string GetOperationName()
         {
-            return value1 * value2;
+            return OperationName;
+        }
+        
+        public int Calculate(int multiplier, int multiplicand)
+        {
+            return multiplier * multiplicand;
         }
 
-        public string GetCalculationString(int value1, int value2)
+        public string GetCalculationString(int multiplier, int multiplicand)
         {
-            return $"{value1} * {value2} = {Calculate(value1, value2)}";
+            return $"{multiplier} * {multiplicand} = {Calculate(multiplier, multiplicand)}";
         }
     }
 }

@@ -2,14 +2,20 @@
 {
     public class SubOperation : IOperation
     {
-        public int Calculate(int value1, int value2)
+        private const string OperationName = "Subtraction";
+        public string GetOperationName()
         {
-            return value1 - value2;
+            return OperationName;
+        }
+        
+        public int Calculate(int minuend, int subtrahend)
+        {
+            return minuend - subtrahend;
         }
 
-        public string GetCalculationString(int value1, int value2)
+        public string GetCalculationString(int minuend, int subtrahend)
         {
-            return $"{value1} - {value2} = {Calculate(value1, value2)}";
+            return $"{minuend} - {subtrahend} = {Calculate(minuend, subtrahend)}";
         }
     }
 }
