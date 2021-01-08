@@ -9,12 +9,16 @@ namespace SOLID.Operations
         {
             return OperationName;
         }
-        
+        public string GetOperationSymbol()
+        {
+            return "/";
+        }
+
         public int Calculate(int dividend, int divisor)
         {
             if (divisor == 0)
             {
-                throw new NotSupportedException("Division by zero is not supported.");
+                throw new DivideByZeroException("Division by zero is not supported.");
             }
             return dividend / divisor;
         }

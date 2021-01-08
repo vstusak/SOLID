@@ -1,5 +1,5 @@
 ﻿using System;
-using SOLID.Logging;
+using SOLID.InputOutput;
 using SOLID.Util;
 
 namespace SOLID
@@ -7,41 +7,62 @@ namespace SOLID
     public class Calculator
     {
         private readonly ILogger _logger;
+        private readonly ValueGetter _valueGetter;
+        private readonly OperationFactory _operationFactory;
+        private readonly IOutput _output;
 
-        public Calculator(ILogger logger)
+        public Calculator(ValueGetter valueGetter, OperationFactory operationFactory, ILogger logger, IOutput output)
         {
+            _valueGetter = valueGetter;
+            _operationFactory = operationFactory;
             _logger = logger;
+            _output = output;
         }
 
-        public void RunCalculator()
+        public bool RunCalculator()
         {
-            while (true)
+            try
             {
-                try
+                _valueGetter.ResetCounter();
+                var operation = _operationFactory.PromptForOperation();
+                _logger.Log($"Operation selected: {operation.GetOperationName()}");
+                if (operation.GetOperationSymbol() == "q")
                 {
-                    var operationDecider = new OperationDecider();
-                    var operation = operationDecider.PromptForOperation();
-                    _logger.Log($"Operation selected: {operation.GetOperationName()}");
-                    var valueGetter = new ValueGetter();
-
-                    var value1 = valueGetter.PromptForValue();
-                    _logger.Log($"Value entered: {value1}");
-                    var value2 = valueGetter.PromptForValue();
-                    _logger.Log($"Value entered: {value2}");
-                    var output = operation.GetCalculationString(value1, value2);
-                    Console.WriteLine(output);
-                    _logger.Log(output);
+                    return false;
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Exception occurred: {e.Message}");
-                    _logger.Log($"Exception occurred: {e.Message}");
-                }
-                finally
-                {
-                    Console.WriteLine();
-                }
+                
+                var value1 = _valueGetter.PromptForValue();
+                _logger.Log($"Value entered: {value1}");
+                var value2 = _valueGetter.PromptForValue();
+                _logger.Log($"Value entered: {value2}");
+                var calculationString = operation.GetCalculationString(value1, value2);
+                _output.Print(calculationString);
+                _logger.Log(calculationString);
             }
+            catch (NotSupportedException e)
+            {
+                var exceptionString = $"Not supported: {e.Message}";
+                _output.Print(exceptionString);
+                _logger.Log(exceptionString);
+            }
+            catch (DivideByZeroException)
+            {
+                const string exceptionString = "Division by zero is not valid.";
+                _output.Print(exceptionString);
+                _logger.Log(exceptionString);
+            }
+            catch (Exception e)
+            {
+                var exceptionString = $"Unknown exception occurred: {e.Message}. Stopping calculator.";
+                _output.Print(exceptionString);
+                _logger.Log(exceptionString);
+                return false;
+            }
+            finally
+            {
+                Console.WriteLine();
+            }
+            return true;
         }
     }
 }

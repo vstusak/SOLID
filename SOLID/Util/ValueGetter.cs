@@ -13,5 +13,10 @@ namespace SOLID.Util
             var valueString = Console.ReadLine();
             return int.Parse(valueString ?? "0");
         }
+
+        public void ResetCounter()
+        {
+            _valueCounter = 0;
+        }
     }
 }

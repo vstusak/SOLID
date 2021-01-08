@@ -1,4 +1,5 @@
-﻿using SOLID.Logging;
+﻿using SOLID.InputOutput;
+using SOLID.Util;
 
 namespace SOLID
 {
@@ -7,8 +8,14 @@ namespace SOLID
         private static void Main()
         {
             var logger = new Logger();
-            var calculator = new Calculator(logger);
+            var output = new ConsoleOutput();
+            var valueGetter = new ValueGetter();
+            var operationFactory = new OperationFactory();
+            var calculator = new Calculator(valueGetter,operationFactory,logger,output);
             calculator.RunCalculator();
+            do
+            {
+            } while (calculator.RunCalculator());
         }
     }
 }

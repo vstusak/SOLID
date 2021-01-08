@@ -8,6 +8,11 @@
             return OperationName;
         }
         
+        public string GetOperationSymbol()
+        {
+            return "+";
+        }
+
         public int Calculate(int addend1, int addend2)
         {
             return addend1 + addend2;

@@ -7,7 +7,12 @@
         {
             return OperationName;
         }
-        
+
+        public string GetOperationSymbol()
+        {
+            return "*";
+        }
+
         public int Calculate(int multiplier, int multiplicand)
         {
             return multiplier * multiplicand;

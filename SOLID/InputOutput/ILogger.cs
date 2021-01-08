@@ -1,4 +1,4 @@
-﻿namespace SOLID.Logging
+﻿namespace SOLID.InputOutput
 {
     public interface ILogger
     {
