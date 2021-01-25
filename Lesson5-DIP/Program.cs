@@ -14,20 +14,20 @@ namespace Lesson5_DIP
             var path = "https://";
 
             var readers = new List<IDataReader> {
-                new SqlDataReader(),
-                new FileDataReader(),
-                new ApiDataReader()
+                //new SqlDataReader(),
+                //new FileDataReader(),
+                //new ApiDataReader()
             };
 
-            var printerJobsDataAccess = new PrinterJobsDataAccess(sqlDataReader);
+            //var printerJobsDataAccess = new PrinterJobsDataAccess(sqlDataReader);
 
             Thread.Sleep(11);
 
-            printerJobsDataAccess.DataReader = fileDataReader;
+            //printerJobsDataAccess.DataReader = fileDataReader;
 
-            var jobs = printerJobsDataAccess.GetJobs(parameters);
+            //var jobs = printerJobsDataAccess.GetJobs(parameters);
 
-            Console.WriteLine(jobs);
+            //Console.WriteLine(jobs);
         }
     }
 }
