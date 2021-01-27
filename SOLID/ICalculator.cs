@@ -6,7 +6,7 @@ namespace SOLID
     {
         private interface ICalculator
         {
-            float Calculate(IEnumerable<float> operands, IArithmeticOperation mathOperation);
+            float Calculate(float value1, float value2, IArithmeticOperation mathOperation);
         }
     }
 }

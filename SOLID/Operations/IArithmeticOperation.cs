@@ -7,7 +7,7 @@ namespace SOLID
         public interface IArithmeticOperation
         {
             char Operator { get; set; }
-            float GetResult(IEnumerable<float> operands);
+            float GetResult(float value1, float value2);
         }
     }
 }

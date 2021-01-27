@@ -11,13 +11,14 @@ namespace SOLID
             var commandChar = commandReader.Read();
 
             var numberReader = new ConsoleNumberReader();
-            var operands = new List<float> {numberReader.Read(), numberReader.Read()};
+            var value1 = numberReader.Read();
+            var value2 = numberReader.Read();
 
-            var factory = new ArithmeticOperationFactory(operands.Count);
+            var factory = new ArithmeticOperationFactory();
             IArithmeticOperation mathOperation = factory.Create(commandChar);
 
             var basicCalculator = new BasicCalculator();
-            var result = basicCalculator.Calculate(operands, mathOperation);
+            var result = basicCalculator.Calculate(value1, value2, mathOperation);
 
             var outputWriter = new ConsoleOutputWriter();
             outputWriter.Write(result.ToString(CultureInfo.InvariantCulture));

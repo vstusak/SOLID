@@ -13,10 +13,9 @@ namespace SOLID
             {
                 Operator = mathOperator;
             }
-            public float GetResult(IEnumerable<float> operands)
+            public float GetResult(float value1, float value2)
             {
-                var values = operands.ToList();
-                return values[0] / values[1];
+                return value1 / value2;
             }
         }
     }

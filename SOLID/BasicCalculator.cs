@@ -6,9 +6,9 @@ namespace SOLID
     {
         public class BasicCalculator : ICalculator
         {
-            public float Calculate(IEnumerable<float> operands, IArithmeticOperation mathOperation)
+            public float Calculate(float value1, float value2, IArithmeticOperation mathOperation)
             {
-                return mathOperation.GetResult(operands);
+                return mathOperation.GetResult(value1, value2);
             }
         }
     }

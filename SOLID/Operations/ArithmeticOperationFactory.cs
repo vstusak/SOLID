@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SOLID
 {
@@ -6,36 +8,21 @@ namespace SOLID
     {
         public class ArithmeticOperationFactory
         {
-            private readonly int _operandsCount;
+            private readonly IEnumerable<IArithmeticOperation> _arithmeticOperations;
 
-            public ArithmeticOperationFactory(int operandsCount)
+            public ArithmeticOperationFactory()
             {
-                _operandsCount = operandsCount;
+                _arithmeticOperations = new List<IArithmeticOperation>
+                {
+                    new AddArithmeticBinaryOperation('+'),
+                    new SubArithmeticBinaryOperation('-'),
+                    new MulArithmeticBinaryOperation('*'),
+                    new DivArithmeticBinaryOperation('/')
+                };
             }
             public IArithmeticOperation Create(char command)
             {
-                if (_operandsCount == 2)
-                {
-                    switch (command)
-                    {
-                        case '+':
-                            return new AddArithmeticBinaryOperation(command);
-                        case '-':
-                            return new SubArithmeticBinaryOperation(command);
-                        case '*':
-                            return new MulArithmeticBinaryOperation(command);
-                        case '/':
-                            return new DivArithmeticBinaryOperation(command);
-                        default:
-                            return new UnknownArithmeticOperation(command);
-                    }
-                }
-                else
-                {
-                    //logic for one operand or more than two operands
-                    //now just throw exception
-                    throw new NotImplementedException();
-                }
+                return _arithmeticOperations.FirstOrDefault(ao => ao.Operator == command) ?? new UnknownArithmeticOperation(command);
             }
         }
     }

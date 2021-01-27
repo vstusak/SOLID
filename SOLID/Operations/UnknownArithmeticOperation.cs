@@ -13,7 +13,7 @@ namespace SOLID
             {
                 Operator = mathOperator;
             }
-            public float GetResult(IEnumerable<float> operands)
+            public float GetResult(float value1, float value2)
             {
                 throw new Exception($"Unknown operation '{Operator}'");
             }
