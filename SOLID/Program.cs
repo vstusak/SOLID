@@ -9,7 +9,7 @@ namespace SOLID
             var consoleOutput = new ConsoleOutput();
             var calculator = new Calculator();
 
-            consoleOutput.Print("Set Command (+. -, *, /");
+            consoleOutput.Print("Set Command (+, -, *, /");
 
             calculator.Calculate();
         }
