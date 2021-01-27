@@ -16,7 +16,7 @@ namespace SOLID.Logger
 
         public void Log(string Message)
         {
-            File.AppendAllText(_filePath, $"{DateTime.UtcNow} : {Message}\n");
+            File.AppendAllText(_filePath, $"[{DateTime.UtcNow}] {Message}\n");
         }
     }
 }

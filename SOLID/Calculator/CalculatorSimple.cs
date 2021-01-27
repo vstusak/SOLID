@@ -2,16 +2,17 @@
 using SOLID.Commands;
 using SOLID.DataReaders;
 using SOLID.DataWriters;
+using SOLID.Logger;
 
 namespace SOLID
 {
-    class CalculatorSimple : CalculatorBase
+    class CalculatorSimple : Calculator
     {
-        public CalculatorSimple(IDataReader DataReader, IDataWriter DataWriter)
+        public CalculatorSimple(IDataReader DataReader, IDataWriter DataWriter, ILogger Logger) : base(Logger)
         {
-            base.SetDataReader(DataReader);
-            base.SetDataWriter(DataWriter);
-            base.SetSupportedCommands(
+            SetDataReader(DataReader);
+            SetDataWriter(DataWriter);
+            SetSupportedCommands(
                 new List<ICommand>
                 {
                     new AddCommand(),

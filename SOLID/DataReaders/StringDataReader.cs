@@ -15,7 +15,7 @@ namespace SOLID.DataReaders
 
         public char ReadCommandName() => ReadCommandName("");
 
-        public char ReadCommandName(string HintText)
+        public char ReadCommandName(string AvailableCommandNames)
         {
             if (_data.Length > 0)
             {
@@ -24,11 +24,11 @@ namespace SOLID.DataReaders
             return ' ';
         }
 
-        public IEnumerable<double> ReadParameters(int NumberOfParameters)
+        public IEnumerable<double> ReadParameters(int AcceptedNumberOfParameters)
         {
             List<double> result = new List<double>();
             string[] cmd = _data.Split(' ');
-            if (cmd.Length == NumberOfParameters + 1)
+            if (cmd.Length == AcceptedNumberOfParameters + 1)
             {
                 for (var i = 1; i < cmd.Length; i++)
                 {
@@ -39,13 +39,12 @@ namespace SOLID.DataReaders
                     else
                     {
                         result.Add(0);
-                        Console.WriteLine("Incorrect number format ('{_data}'). Used zero as a value.");
                     }
                 }
             }
             else
             {
-                throw new ArgumentException($"Wrong number of parameters ('{_data}')");
+                throw new ArgumentException($"Incorrect number of parameters. Expected {AcceptedNumberOfParameters} but found {cmd.Length - 1} in string '{_data}'");
             }
             return result;
         }

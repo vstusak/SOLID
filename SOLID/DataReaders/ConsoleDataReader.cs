@@ -8,16 +8,16 @@ namespace SOLID.DataReaders
     {
         public char ReadCommandName() => ReadCommandName("");
 
-        public char ReadCommandName(string HintText)
+        public char ReadCommandName(string AvailableCommandNames)
         {
-            Console.Write($"Set command{(!string.IsNullOrWhiteSpace(HintText) ? " (" + HintText + ")" : "")}:");
+            Console.Write($"Set command{(!string.IsNullOrWhiteSpace(AvailableCommandNames) ? " (" + AvailableCommandNames + ")" : "")}:");
             return Console.ReadKey().KeyChar;
         }
 
-        public IEnumerable<double> ReadParameters(int NumberOfParameters)
+        public IEnumerable<double> ReadParameters(int AcceptedNumberOfParameters)
         {
             List<double> result = new List<double>();
-            for (var i = 1; i <= NumberOfParameters; i++)
+            for (var i = 1; i <= AcceptedNumberOfParameters; i++)
             {
                 Console.Write($"{(i==1?"\n":"")}Set value {i}:");
                 var readData = Console.ReadLine();
@@ -28,7 +28,7 @@ namespace SOLID.DataReaders
                 else
                 {
                     result.Add(0);
-                    Console.WriteLine("Incorrect number format. Used zero as a value.");
+                    Console.WriteLine("Incorrect number format. Used zero as a value");
                 }
             }
             return result;
