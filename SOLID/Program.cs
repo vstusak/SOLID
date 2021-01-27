@@ -1,76 +1,29 @@
-﻿using System;
-using System.IO;
+﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace SOLID
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Set Command (+. -, *, /");
-            var key = Console.ReadKey();
+            var commandReader = new ConsoleCommandReader();
+            var commandChar = commandReader.Read();
 
-            switch (key.KeyChar)
-            {
-                case '+':
-                    Add();
-                    break;
-                case '-':
-                    Sub();
-                    break;
-                case '*':
-                    Mul();
-                    break;
-                case '/':
-                    Div();
-                    break;
-                default:
-                    Console.WriteLine("Not supported");
-                    break;
-            }
-        }
+            var numberReader = new ConsoleNumberReader();
+            var operands = new List<float> {numberReader.Read(), numberReader.Read()};
 
-        private static void Add()
-        {
-            Console.WriteLine("\nset value 1");
-            var value1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("set value 2");
-            var value2 = int.Parse(Console.ReadLine());
+            var factory = new ArithmeticOperationFactory(operands.Count);
+            IArithmeticOperation mathOperation = factory.Create(commandChar);
 
-            var result = value1 + value2;
+            var basicCalculator = new BasicCalculator();
+            var result = basicCalculator.Calculate(operands, mathOperation);
 
-            var output = $"{value1} + {value2} = {result}";
-            Console.WriteLine(output);
-            LogHistory(output);
-        }
+            var outputWriter = new ConsoleOutputWriter();
+            outputWriter.Write(result.ToString(CultureInfo.InvariantCulture));
 
-        private static void Sub()
-        {
-            Console.WriteLine("\nset value 1");
-            var value1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("set value 2");
-            var value2 = int.Parse(Console.ReadLine());
-
-            var result = value1 - value2;
-
-            var output = $"{value1} - {value2} = {result}";
-            Console.WriteLine(output);
-            LogHistory(output);
-        }
-
-        private static void Mul()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void Div()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void LogHistory(string output)
-        {
-            File.AppendAllText("log.json", $"{DateTime.UtcNow} : {output}\n");
+            var logger = new FileLogger("log.json");
+            logger.Log(result.ToString(CultureInfo.InvariantCulture));
         }
     }
 }
