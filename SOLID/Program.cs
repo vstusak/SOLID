@@ -7,6 +7,20 @@ namespace SOLID
     {
         static void Main(string[] args)
         {
+
+            var add = new AddOperation("add");
+
+            add.Result = new OperationResult(0);
+            add.Compute(new IntegerOperand(5) , new IntegerOperand(20));
+            
+            Console.WriteLine(add.Result.Description );
+            Console.WriteLine(add.Result.Value);
+
+            //trying to add to result 
+            add.Compute(new IntegerOperand(add.Result.Value), new IntegerOperand(12));            
+            Console.WriteLine(add.Result.Description);
+
+
             Console.WriteLine("Set Command (+. -, *, /");
             var key = Console.ReadKey();
 
