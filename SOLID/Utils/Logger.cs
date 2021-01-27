@@ -7,9 +7,9 @@ namespace SOLID.Utils
     {
         private const string LogFileName = "log.json";
 
-        public void LogHistory(string output)
+        public void LogHistory(int output)
         {
-            File.AppendAllText(LogFileName, $"{DateTime.UtcNow} : {output}\n");
+            File.AppendAllText(LogFileName, $"{DateTime.UtcNow} : {output.ToString()}\n");
         }
     }
 }
