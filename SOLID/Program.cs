@@ -7,84 +7,26 @@ namespace SOLID
     {
         static void Main(string[] args)
         {
+            var logger = new ConsoleLogger();
 
-            var add = new AddOperation("add");
+            var operationsFactory = new OperationsProvider();
 
-            add.Result = new OperationResult(0);
-            add.Compute(new IntegerOperand(5) , new IntegerOperand(20));
-            
-            Console.WriteLine(add.Result.Description );
-            Console.WriteLine(add.Result.Value);
+            var reader = new ConsoleReader(operationsFactory);
 
-            //trying to add to result 
-            add.Compute(new IntegerOperand(add.Result.Value), new IntegerOperand(12));            
-            Console.WriteLine(add.Result.Description);
+            var operation = reader.GetOperation();
 
-
-            Console.WriteLine("Set Command (+. -, *, /");
-            var key = Console.ReadKey();
-
-            switch (key.KeyChar)
+            if (operation is UnknownOperation)
             {
-                case '+':
-                    Add();
-                    break;
-                case '-':
-                    Sub();
-                    break;
-                case '*':
-                    Mul();
-                    break;
-                case '/':
-                    Div();
-                    break;
-                default:
-                    Console.WriteLine("Not supported");
-                    break;
+                logger.Send($"Operation {operation.Operator} not supported");                
             }
-        }
+            else
+            {
+                var operators = reader.GetOperands();
+                var result = operation.Compute(operators.Item1, operators.Item2);                
+                logger.Send(result.Description);
+            }
 
-        private static void Add()
-        {
-            Console.WriteLine("\nset value 1");
-            var value1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("set value 2");
-            var value2 = int.Parse(Console.ReadLine());
-
-            var result = value1 + value2;
-
-            var output = $"{value1} + {value2} = {result}";
-            Console.WriteLine(output);
-            LogHistory(output);
-        }
-
-        private static void Sub()
-        {
-            Console.WriteLine("\nset value 1");
-            var value1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("set value 2");
-            var value2 = int.Parse(Console.ReadLine());
-
-            var result = value1 - value2;
-
-            var output = $"{value1} - {value2} = {result}";
-            Console.WriteLine(output);
-            LogHistory(output);
-        }
-
-        private static void Mul()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void Div()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void LogHistory(string output)
-        {
-            File.AppendAllText("log.json", $"{DateTime.UtcNow} : {output}\n");
-        }
+            logger.Send("Finished, exiting");
+        }        
     }
 }
