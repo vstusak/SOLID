@@ -4,7 +4,7 @@
     {
         string GetOperatorSymbol();
         string GetOperatorName();
-        int DoCalc(int value1, int value2);
-        string GetCalcString(int value1, int value2);
+        int DoCalc(int val1, int val2);
+        string GetCalcString(int val1, int val2);
     }
 }

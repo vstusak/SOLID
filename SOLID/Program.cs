@@ -3,7 +3,7 @@ using SOLID.Util;
 
 namespace SOLID
 {
-    public class Program
+    public static class Program
     {
         private static void Main()
         {

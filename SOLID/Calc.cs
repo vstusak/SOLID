@@ -40,12 +40,12 @@ namespace SOLID
             }
             catch (Exception exception)
             {
-                var exceptionString = $"Unknown exception occurred: {exception.Message}. Stopping calculator.";
+                var exceptionString = $"Weird exception occurred: {exception.Message}. Closing calculator.";
                 _output.Print(exceptionString);
             }
             finally
             {
-                Console.WriteLine();
+                Console.WriteLine("Press anything to close Calc");
                 Console.ReadLine();
             }
         }
