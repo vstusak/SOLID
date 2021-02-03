@@ -4,16 +4,16 @@ namespace SOLID.Operations
 {
     public class Division : IOperator
     {
-        private const string OperatorName = "Division";
-        private const string OperatorSymbol = "/";
+        private const string _operatorName = "Division";
+        private const string _operatorSymbol = "/";
 
         public string GetOperatorName()
         {
-            return OperatorName;
+            return _operatorName;
         }
         public string GetOperatorSymbol()
         {
-            return OperatorSymbol;
+            return _operatorSymbol;
         }
 
         public int DoCalc(int val1, int val2)
@@ -31,7 +31,7 @@ namespace SOLID.Operations
 
         public string GetCalcString(int val1, int val2)
         {
-            return $"{val1} {OperatorSymbol} {val2} = {DoCalc(val1, val2)}";
+            return $"{val1} {_operatorSymbol} {val2} = {DoCalc(val1, val2)}";
         }
     }
 }

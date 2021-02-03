@@ -30,12 +30,12 @@ namespace SOLID
             }
             catch (DivideByZeroException)
             {
-                const string exceptionString = "Division by zero is not valid.";
+                const string exceptionString = "Division with zero is not valid.";
                 _output.Print(exceptionString);
             }
             catch (NotSupportedException exception)
             {
-                var exceptionString = $"Not supported: {exception.Message}";
+                var exceptionString = $"String not supported: {exception.Message}";
                 _output.Print(exceptionString);
             }
             catch (Exception exception)

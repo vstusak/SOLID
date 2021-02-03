@@ -2,17 +2,17 @@
 {
     public class Subtract : IOperator
     {
-        private const string OperatorName = "Subtract";
-        private const string OperatorSymbol = "-";
+        private const string _operatorName = "Subtract";
+        private const string _operatorSymbol = "-";
 
         public string GetOperatorName()
         {
-            return OperatorName;
+            return _operatorName;
         }
 
         public string GetOperatorSymbol()
         {
-            return OperatorSymbol;
+            return _operatorSymbol;
         }
 
         public int DoCalc(int val1, int val2)
@@ -22,7 +22,7 @@
 
         public string GetCalcString(int val1, int val2)
         {
-            return $"{val1} {OperatorSymbol} {val1} = {DoCalc(val1, val2)}";
+            return $"{val1} {_operatorSymbol} {val1} = {DoCalc(val1, val2)}";
         }
     }
 }
