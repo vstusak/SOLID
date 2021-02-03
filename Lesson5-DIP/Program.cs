@@ -37,12 +37,19 @@ namespace Lesson5_DIP
         {
             var readers = new List<IDataReader> { new ApiDataReader(path), new SqlDataReader(path), new FileDataReader(path)};
 
-            return readers.SingleOrDefault(r => r.CanProcess()) ?? new NullDataReader();
+            return readers.SingleOrDefault(r => r.CanProcess()) ?? new NullDataReader(path);
         }
     }
 
     public class NullDataReader : IDataReader
     {
+        private readonly string path;
+
+        public NullDataReader(string path)
+        {
+            this.path = path;
+        }
+
         public bool CanProcess()
         {
             return true;
@@ -50,8 +57,8 @@ namespace Lesson5_DIP
 
         public IEnumerable<Job> Read()
         {
-            //uber logging
-            throw new NotImplementedException();
+            //uber logging with information about path
+            return new List<Job>();
         }
     }
 }
