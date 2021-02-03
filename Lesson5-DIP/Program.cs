@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace Lesson5_DIP
@@ -13,21 +14,44 @@ namespace Lesson5_DIP
 
             var path = "https://";
 
-            var readers = new List<IDataReader> {
-                new SqlDataReader(),
-                new FileDataReader(),
-                new ApiDataReader()
-            };
 
-            var printerJobsDataAccess = new PrinterJobsDataAccess(sqlDataReader);
+            
+
+            var reader = DataReaderFactory.GetSuitableDataReader(path);
+
+            var printerJobsDataAccess = new PrinterJobsDataAccess(reader);
 
             Thread.Sleep(11);
 
-            printerJobsDataAccess.DataReader = fileDataReader;
+            //printerJobsDataAccess.DataReader = fileDataReader;
 
             var jobs = printerJobsDataAccess.GetJobs(parameters);
 
             Console.WriteLine(jobs);
+        }
+    }
+
+    public class DataReaderFactory
+    {
+        internal static IDataReader GetSuitableDataReader(string path)
+        {
+            var readers = new List<IDataReader> { new ApiDataReader(path), new SqlDataReader(path), new FileDataReader(path)};
+
+            return readers.SingleOrDefault(r => r.CanProcess()) ?? new NullDataReader();
+        }
+    }
+
+    public class NullDataReader : IDataReader
+    {
+        public bool CanProcess()
+        {
+            return true;
+        }
+
+        public IEnumerable<Job> Read()
+        {
+            //uber logging
+            throw new NotImplementedException();
         }
     }
 }

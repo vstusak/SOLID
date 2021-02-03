@@ -16,7 +16,5 @@ namespace Lesson5_DIP
             var data = DataReader.Read();
             return data;
         }
-
-        //TODO DesignPattern "Strategy"
     }
 }

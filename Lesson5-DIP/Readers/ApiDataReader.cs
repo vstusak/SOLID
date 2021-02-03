@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Lesson5_DIP
 {
@@ -11,9 +12,23 @@ namespace Lesson5_DIP
             _URL = URL;
         }
 
+        public bool CanProcess()
+        {
+            try
+            {
+                var uri = new Uri(_URL);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
         public IEnumerable<Job> Read()
         {
-            return new List<Job>();
+            throw new NotImplementedException();
         }
     }
 }

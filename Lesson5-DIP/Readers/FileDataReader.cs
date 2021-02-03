@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace Lesson5_DIP
 {
@@ -9,6 +10,11 @@ namespace Lesson5_DIP
         public FileDataReader(string path)
         {
             _path = path;
+        }
+
+        public bool CanProcess()
+        {
+            return File.Exists(_path);
         }
 
         public IEnumerable<Job> Read()
