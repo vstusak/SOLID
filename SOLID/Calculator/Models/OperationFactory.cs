@@ -8,7 +8,6 @@ namespace SOLID
 {
     public static class OperationFactory
     {
-        #warning This looks weird, how should I handle mutable objects within static classes?
         private static readonly List<IOperation> _operations = new List<IOperation>()
         {
             new AddOperation(),

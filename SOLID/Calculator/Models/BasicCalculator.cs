@@ -14,7 +14,6 @@ namespace SOLID.Calculator
             _logger = logger;
         }
 
-#warning Should I switch to nullable return type?
         public double Calculate(double firstInput, double secondInput, IOperation operation)
         {
             if(operation == null)
