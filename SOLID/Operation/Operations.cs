@@ -1,4 +1,5 @@
 ﻿using SOLID.Data;
+using System;
 
 namespace SOLID.Operation
 {
@@ -11,6 +12,11 @@ namespace SOLID.Operation
 
         public void Div(InputOutputData inputOutputData)
         {
+            if (inputOutputData.Value2 == 0)
+            {
+                throw new DivideByZeroException();
+
+            }
             inputOutputData.Output = inputOutputData.Value1 / inputOutputData.Value2;
         }
 
