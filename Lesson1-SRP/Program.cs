@@ -32,7 +32,8 @@ namespace Lesson1_SRP
             double multiplication = 1;
             var bonuses = new List<int>();
 
-            var salaries = JsonSerializer.Deserialize<IEnumerable<Salary>>(File.ReadAllText("salaries.json")).ToList();
+            List<Salary> salaries = GetSalaries();
+            //salaries.re //ctrl + k, ctrl + c
 
             if (salaries.Count() > 50)
             {
@@ -50,6 +51,11 @@ namespace Lesson1_SRP
             }
 
             RetirementSalary = Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+        }
+
+        public static List<Salary> GetSalaries()
+        {
+            return JsonSerializer.Deserialize<IEnumerable<Salary>>(File.ReadAllText("salaries.json")).ToList();
         }
 
         public void GenerateSalaries()
