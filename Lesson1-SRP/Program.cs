@@ -15,6 +15,7 @@ namespace Lesson1_SRP
             //retirementCalculator.GenerateSalaries();
             retirementCalculator.Process();
 
+
             Console.WriteLine(retirementCalculator.RetirementSalary > 20000
                 ? "Congratulations and have a nice retirement"
                 : "You will need additional work now or in retirement, sorry");
