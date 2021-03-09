@@ -13,10 +13,16 @@ namespace Lesson1_SRP
             var retirementCalculator = new RetirementCalculator();
 
             //retirementCalculator.GenerateSalaries();
-            retirementCalculator.Process();
 
 
-            Console.WriteLine(retirementCalculator.RetirementSalary > 20000
+            var salaryProvider = new SalariesProvider();
+
+            var salaries = salaryProvider.GetSalaries();
+
+            var retirementSalary = retirementCalculator.Process(salaries);
+
+
+            Console.WriteLine(retirementSalary > 20000
                 ? "Congratulations and have a nice retirement"
                 : "You will need additional work now or in retirement, sorry");
         }
@@ -24,15 +30,14 @@ namespace Lesson1_SRP
 
     public class RetirementCalculator
     {
-        public int RetirementSalary { get; set; }
+        //public int RetirementSalary { get; set; }
 
-        public void Process()
+        public int Process(IEnumerable<Salary> salaries)
         {
             var baseSalary = 10000;
             double multiplication = 1;
             var bonuses = new List<int>();
 
-            List<Salary> salaries = GetSalaries();
             //salaries.re //ctrl + k, ctrl + c
 
             if (salaries.Count() > 50)
@@ -50,10 +55,19 @@ namespace Lesson1_SRP
                 bonuses.Add(2000);
             }
 
-            RetirementSalary = Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
         }
+    }
 
-        public static List<Salary> GetSalaries()
+    public class Salary
+    {
+        public DateTime DateTime { get; set; }
+        public int Value { get; set; }
+    }
+
+    public class SalariesProvider
+    {
+        public List<Salary> GetSalaries()
         {
             return JsonSerializer.Deserialize<IEnumerable<Salary>>(File.ReadAllText("salaries.json")).ToList();
         }
@@ -66,17 +80,11 @@ namespace Lesson1_SRP
             for (int i = 0; i < 100; i++)
             {
                 salaries.Add(new Salary
-                    { DateTime = new DateTime(2020, 9, 13).AddMonths(i * -1), Value = salaryGenerator.Next(5000, 50000) });
+                { DateTime = new DateTime(2020, 9, 13).AddMonths(i * -1), Value = salaryGenerator.Next(5000, 50000) });
             }
 
             var json = JsonSerializer.Serialize(salaries);
             File.AppendAllText("salaries.json", json);
         }
-    }
-
-    public class Salary
-    {
-        public DateTime DateTime { get; set; }
-        public int Value { get; set; }
     }
 }
