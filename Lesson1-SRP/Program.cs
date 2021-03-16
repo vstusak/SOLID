@@ -19,7 +19,7 @@ namespace Lesson1_SRP
 
             var salaries = salaryProvider.GetSalaries();
 
-            var retirementSalary = retirementCalculator.Process(salaries);
+            var retirementSalary = retirementCalculator.Calculate(salaries);
 
 
             Console.WriteLine(retirementSalary > 20000
@@ -32,7 +32,7 @@ namespace Lesson1_SRP
     {
         //public int RetirementSalary { get; set; }
 
-        public int Process(IEnumerable<Salary> salaries)
+        public int Calculate(IEnumerable<Salary> salaries)
         {
             var baseSalary = 10000;
             double multiplication = 1;
@@ -40,6 +40,23 @@ namespace Lesson1_SRP
 
             //salaries.re //ctrl + k, ctrl + c
 
+            multiplication = ApplyRulesForMultiplication(salaries, multiplication);
+
+            ApplyRulesForBonuses(salaries, bonuses);
+
+            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+        }
+
+        private static void ApplyRulesForBonuses(IEnumerable<Salary> salaries, List<int> bonuses)
+        {
+            if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
+            {
+                bonuses.Add(2000);
+            }
+        }
+
+        private static double ApplyRulesForMultiplication(IEnumerable<Salary> salaries, double multiplication)
+        {
             if (salaries.Count() > 50)
             {
                 multiplication += 0.3;
@@ -50,12 +67,7 @@ namespace Lesson1_SRP
                 multiplication += 1;
             }
 
-            if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
-            {
-                bonuses.Add(2000);
-            }
-
-            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+            return multiplication;
         }
     }
 
