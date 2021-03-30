@@ -28,34 +28,19 @@ namespace Lesson1_SRP
         }
     }
 
-    public class RetirementCalculator
+    public class RulesProvider 
     {
-        //public int RetirementSalary { get; set; }
-
-        public int Calculate(IEnumerable<Salary> salaries)
+        public List<int> ApplyRulesForBonuses(IEnumerable<Salary> salaries)
         {
-            var baseSalary = 10000;
-            double multiplication = 1;
             var bonuses = new List<int>();
-
-            //salaries.re //ctrl + k, ctrl + c
-
-            multiplication = ApplyRulesForMultiplication(salaries, multiplication);
-
-            ApplyRulesForBonuses(salaries, bonuses);
-
-            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
-        }
-
-        private static void ApplyRulesForBonuses(IEnumerable<Salary> salaries, List<int> bonuses)
-        {
             if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
             {
                 bonuses.Add(2000);
             }
+            return bonuses;
         }
 
-        private static double ApplyRulesForMultiplication(IEnumerable<Salary> salaries, double multiplication)
+        public double ApplyRulesForMultiplication(IEnumerable<Salary> salaries, double multiplication)
         {
             if (salaries.Count() > 50)
             {
@@ -69,6 +54,28 @@ namespace Lesson1_SRP
 
             return multiplication;
         }
+    }
+
+    public class RetirementCalculator
+    {
+        //public int RetirementSalary { get; set; }
+
+        public int Calculate(IEnumerable<Salary> salaries)
+        {
+            var baseSalary = 10000;
+            double multiplication = 1;
+
+
+            //salaries.re //ctrl + k, ctrl + c
+            var rulesProvider = new RulesProvider();
+            multiplication = rulesProvider.ApplyRulesForMultiplication(salaries, multiplication);
+            
+            var bonuses = rulesProvider.ApplyRulesForBonuses(salaries);
+
+            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+        }
+
+        
     }
 
     public class Salary
