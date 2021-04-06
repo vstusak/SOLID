@@ -8,12 +8,11 @@ namespace Lesson1_SRP
 {
     public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var retirementCalculator = new RetirementCalculator();
 
             //retirementCalculator.GenerateSalaries();
-
 
             var salaryProvider = new SalariesProvider();
 
@@ -21,14 +20,13 @@ namespace Lesson1_SRP
 
             var retirementSalary = retirementCalculator.Calculate(salaries);
 
-
             Console.WriteLine(retirementSalary > 20000
                 ? "Congratulations and have a nice retirement"
                 : "You will need additional work now or in retirement, sorry");
         }
     }
 
-    public class RulesProvider 
+    public class RulesProvider
     {
         public List<int> ApplyRulesForBonuses(IEnumerable<Salary> salaries)
         {
@@ -65,17 +63,14 @@ namespace Lesson1_SRP
             var baseSalary = 10000;
             double multiplication = 1;
 
-
             //salaries.re //ctrl + k, ctrl + c
             var rulesProvider = new RulesProvider();
             multiplication = rulesProvider.ApplyRulesForMultiplication(salaries, multiplication);
-            
+
             var bonuses = rulesProvider.ApplyRulesForBonuses(salaries);
 
             return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
         }
-
-        
     }
 
     public class Salary

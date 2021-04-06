@@ -4,20 +4,21 @@ namespace Lesson2_OCP
 {
     public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             OCPApproaches ocpApproaches = new OCPApproaches();
 
-            ocpApproaches.ExtremelyConcrete();
+            //ocpApproaches.ExtremelyConcrete();
 
-            ocpApproaches.ParameterBased("Hello world! Parameter.");
+            //ocpApproaches.ParameterBased("Hello world! Parameter.");
 
-            ocpApproaches.InheritanceBased();
-            ocpApproaches = new OCPApproachesInherited();
-            ocpApproaches.InheritanceBased();
+            //ocpApproaches.InheritanceBased();
+            //ocpApproaches = new OCPApproachesInherited();
+            //ocpApproaches.InheritanceBased();
 
-            ocpApproaches = new OCPApproachesInjection(new GreetingsService());
+            ocpApproaches = new OCPApproachesInjection(new GoodByeService());
             ((OCPApproachesInjection)ocpApproaches).InjectedBased();
+            Console.ReadLine();
         }
     }
 
@@ -49,11 +50,11 @@ namespace Lesson2_OCP
 
     public class OCPApproachesInjection : OCPApproaches
     {
-        private readonly GreetingsService _greetingsService;
+        private readonly IGreetings _greetingsService;
 
-        public OCPApproachesInjection(GreetingsService greetingsService)
+        public OCPApproachesInjection(IGreetings greetings)
         {
-            _greetingsService = greetingsService;
+            _greetingsService = greetings;
         }
 
         public void InjectedBased()
@@ -62,11 +63,24 @@ namespace Lesson2_OCP
         }
     }
 
-    public class GreetingsService
+    public class GreetingsService : IGreetings
     {
         public string GetMessage()
         {
             return "Hello World! Injected.";
+        }
+    }
+
+    public interface IGreetings
+    {
+        string GetMessage();
+    }
+
+    public class GoodByeService : IGreetings
+    {
+        public string GetMessage()
+        {
+            return "Goodbye";
         }
     }
 }
