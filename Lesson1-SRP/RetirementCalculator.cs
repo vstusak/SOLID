@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Lesson1_SRP
 {
     public class RetirementCalculator
     {
+        //private readonly object lockObject = new object();
+        //private readonly static object lockObject2 = new object();
+
+        //private readonly Dictionary<int, string> myMemory = new Dictionary<int, string>();
+
         private readonly IMultiplicationRulesProvider _multiplicationRulesProvider;
         private readonly IBonusesRulesProvider _bonusesRulesProvider;
 
@@ -17,6 +23,20 @@ namespace Lesson1_SRP
 
         public int Process(IEnumerable<Salary> salaries, IEmployee employee)
         {
+            //lock (lockObject)
+            //{
+            //    myMemory.Add(0, "hello");
+            //}
+
+            //lock (lockObject2)
+            //{
+            //    File.AppendAllText("C:\temp.txt", "world");
+            //}
+
+            //read (hello)
+            //origin + new 
+            //write
+
             //double multiplication;
             //switch (employeType)
             //{
