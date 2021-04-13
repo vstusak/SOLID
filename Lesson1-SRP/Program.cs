@@ -8,9 +8,10 @@ namespace Lesson1_SRP
 {
     public class Program
     {
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var retirementCalculator = new RetirementCalculator();
+            var rulesProvider = new RulesProvider2021();
+            var retirementCalculator = new RetirementCalculator(rulesProvider);
 
             //retirementCalculator.GenerateSalaries();
 
@@ -26,7 +27,7 @@ namespace Lesson1_SRP
         }
     }
 
-    public class RulesProvider
+    public class RulesProvider2020 : IRulesProvider
     {
         public List<int> ApplyRulesForBonuses(IEnumerable<Salary> salaries)
         {
@@ -54,22 +55,49 @@ namespace Lesson1_SRP
         }
     }
 
+    public class RulesProvider2021 : IRulesProvider
+    {
+        public List<int> ApplyRulesForBonuses(IEnumerable<Salary> salaries)
+        {
+            var emptyList = new List<int>();
+            return emptyList;
+        }
+
+        public double ApplyRulesForMultiplication(IEnumerable<Salary> salaries, double multiplication)
+        {
+            return multiplication;
+        }
+    }
+
+    public interface IRulesProvider
+    {
+        double ApplyRulesForMultiplication(IEnumerable<Salary> salaries, double multiplication);
+        List<int> ApplyRulesForBonuses(IEnumerable<Salary> salaries);
+    }
+
     public class RetirementCalculator
     {
         //public int RetirementSalary { get; set; }
+        private IRulesProvider _rulesProvider;
+        public RetirementCalculator(IRulesProvider rulesProvider)
+        {
+            _rulesProvider = rulesProvider;
+        }
 
+        // TODO Apply CEO base salary - FROM outside object
         public int Calculate(IEnumerable<Salary> salaries)
         {
             var baseSalary = 10000;
             double multiplication = 1;
 
             //salaries.re //ctrl + k, ctrl + c
-            var rulesProvider = new RulesProvider();
-            multiplication = rulesProvider.ApplyRulesForMultiplication(salaries, multiplication);
+            
+            multiplication = _rulesProvider.ApplyRulesForMultiplication(salaries, multiplication);
 
-            var bonuses = rulesProvider.ApplyRulesForBonuses(salaries);
+            var bonuses = _rulesProvider.ApplyRulesForBonuses(salaries);
 
-            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+            var result = Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+            return result;
         }
     }
 
