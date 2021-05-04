@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Reflection.Metadata;
 
 namespace Lesson3_LSP
 {
@@ -7,53 +9,89 @@ namespace Lesson3_LSP
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            var square = new Square();
+            var circle = new Circle();
+            circle.color = ConsoleColor.Red;
             Rectangle myRect = new Rectangle();
+            myRect.color = ConsoleColor.Green;
             myRect.Height = 10;
             myRect.Width = 15;
 
             var calculator = new Calculator();
             var result = calculator.CalculateArea(myRect);
+            Console.ForegroundColor = myRect.color;
             Console.WriteLine(result);
-
-            square.Width = 12;
-            square.Height = 8;
-            var resultSquare = calculator.CalculateArea(square);
+            Console.WriteLine($"is square: {myRect.IsSquare}");
+            circle.Radius = 12;
+            var resultSquare = calculator.CalculateArea(circle);
+            Console.ForegroundColor = circle.color;
             Console.WriteLine(resultSquare);
-
             Console.ReadLine();
         }
 
-        public class Rectangle
+        public class Circle : Shape
+        {
+            public int Radius { get; set; }
+
+            public override int GetArea()
+            {
+                return Radius * Radius * 3;
+            }
+        }
+
+
+        public class Rectangle : Shape
         {
             public virtual int Width { get; set; }
             public virtual int Height { get; set; }
-        }
 
-        public class Square : Rectangle
-        {
-            private int _width;
-            private int _height;
+            public bool IsSquare => Width == Height;
 
-            public override int Width
+            public override int GetArea()
             {
-                get { return _width; }
-                set { _width = _height = value; }
+                return Height * Width;
             }
-            public override int Height
-            {
-                get { return _height; }
-                set { _height = _width = value; }
-            }
-
         }
+        
+        //public class Square : Rectangle
+        //{
+        //    private int _width;
+        //    private int _height;
+
+        //    public override int Width
+        //    {
+        //        get { return _width; }
+        //        set { _width = _height = value; }
+        //    }
+        //    public override int Height
+        //    {
+        //        get { return _height; }
+        //        set { _height = _width = value; }
+        //    }
+
+        //}
 
         public class Calculator
         {
-            public int CalculateArea(Rectangle myRect)
+            public int CalculateArea(Shape shape)
             {
-                return myRect.Height * myRect.Width;
+                return shape.GetArea();
             }
+            //public int CalculateArea(Rectangle myRect)
+            //{
+            //    return myRect.Height * myRect.Width;
+            //}
+
+            //public int CalculateArea(Circle circle)
+            //{
+            //    return circle.Radius * circle.Radius * 3;
+            //}
         }
+    }
+
+    public abstract class Shape
+    {
+        public abstract int GetArea();
+        public ConsoleColor color { get; set; }
+
     }
 }
