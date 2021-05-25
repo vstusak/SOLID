@@ -8,24 +8,26 @@ namespace Lesson3_LSP
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            var circle = new Circle();
-            circle.color = ConsoleColor.Red;
-            Rectangle myRect = new Rectangle();
-            myRect.color = ConsoleColor.Green;
-            myRect.Height = 10;
-            myRect.Width = 15;
-
-            var calculator = new Calculator();
-            var result = calculator.CalculateArea(myRect);
-            Console.ForegroundColor = myRect.color;
-            Console.WriteLine(result);
-            Console.WriteLine($"is square: {myRect.IsSquare}");
-            circle.Radius = 12;
-            var resultSquare = calculator.CalculateArea(circle);
-            Console.ForegroundColor = circle.color;
-            Console.WriteLine(resultSquare);
-            Console.ReadLine();
+            var dosth = new NullObjectDesignPattern();
+            dosth.DoSomething();
+            //Console.WriteLine("Hello World!");
+            //var circle = new Circle();
+            //circle.color = ConsoleColor.Red;
+            //Rectangle myRect = new Rectangle();
+            //myRect.color = ConsoleColor.Green;
+            //myRect.Height = 10;
+            //myRect.Width = 15;
+            //
+            //var calculator = new Calculator();
+            //var result = calculator.CalculateArea(myRect);
+            //Console.ForegroundColor = myRect.color;
+            //Console.WriteLine(result);
+            //Console.WriteLine($"is square: {myRect.IsSquare}");
+            //circle.Radius = 12;
+            //var resultSquare = calculator.CalculateArea(circle);
+            //Console.ForegroundColor = circle.color;
+            //Console.WriteLine(resultSquare);
+            //Console.ReadLine();
         }
 
         public class Circle : Shape

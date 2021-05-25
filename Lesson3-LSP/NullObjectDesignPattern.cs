@@ -6,16 +6,44 @@ namespace Lesson3_LSP
     {
         public void DoSomething()
         {
-            var factory = new CalculatorFactory();
-            var calculator = factory.Create("kids");
+            //var factory = new CalculatorFactory();
+            //var calculator = factory.Create("kids");
 
-            var result = calculator?.Calculate();
+            Calculator calculator;
+            var calculatorType = "kids";
+
+            switch (calculatorType)
+            {
+                case "standard":
+                    calculator = new Calculator();
+                    break;
+                case "science":
+                    calculator = new ScienceCalculator();
+                    break;
+                default:
+                    calculator = new NullCalculator(calculatorType);
+                    break;
+            }
+
+
+            //var result = calculator?.Calculate();
+            //Console.WriteLine(result);
+            //if (calculator != null)
+            //{
+            //    var result = calculator.Calculate();
+            //    Console.WriteLine(result);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Calculator failed to load.");
+            //}
+
+            var result = calculator.Calculate();
             Console.WriteLine(result);
-            
         }
     }
 
-    internal class CalculatorFactory    
+    public class CalculatorFactory    
     {
         public Calculator Create(string type)
         {
@@ -26,8 +54,24 @@ namespace Lesson3_LSP
                 case "science":
                     return new ScienceCalculator();
                 default:
-                    return null;
+                    return new NullCalculator(type);
             }
+        }
+    }
+
+    public class NullCalculator : Calculator
+    {
+        private string type;
+
+        public NullCalculator(string type)
+        {
+            this.type = type;
+        }
+
+        public override int Calculate()
+        {
+            Console.WriteLine($"You find yourself in a NullCalculator. You have a type \"{type}\" defined.");
+            throw new Exception("Unknown calc defined.");
         }
     }
 
