@@ -14,7 +14,7 @@ namespace Lesson4_ISP
             service.SendPostcard("Me", "Home", "Hometown", "Hey");
 
             //CzechPost already implements IText.. Casting is okay as is
-            ((ITextNotificationService) service).SendText("1", "message");
+            ((ITextNotificationService)service).SendText("1", "message");
 
             ITextNotificationService test = service as ITextNotificationService;
             ITextNotificationService test2 = (ITextNotificationService)service;
@@ -22,7 +22,7 @@ namespace Lesson4_ISP
 
             ITextNotificationService messageService = new CzechPostCardService();
 
-            messageService.SendText("1","message");
+            messageService.SendText("1", "message");
         }
     }
 
@@ -57,7 +57,7 @@ namespace Lesson4_ISP
         void ShowPopup(string clientUri, string message);
     }
 
-    public class CzechPostCardService : IPostcardNotificationService,ITextNotificationService
+    public class CzechPostCardService : IPostcardNotificationService, ITextNotificationService
     {
         public void SendPostcard(string name, string street, string town, string message)
         {

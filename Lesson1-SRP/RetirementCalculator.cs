@@ -5,13 +5,16 @@ using System.Linq;
 
 namespace Lesson1_SRP
 {
-    public class RetirementCalculator
+    public class RetirementCalculator : IRetirementCalculator
     {
         //public int RetirementSalary { get; set; }
-        private IRulesProvider _rulesProvider;
-        public RetirementCalculator(IRulesProvider rulesProvider)
+        private readonly IRulesForBonusesProvider _rulesForBonusesProvider;
+        private readonly IMultiplicationRulesProvider _multiplicationRulesProvider;
+
+        public RetirementCalculator(IRulesForBonusesProvider rulesForBonusesProvider, IMultiplicationRulesProvider multiplicationRulesProvider)
         {
-            _rulesProvider = rulesProvider;
+            _rulesForBonusesProvider = rulesForBonusesProvider;
+            _multiplicationRulesProvider = multiplicationRulesProvider;
         }
 
         // TODO Apply CEO base salary - FROM outside object
@@ -22,9 +25,9 @@ namespace Lesson1_SRP
 
             //salaries.re //ctrl + k, ctrl + c
 
-            multiplication = _rulesProvider.ApplyRulesForMultiplication(person.Salaries, multiplication);
+            multiplication = _multiplicationRulesProvider.ApplyRulesForMultiplication(person.Salaries, multiplication);
 
-            var bonuses = _rulesProvider.ApplyRulesForBonuses(person.Salaries);
+            var bonuses = _rulesForBonusesProvider.ApplyRulesForBonuses(person.Salaries);
 
             var result = Convert.ToInt32(person.BaseSalary * multiplication + bonuses.Sum());
             return result;

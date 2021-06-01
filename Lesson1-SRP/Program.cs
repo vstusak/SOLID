@@ -2,8 +2,6 @@
 using Lesson1_SRP.Enums;
 using Lesson1_SRP.RulesProviders;
 using System;
-using System.IO;
-using System.Text.Json;
 
 namespace Lesson1_SRP
 {
@@ -11,8 +9,9 @@ namespace Lesson1_SRP
     {
         public static void Main(string[] args)
         {
-            var rulesProvider = new RulesProvider2021();
-            var retirementCalculator = new RetirementCalculator(rulesProvider);
+            var rulesProvider = new RulesForBonusesProvider2021();
+            var multiplicationRulesProvider = new MultiplicationRulesProvider2021();
+            var retirementCalculator = new RetirementCalculator(rulesProvider, multiplicationRulesProvider);
 
             //retirementCalculator.GenerateSalaries();
 
