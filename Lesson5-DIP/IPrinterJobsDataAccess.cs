@@ -40,11 +40,11 @@ namespace Lesson5_DIP
         IEnumerable<Job> Read();
     }
 
-    public class SqlDataAccess : IPrinterJobsDataAccess
+    public class SqlPrinterJobsDataAccess : IPrinterJobsDataAccess
     {
         private readonly ISqlDataReader _reader;
 
-        public SqlDataAccess(ISqlDataReader reader)
+        public SqlPrinterJobsDataAccess(ISqlDataReader reader)
         {
             _reader = reader;
         }

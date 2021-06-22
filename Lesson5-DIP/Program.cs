@@ -6,9 +6,8 @@ namespace Lesson5_DIP
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IPrinterJobsDataAccess dataAccess = new SqlPrinterJobsDataAccess(new SqlDataReader());
+            //dataAccess.GetJobs();
         }
     }
-
-    
 }
