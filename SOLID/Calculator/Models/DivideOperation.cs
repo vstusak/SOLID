@@ -12,7 +12,7 @@ namespace SOLID.Calculator
         {
             if (second == 0)
             {
-                throw new ArgumentOutOfRangeException(paramName: "Denominator", message: "Can't divide by zero");
+                throw new DivideByZeroException("Can't divide by zero");
             }
             return first / second;
         }
