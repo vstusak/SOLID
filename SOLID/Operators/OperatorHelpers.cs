@@ -13,7 +13,7 @@ namespace SOLID
 
         public IOperator ValidateSelectedOperatorforReader(IOperator selectedOperator, ConsoleKeyInfo @operator)
         {
-            while (selectedOperator == null)
+            while (selectedOperator == null) // array of valid chars, regularny výraz 
             {
                 Console.WriteLine("\nInvalid operator");
                 Console.WriteLine("Set valid operator (+, -, *, /)");
@@ -22,7 +22,7 @@ namespace SOLID
             }
             return selectedOperator;
         }
-        public IOperator SelectRigthOepratorForReader(ConsoleKeyInfo @operator)
+        public IOperator SelectRigthOepratorForReader(ConsoleKeyInfo @operator) // add to calculator class,  Reader - string not to work with classes, work with strings
         {
             switch (@operator.KeyChar)
             {
@@ -34,9 +34,9 @@ namespace SOLID
                     return new Multiplication();
                 case _operatorDivide:
                     return new Division();
+                default:
+                     throw new InvalidOperatorException(); // do not return null, return exceptions 
             }
-
-            return null;
         }
 
         public Char SelectRightOperatorForWriter(IOperator @operator)
@@ -59,6 +59,15 @@ namespace SOLID
             }
 
             return 'N';
+        }
+
+    }
+
+    public class InvalidOperatorException : Exception
+    {
+        public InvalidOperatorException() //exception pattern three constructors 
+        {
+
         }
     }
 }

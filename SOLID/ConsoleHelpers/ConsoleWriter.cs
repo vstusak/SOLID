@@ -25,8 +25,8 @@ namespace SOLID
 
         public void ShowResult(double number1, double number2, double result, IOperator @operator)
         {
-            var selectedOperator = _operatorSelector.SelectRightOperatorForWriter(@operator);
-            Console.WriteLine($"\n{number1} {selectedOperator} {number2} = {result}");
+            //var selectedOperator = _operatorSelector.SelectRightOperatorForWriter(@operator);
+            Console.WriteLine($"\n{number1} {@operator.ToString()} {number2} = {result}");
         }
     }
 }

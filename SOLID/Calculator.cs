@@ -13,7 +13,7 @@ namespace SOLID
             _operator = @operator;
         }
 
-        public double Calculate(double number1, double number2)
+        public double Calculate(double number1, double number2) // plus operator + exception for invalid input 
         {
             return _operator.Calculate(number1, number2);
         }

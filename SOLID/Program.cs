@@ -7,14 +7,15 @@ namespace SOLID
     {
         static void Main(string[] args)
         {
+            var consoleReader = new ConsoleReader();
+            var consoleWriter = new ConsoleWriter();
+
+            //messages provider
             try
             {
-                var consoleReader = new ConsoleReader();
-                var consoleWriter = new ConsoleWriter();
+                consoleWriter.SetValidOperator();  //naming + be part of calculator class
 
-                consoleWriter.SetValidOperator();
-
-                var @operator = consoleReader.ReadandReturnValidOperator();
+                var @operator = consoleReader.ReadandReturnValidOperator();  //naming + be part of calculator class
                 var calculator = new Calculator(@operator);
 
                 consoleWriter.SetValue("1");
@@ -30,9 +31,9 @@ namespace SOLID
             catch (Exception e)
             {
 
-                Console.WriteLine(e); 
+                Console.WriteLine(e);
             }
-           
+
             //private static void LogHistory(string output)
             //{
             //    File.AppendAllText("log.json", $"{DateTime.UtcNow} : {output}\n");

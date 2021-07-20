@@ -14,14 +14,17 @@ namespace SOLID
             _operatorHelpers = new OperatorHelpers();
         }
 
-        public double ReadAndParseDouble(){return double.Parse(Console.ReadLine());}
+        public double ReadAndParseDouble()
+        {
+            return double.Parse(Console.ReadLine());
+        }
 
         public IOperator ReadandReturnValidOperator()
-        { 
+        {
             var @operator = Console.ReadKey();
             var selectedOperator = _operatorHelpers.SelectRigthOepratorForReader(@operator);
-        
+
             return _operatorHelpers.ValidateSelectedOperatorforReader(selectedOperator, @operator);
-        }       
+        }
     }
 }

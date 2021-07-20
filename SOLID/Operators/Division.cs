@@ -8,7 +8,10 @@ namespace SOLID
     {
         public double Calculate(double number1, double number2) {return number1 / number2;}
 
-        //divided by zero exception 
-    
+        public override string ToString()
+        {
+            return "/";
+        }
+        //divided by zero exception
     }
 }
