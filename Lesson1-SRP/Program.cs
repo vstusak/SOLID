@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Lesson1_SRP
 {
@@ -30,10 +31,10 @@ namespace Lesson1_SRP
 
     public class RetirementCalculator
     {
-        private readonly MultiplicationProvider _multiplicationProvider;
-        private readonly BonusesProvider _bonusesProvider;
+        private readonly IMultiplicationProvider _multiplicationProvider;
+        private readonly IBonusesProvider _bonusesProvider;
 
-        public RetirementCalculator(MultiplicationProvider multiplicationProvider, BonusesProvider bonusesProvider)
+        public RetirementCalculator(IMultiplicationProvider multiplicationProvider, IBonusesProvider bonusesProvider)
         {
             _multiplicationProvider = multiplicationProvider;
             _bonusesProvider = bonusesProvider;
@@ -52,7 +53,7 @@ namespace Lesson1_SRP
 
             var multiplicationResult = _multiplicationProvider.ApplyRules(employee.MultiplicationDefault, salaries);
             var bonusesResult = _bonusesProvider.ApplyRules(salaries);
-            
+
             //example how to use more returning types
             //var result = GetSomething(salaries);
             //Console.WriteLine(result.multiplication);
@@ -66,7 +67,7 @@ namespace Lesson1_SRP
         //}
     }
 
-    public class BonusesProvider
+    public class BonusesProvider : IBonusesProvider
     {
         public IEnumerable<int> ApplyRules(IEnumerable<Salary> salaries)
         {
@@ -74,7 +75,7 @@ namespace Lesson1_SRP
 
             if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
             {
-                
+
                 bonuses.Add(2000);
             }
 
@@ -82,7 +83,7 @@ namespace Lesson1_SRP
         }
     }
 
-    public class MultiplicationProvider
+    public class MultiplicationProvider : IMultiplicationProvider
     {
 
         //todo: data vs reference types
@@ -111,10 +112,15 @@ namespace Lesson1_SRP
 
     public class SalariesProvider
     {
-        public virtual IEnumerable<Salary> GetData()
+        public async virtual Task<IEnumerable<Salary>> GetData()
         {
             //system.io.abstractions
-            return JsonSerializer.Deserialize<IEnumerable<Salary>>(File.ReadAllText("salaries.json")).ToList();
+            //return JsonSerializer.Deserialize<IEnumerable<Salary>>(File.ReadAllText("salaries.json")).ToList();
+
+            var text = await File.ReadAllTextAsync("salaries.json");
+            var result = JsonSerializer.Deserialize<IEnumerable<Salary>>(text);
+
+            return result;
         }
     }
 

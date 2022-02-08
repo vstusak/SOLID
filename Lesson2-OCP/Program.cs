@@ -12,7 +12,6 @@ namespace Lesson2_OCP
         static void Main(string[] args)
         {
             OCPApproaches ocpApproaches = new OCPApproaches();
-
             ocpApproaches.ExtremelyConcrete();
 
             ocpApproaches.ParameterBased("Hello world! Parameter.");

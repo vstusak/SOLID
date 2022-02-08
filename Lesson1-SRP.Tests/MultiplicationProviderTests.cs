@@ -18,7 +18,7 @@ namespace Lesson1_SRP.Tests
             //Act
             var finalMultiplication = underTest.ApplyRules(defaultMultiplication,listOfSalaries);
             //Assert
-            Assert.
+            //Assert.
         }
 
     }

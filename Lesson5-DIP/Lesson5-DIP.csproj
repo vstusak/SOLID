@@ -6,4 +6,8 @@
     <RootNamespace>Lesson5_DIP</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\lesson5-abstractions\lesson5-abstractions.csproj" />
+  </ItemGroup>
+
 </Project>
