@@ -11,7 +11,7 @@ namespace Lesson1_SRP
 {
     public class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var multiplicationProvider = new MultiplicationProvider();
             var bonusesProvider = new BonusesProvider();
@@ -19,7 +19,7 @@ namespace Lesson1_SRP
             SalariesProvider salariesProvider = new SalariesProviderDb();
 
             //retirementCalculator.GenerateSalaries();
-            var salaries = salariesProvider.GetData();
+            var salaries = await salariesProvider.GetData();
             var retirementSalary = retirementCalculator.CalculateRetirementMonthlySalary(salaries, new Employee());
 
             Console.WriteLine(retirementSalary > 20000
@@ -112,7 +112,7 @@ namespace Lesson1_SRP
 
     public class SalariesProvider
     {
-        public async virtual Task<IEnumerable<Salary>> GetData()
+        public virtual async Task<IEnumerable<Salary>> GetData()
         {
             //system.io.abstractions
             //return JsonSerializer.Deserialize<IEnumerable<Salary>>(File.ReadAllText("salaries.json")).ToList();
@@ -126,9 +126,9 @@ namespace Lesson1_SRP
 
     public class SalariesProviderDb : SalariesProvider
     {
-        public override IEnumerable<Salary> GetData()
+        public override async Task<IEnumerable<Salary>> GetData()
         {
-            return GenerateSalaries();
+            return await Task.FromResult(GenerateSalaries());
         }
 
         private List<Salary> GenerateSalaries()
