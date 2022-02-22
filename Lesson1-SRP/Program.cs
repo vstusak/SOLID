@@ -89,13 +89,17 @@ namespace Lesson1_SRP
         //todo: data vs reference types
         public double ApplyRules(double multiplication, IEnumerable<Salary> salaries)
         {
-            var enumerable = salaries.ToList();
-            if (enumerable.Count() > 50)
+            if(salaries.IsNullOrEmpty())
+            {
+                return multiplication;
+            }
+
+            if (salaries.IsCountHigherThanThreashold(50))
             {
                 multiplication += 0.3;
             }
 
-            if (enumerable.Select(salary => salary.Value).Average() > 30000)
+            if (salaries.Select(salary => salary.Value).Average() > 30000)
             {
                 multiplication += 1;
             }

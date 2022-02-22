@@ -54,6 +54,7 @@ namespace Lesson1_SRP.Tests
         [InlineData(0.1, 100, 25000, 0.4)]
         [InlineData(0.1, 3, 35000, 1.1)]
         [InlineData(0.1, 100, 35000, 1.4)]
+        [InlineData(0.5, 3, 25000, 0.5)]
         public void GivenData_ApplyRules_ExpectedMultiplication(double defaultMultiplication, int numberOfSalaries, int averageSalary, double expectedMultiplication)
         {
             //Arrange
@@ -70,6 +71,40 @@ namespace Lesson1_SRP.Tests
 
             //Assert
             Assert.Equal(expectedMultiplication, actualResult);
+        }
+
+        [Fact]
+        public void NullListOfSalaries_ApplyRules_ExpectSameMultiplicationsAsInput()
+        {
+            //Arrange
+            MultiplicationProvider underTest = new MultiplicationProvider();
+            const double defaultMultiplication = 0.1;
+            const double expectedMultiplication = 0.1;
+
+            List<Salary> listOfSalaries = null; 
+
+            //Act
+            var finalMultiplication = underTest.ApplyRules(defaultMultiplication, listOfSalaries);
+
+            //Assert
+            Assert.Equal(expectedMultiplication, finalMultiplication);
+        }
+
+        public void HundredSalaries_ApplyRules_TooManySalariesException()
+        {
+            //Arrange
+            MultiplicationProvider underTest = new MultiplicationProvider();
+
+            var listOfSalaries = new List<Salary>();
+            for (var i = 0; i < 100; i++)
+            {
+                listOfSalaries.Add(new Salary { DateTime = DateTime.Now, Value = 25 });
+            }
+
+            //Act         
+
+            //Assert
+            Assert.Throws<TooManySalariesException>(() => underTest.ApplyRules(0.1, listOfSalaries));
         }
     }
 }
