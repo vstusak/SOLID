@@ -123,5 +123,52 @@ namespace Lesson1_SRP.Tests
             actualResult.Should().Be(expectedResult); //Assert with Fluent Assertions
             //Probrat Assert Extensions
         }
+
+        [Fact]
+        public void ApplyRules_NullSalariesList_MultiplicationIsNotChanged()
+        {
+            //Arrange
+            var unitUnderTest = new MultiplicationRulesProvider();
+            var defaultMultiplication = 123.0;
+            var expectedResult = 123.0;
+
+            //Act
+            var actualResult = unitUnderTest.ApplyRules(null, defaultMultiplication);
+
+            //Assert
+            Assert.Equal(expectedResult, actualResult); //Assert with xUnit default Assert
+            actualResult.Should().Be(expectedResult); //Assert with Fluent Assertions
+        }
+
+        [Fact]
+        public void ApplyRules_MoreThan100SalariesList_CriticalCountOfSalariesException()
+        {
+            //Arrange
+            var unitUnderTest = new MultiplicationRulesProvider();
+            var defaultMultiplication = 123.0;
+            var expectedResult = 123.0;
+
+            var salaries = new List<Salary>();
+            for (var i = 0; i < 101; i++)
+            {
+                salaries.Add(new Salary
+                {
+                    DateTime = DateTime.UtcNow,
+                    Value = 123
+                });
+            }
+
+            //Act and Assert
+            Assert.Throws<CriticalCountOfSalariesException>(() =>
+                unitUnderTest.ApplyRules(salaries, defaultMultiplication));
+
+            Action act = () => unitUnderTest.ApplyRules(salaries, defaultMultiplication);
+            act.Should().Throw<CriticalCountOfSalariesException>()
+                .WithInnerException<ArgumentException>()
+                .WithMessage("whatever");
+
+            //Dodelat custom fluent assertion, ktera vrati Exception
+        }
+
     }
 }
