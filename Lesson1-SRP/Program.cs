@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -11,7 +10,7 @@ namespace Lesson1_SRP
 {
     public class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             var multiplicationProvider = new MultiplicationProvider();
             var bonusesProvider = new BonusesProvider();
@@ -51,7 +50,9 @@ namespace Lesson1_SRP
             //drive rules provider based on roles (based/manager/ceo)
             //move rules to roles
 
-            var multiplicationResult = _multiplicationProvider.ApplyRules(employee.MultiplicationDefault, salaries);
+            var multiplicationResult = _multiplicationProvider
+                .ApplyRules(employee.MultiplicationDefault, salaries);
+
             var bonusesResult = _bonusesProvider.ApplyRules(salaries);
 
             //example how to use more returning types
@@ -85,16 +86,23 @@ namespace Lesson1_SRP
 
     public class MultiplicationProvider : IMultiplicationProvider
     {
+        private const int SalariesMaxThreshold = 100;
+        private const int SalariesMultiplicationThreshold = 50;
 
         //todo: data vs reference types
         public double ApplyRules(double multiplication, IEnumerable<Salary> salaries)
         {
-            if(salaries.IsNullOrEmpty())
+            if (salaries.IsNullOrEmpty())
             {
                 return multiplication;
             }
 
-            if (salaries.IsCountHigherThanThreashold(50))
+            if (salaries.IsCountHigherThanThreashold(SalariesMaxThreshold))
+            {
+                throw new TooManySalariesException("There is too many salaries");
+            }
+
+            if (salaries.IsCountHigherThanThreashold(SalariesMultiplicationThreshold))
             {
                 multiplication += 0.3;
             }
@@ -143,7 +151,7 @@ namespace Lesson1_SRP
             for (int i = 0; i < 100; i++)
             {
                 salaries.Add(new Salary
-                    { DateTime = new DateTime(2020, 9, 13).AddMonths(i * -1), Value = salaryGenerator.Next(5000, 50000) });
+                { DateTime = new DateTime(2020, 9, 13).AddMonths(i * -1), Value = salaryGenerator.Next(5000, 50000) });
             }
 
             return salaries;

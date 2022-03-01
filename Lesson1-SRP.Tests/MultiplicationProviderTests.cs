@@ -81,7 +81,7 @@ namespace Lesson1_SRP.Tests
             const double defaultMultiplication = 0.1;
             const double expectedMultiplication = 0.1;
 
-            List<Salary> listOfSalaries = null; 
+            List<Salary> listOfSalaries = null;
 
             //Act
             var finalMultiplication = underTest.ApplyRules(defaultMultiplication, listOfSalaries);
@@ -90,13 +90,14 @@ namespace Lesson1_SRP.Tests
             Assert.Equal(expectedMultiplication, finalMultiplication);
         }
 
+        [Fact]
         public void HundredSalaries_ApplyRules_TooManySalariesException()
         {
             //Arrange
             MultiplicationProvider underTest = new MultiplicationProvider();
 
             var listOfSalaries = new List<Salary>();
-            for (var i = 0; i < 100; i++)
+            for (var i = 0; i < 101; i++)
             {
                 listOfSalaries.Add(new Salary { DateTime = DateTime.Now, Value = 25 });
             }
