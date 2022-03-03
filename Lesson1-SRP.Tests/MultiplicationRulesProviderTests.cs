@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using FluentAssertions.Specialized;
+using Lesson1_SRP.Exceptions;
 using Xunit;
 
 namespace Lesson1_SRP.Tests
@@ -146,7 +148,6 @@ namespace Lesson1_SRP.Tests
             //Arrange
             var unitUnderTest = new MultiplicationRulesProvider();
             var defaultMultiplication = 123.0;
-            var expectedResult = 123.0;
 
             var salaries = new List<Salary>();
             for (var i = 0; i < 101; i++)
@@ -163,12 +164,20 @@ namespace Lesson1_SRP.Tests
                 unitUnderTest.ApplyRules(salaries, defaultMultiplication));
 
             Action act = () => unitUnderTest.ApplyRules(salaries, defaultMultiplication);
-            act.Should().Throw<CriticalCountOfSalariesException>()
-                .WithInnerException<ArgumentException>()
-                .WithMessage("whatever");
+            var exception = act.Should().Throw<CriticalCountOfSalariesException>().GetException();
+            //.WithInnerException<ArgumentException>();
+            //.WithMessage("whatever");
 
             //Dodelat custom fluent assertion, ktera vrati Exception
         }
 
+    }
+
+    public static class Extensions
+    {
+        public static Exception GetException<T>(this ExceptionAssertions<T> exceptionAssertions) where T : Exception
+        {
+            return exceptionAssertions.And;
+        }
     }
 }

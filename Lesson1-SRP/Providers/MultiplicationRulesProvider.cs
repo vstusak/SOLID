@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Lesson1_SRP.Exceptions;
 
 namespace Lesson1_SRP
 {
@@ -11,7 +12,12 @@ namespace Lesson1_SRP
             {
                 return multiplication;
             }
-            
+
+            if (salaries.Count() > 100)
+            {
+                throw new CriticalCountOfSalariesException("Critical count of salaries reached.");
+            }
+
             if (salaries.Count() > 50)
             {
                 multiplication += 0.3;
