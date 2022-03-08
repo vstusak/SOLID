@@ -8,6 +8,11 @@ namespace Lesson1_SRP.RulesProviders
     {
         public double ApplyRulesForMultiplication(IEnumerable<Salary> salaries, double multiplication)
         {
+            if (salaries == null)
+            {
+                return multiplication;
+            }
+
             if (salaries.Count() > 50)
             {
                 multiplication += 0.3;
