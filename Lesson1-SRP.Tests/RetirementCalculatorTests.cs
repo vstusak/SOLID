@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Moq;
 using Xunit;
 
@@ -11,19 +12,27 @@ namespace Lesson1_SRP.Tests
         public void BasicTest_RetirementCalculator()
         {
             // arrange
-            var multiplicationProviderMock = new Mock<IMultiplicationProvider>();
-            var bonusesProviderMock = new Mock<IBonusesProvider>();
-
-            var retirementCalculator = new RetirementCalculator(
-                multiplicationProviderMock.Object,
-                bonusesProviderMock.Object);
+            var multiplicationProviderMock = new Mock<IMultiplicationProvider>(MockBehavior.Strict);
+            var bonusesProviderMock = new Mock<IBonusesProvider>(MockBehavior.Strict);
 
             var listOfSalaries = new List<Salary>
             {
                 new() { DateTime = DateTime.Now, Value = 25000 },
                 new() { DateTime = DateTime.Now, Value = 25000 },
-                new() { DateTime = DateTime.Now, Value = 25000 }
+                new() { DateTime = DateTime.Now, Value = 50000 }
             };
+
+            //multiplicationProviderMock.Setup(mpm => mpm.ApplyRules(2.0,listOfSalaries)).Returns(1.0);
+            //var applyRules = mpm => mpm.ApplyRules(It.IsAny<Double>(), It.IsAny<IEnumerable<Salary>>());
+            Expression<Action<IMultiplicationProvider>> applyRules = mpm => mpm.ApplyRules(It.IsAny<Double>(), It.IsAny<IEnumerable<Salary>>());
+            multiplicationProviderMock.Setup(applyRules).Returns(1.0);
+            bonusesProviderMock
+                .Setup(bpm => bpm.ApplyRules(It.IsAny<IEnumerable<Salary>>()))
+                .Returns(new List<int>() { 1, 1, 1 });
+            
+            var retirementCalculator = new RetirementCalculator(
+                multiplicationProviderMock.Object,
+                bonusesProviderMock.Object);
 
             var employee = new Employee();
 
@@ -31,7 +40,10 @@ namespace Lesson1_SRP.Tests
             var actualResult = retirementCalculator.CalculateRetirementMonthlySalary(listOfSalaries, employee);
 
             // assert
-            Assert.True(actualResult != 0);
+            Assert.Equal(1003, actualResult);
+            multiplicationProviderMock.Verify();
+            bonusesProviderMock.Verify();
+            multiplicationProviderMock.Verify(applyRules);
         }
     }
 }
