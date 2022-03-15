@@ -46,6 +46,9 @@ namespace Lesson1_SRP
 
         public int CalculateRetirementMonthlySalary(IEnumerable<Salary> salaries, IEmployee employee)
         {
+            Console.WriteLine($" Year is {_multiplicationProvider.Year}");
+            _multiplicationProvider.Year = 2000;
+            //_multiplicationProvider.Year = 1999;
             //move rules to rules provider (icnluding base salary)
             //drive rules provider based on roles (based/manager/ceo)
             //move rules to roles
@@ -89,9 +92,13 @@ namespace Lesson1_SRP
         private const int SalariesMaxThreshold = 100;
         private const int SalariesMultiplicationThreshold = 50;
 
+        public int Year { get ; set ; }
+
         //todo: data vs reference types
         public double ApplyRules(double multiplication, IEnumerable<Salary> salaries)
         {
+            
+
             if (salaries.IsNullOrEmpty())
             {
                 return multiplication;
