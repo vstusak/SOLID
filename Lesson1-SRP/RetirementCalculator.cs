@@ -71,6 +71,19 @@ namespace Lesson1_SRP
             
             var resultMultiplication = _multiplicationRulesProvider.ApplyRules(salaries, employee.Multiplication);
             var resultBonuses = _bonusesRulesProvider.ApplyRules(salaries);
+            
+            Console.WriteLine($"TenantId: {_multiplicationRulesProvider.TenantId}");
+            _multiplicationRulesProvider.TenantId = "My string 1";
+            _multiplicationRulesProvider.TenantId = "My string 2";
+            _multiplicationRulesProvider.TenantId = "My string 2";
+            _multiplicationRulesProvider.TenantId = "My string";
+
+            //_multiplicationRulesProvider.TenantAddress = new Address()
+            //{
+            //    Street = new Street() { Name = "Jina adresa" },
+            //    City = "Brno"
+            //};
+            Console.WriteLine(_multiplicationRulesProvider.TenantAddress.Street.Name);
 
             return Convert.ToInt32(employee.BaseRetirementSalary * resultMultiplication + resultBonuses.Sum());
         }

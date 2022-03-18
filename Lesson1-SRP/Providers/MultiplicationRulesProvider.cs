@@ -6,6 +6,9 @@ namespace Lesson1_SRP
 {
     public class MultiplicationRulesProvider : IMultiplicationRulesProvider
     {
+        public string TenantId { get; set; }
+        public Address TenantAddress { get; set; }
+
         public double ApplyRules(IEnumerable<Salary> salaries, double multiplication)
         {
             if (salaries.IsNullOrEmpty())
