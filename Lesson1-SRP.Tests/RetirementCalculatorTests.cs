@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using System.Linq.Expressions;
 
 namespace Lesson1_SRP.Tests
 {
@@ -18,13 +19,15 @@ namespace Lesson1_SRP.Tests
             var multiplicationRulesProviderMock = new Mock<IMultiplicationRulesProvider>(MockBehavior.Strict);
             var bonusesRulesProviderMock = new Mock<IBonusesRulesProvider>(MockBehavior.Strict);
 
+            Expression<Func<IMultiplicationRulesProvider, double>> expression = mrpm => mrpm.ApplyRules(It.IsAny<IEnumerable<Salary>>(), It.IsAny<double>());
+
             //multiplicationRulesProviderMock.Setup(mrpm => mrpm.ApplyRules( new List<Salary>(), 0)).Returns(1);
             //multiplicationRulesProviderMock.Setup(mrpm => mrpm.ApplyRules(null, 0)).Returns(1);
-            multiplicationRulesProviderMock.Setup(mrpm => mrpm.ApplyRules(It.IsAny<IEnumerable<Salary>>(), It.IsAny<double>())).Returns(1);
+            multiplicationRulesProviderMock.Setup(expression).Returns(1);
             //bonusesRulesProviderMock.Setup(brpm => brpm.ApplyRules(null)).Returns(new List<int>());
 
-            bonusesRulesProviderMock.Setup(brpm => brpm.ApplyRules(It.IsAny<IEnumerable<Salary>>())).Returns(new List<int>{ 1, 1, 1 });
-            var retirementCalculator = new RetirementCalculator(multiplicationRulesProviderMock.Object,bonusesRulesProviderMock.Object);
+            bonusesRulesProviderMock.Setup(brpm => brpm.ApplyRules(It.IsAny<IEnumerable<Salary>>())).Returns(new List<int> { 1, 1, 1 });
+            var retirementCalculator = new RetirementCalculator(multiplicationRulesProviderMock.Object, bonusesRulesProviderMock.Object);
             var expectedResult = 10003;
             IEnumerable<Salary> salaries = new List<Salary>();
             IEmployee employee = new Employee();
@@ -34,9 +37,9 @@ namespace Lesson1_SRP.Tests
             //Assert
             Assert.Equal(expectedResult, actualResult);
 
-            //Todo: add check for howmany times the method has been called.
-            
-
+            multiplicationRulesProviderMock.Verify(expression);
+            //Check for howmany times the method has been called.
+            multiplicationRulesProviderMock.Verify(expression, Times.Exactly(1));
         }
     }
 }
