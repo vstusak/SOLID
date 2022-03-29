@@ -99,5 +99,30 @@ namespace Lesson1_SRP.Tests
             Assert.Equal(expectedResult, actualResult);
 
         }
+
+        [Fact]
+        public void TooManySalaries_Throws_Exception()
+        {
+            //Arrange
+            var salaries = new List<Salary>();
+            for (int i = 0; i < 101; i++)
+            {
+                salaries.Add(new Salary()
+                {
+                    Value = i,
+                    DateTime = new DateTime(2020, 1, 1)
+                });
+            }
+            var unitUnderTest = new MultiplicationRulesProvider2020();
+
+            //Act
+
+            var act = Assert.Throws<TooManySalariesException>(() => unitUnderTest.ApplyRulesForMultiplication(salaries, 1.0));
+            Assert.Equal("Too many salaries found.", act.Message);
+
+
+
+
+        }
     }
 }

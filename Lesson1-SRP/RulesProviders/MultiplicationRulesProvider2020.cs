@@ -12,7 +12,10 @@ namespace Lesson1_SRP.RulesProviders
             {
                 return multiplication;
             }
-
+            if (salaries.Count() > 100)
+            {
+                throw new TooManySalariesException("Too many salaries found.");
+            }
             if (salaries.Count() > 50)
             {
                 multiplication += 0.3;
