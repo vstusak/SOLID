@@ -26,9 +26,12 @@ namespace Lesson1_SRP.Tests
             //var applyRules = mpm => mpm.ApplyRules(It.IsAny<Double>(), It.IsAny<IEnumerable<Salary>>());
             //multiplicationProviderMock.Setup(mpm => mpm.Year).Returns(1689);
             multiplicationProviderMock.SetupProperty(mpm => mpm.Year, 1969);
-            Action<IMultiplicationProvider> set = mpm => mpm.Year = 2000;
-            multiplicationProviderMock.SetupSet(set);
+            //Action<IMultiplicationProvider> set = mpm => mpm.Year = 2000;
+            //multiplicationProviderMock.SetupSet(set);
 
+            multiplicationProviderMock.SetupSet(mpm => mpm.Address.Street.Name = "Vlnena");
+            multiplicationProviderMock.SetupSet(mpm => mpm.Address.Street.Number = 1);
+            
             Expression<Func<IMultiplicationProvider, double>> applyRules = mpm => mpm.ApplyRules(It.IsAny<Double>(), It.IsAny<IEnumerable<Salary>>());
             multiplicationProviderMock.Setup(applyRules).Returns(1.0);
 

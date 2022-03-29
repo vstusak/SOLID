@@ -93,6 +93,7 @@ namespace Lesson1_SRP
         private const int SalariesMultiplicationThreshold = 50;
 
         public int Year { get ; set ; }
+        public Address Address { get; set; }
 
         //todo: data vs reference types
         public double ApplyRules(double multiplication, IEnumerable<Salary> salaries)
