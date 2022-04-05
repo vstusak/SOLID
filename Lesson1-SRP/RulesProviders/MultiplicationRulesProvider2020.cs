@@ -6,6 +6,8 @@ namespace Lesson1_SRP.RulesProviders
 {
     public class MultiplicationRulesProvider2020 : IMultiplicationRulesProvider
     {
+        public int Year { get; set; }
+
         public double ApplyRulesForMultiplication(IEnumerable<Salary> salaries, double multiplication)
         {
             if (salaries == null)

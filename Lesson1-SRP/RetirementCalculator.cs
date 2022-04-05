@@ -29,6 +29,11 @@ namespace Lesson1_SRP
 
             var bonuses = _rulesForBonusesProvider.ApplyRulesForBonuses(person.Salaries);
 
+            Console.WriteLine(_multiplicationRulesProvider.Year);
+            _multiplicationRulesProvider.Year = 1988;
+            Console.WriteLine(_multiplicationRulesProvider.Year);
+
+
             var result = Convert.ToInt32(person.BaseSalary * multiplication + bonuses.Sum());
             return result;
         }

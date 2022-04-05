@@ -26,13 +26,18 @@ namespace Lesson1_SRP.Tests
 
             //IRulesForBonusesProvider rulesForBonusesProvider = null;
             //IMultiplicationRulesProvider multiplicationRulesProvider = null;
+
             var multiplicationRulesProviderMock = new Mock<IMultiplicationRulesProvider>(MockBehavior.Strict);
+            //multiplicationRulesProviderMock.Setup(mrp => mrp.ApplyRulesForMultiplication(salaries, multiplication)).Returns(2);
+            multiplicationRulesProviderMock.Setup(mrp => mrp.ApplyRulesForMultiplication(It.IsAny<IEnumerable<Salary>>(), It.IsAny<double>())).Returns(2);
+            //nedovolí přiřazení hodnoty, nikdy to neudělá nic jinýho :) <3 pro Vláďu
+            //multiplicationRulesProviderMock.Setup(mrp => mrp.Year).Returns(2);
+            multiplicationRulesProviderMock.SetupProperty(mrp => mrp.Year, 1955);
+
             var rulesForBonusesProviderMock = new Mock<IRulesForBonusesProvider>(MockBehavior.Strict);
+            rulesForBonusesProviderMock.Setup(rfbp => rfbp.ApplyRulesForBonuses(It.IsAny<IEnumerable<Salary>>())).Returns(new List<int> { 0, 1 });
 
             //multiplicationRulesProviderMock.Setup(mrp => mrp.ApplyRulesForMultiplication(salaries, multiplication)).Returns(2);
-
-            multiplicationRulesProviderMock.Setup(mrp => mrp.ApplyRulesForMultiplication(It.IsAny<IEnumerable<Salary>>(), It.IsAny<double>())).Returns(2);
-            rulesForBonusesProviderMock.Setup(rfbp => rfbp.ApplyRulesForBonuses(It.IsAny<IEnumerable<Salary>>())).Returns(new List<int> { 0, 1 });
 
             //Arrange
             var retirementCalculator = new RetirementCalculator(rulesForBonusesProviderMock.Object, multiplicationRulesProviderMock.Object);
@@ -45,6 +50,7 @@ namespace Lesson1_SRP.Tests
             Assert.Equal(40001, result);
 
             multiplicationRulesProviderMock.Verify(mrp => mrp.ApplyRulesForMultiplication(It.IsAny<IEnumerable<Salary>>(), It.IsAny<double>()), Times.Exactly(1));
+        ověřit hodnotu property
         }
     }
 }
