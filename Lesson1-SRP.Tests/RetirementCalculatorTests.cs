@@ -33,6 +33,7 @@ namespace Lesson1_SRP.Tests
             //nedovolí přiřazení hodnoty, nikdy to neudělá nic jinýho :) <3 pro Vláďu
             //multiplicationRulesProviderMock.Setup(mrp => mrp.Year).Returns(2);
             multiplicationRulesProviderMock.SetupProperty(mrp => mrp.Year, 1955);
+            multiplicationRulesProviderMock.SetupProperty(mrp => mrp.Address.Street.Name, "Ulicova");
 
             var rulesForBonusesProviderMock = new Mock<IRulesForBonusesProvider>(MockBehavior.Strict);
             rulesForBonusesProviderMock.Setup(rfbp => rfbp.ApplyRulesForBonuses(It.IsAny<IEnumerable<Salary>>())).Returns(new List<int> { 0, 1 });
@@ -50,7 +51,11 @@ namespace Lesson1_SRP.Tests
             Assert.Equal(40001, result);
 
             multiplicationRulesProviderMock.Verify(mrp => mrp.ApplyRulesForMultiplication(It.IsAny<IEnumerable<Salary>>(), It.IsAny<double>()), Times.Exactly(1));
-        ověřit hodnotu property
+
+            Assert.Equal(2022, multiplicationRulesProviderMock.Object.Year);
+            multiplicationRulesProviderMock.VerifySet(mrp => mrp.Year = 2022, Times.AtLeastOnce);
+            multiplicationRulesProviderMock.VerifySet(mrp => mrp.Year = 1988);
+
         }
     }
 }

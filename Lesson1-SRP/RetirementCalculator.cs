@@ -32,6 +32,7 @@ namespace Lesson1_SRP
             Console.WriteLine(_multiplicationRulesProvider.Year);
             _multiplicationRulesProvider.Year = 1988;
             Console.WriteLine(_multiplicationRulesProvider.Year);
+            _multiplicationRulesProvider.Year = 2022;
 
 
             var result = Convert.ToInt32(person.BaseSalary * multiplication + bonuses.Sum());
