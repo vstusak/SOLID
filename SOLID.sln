@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32228.343
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SOLID", "SOLID\SOLID.csproj", "{FC9E95F2-A517-4283-BBEE-D65AD0F5F596}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1-SRP.Tests", "Lesson1-SRP.Tests\Lesson1-SRP.Tests.csproj", "{7C38AEA0-2A70-430C-B78D-BAD6A49B4C43}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryPattern", "RepositoryPattern\RepositoryPattern.csproj", "{88EA5208-53F0-4E12-9355-50A7C4CE419F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryPattern.Tests", "Tests\RepositoryPattern.Tests\RepositoryPattern.Tests.csproj", "{B6EFA3CF-5A41-4A66-8909-DCFCC2C298FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,12 +61,17 @@ Global
 		{88EA5208-53F0-4E12-9355-50A7C4CE419F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88EA5208-53F0-4E12-9355-50A7C4CE419F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88EA5208-53F0-4E12-9355-50A7C4CE419F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6EFA3CF-5A41-4A66-8909-DCFCC2C298FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6EFA3CF-5A41-4A66-8909-DCFCC2C298FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6EFA3CF-5A41-4A66-8909-DCFCC2C298FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6EFA3CF-5A41-4A66-8909-DCFCC2C298FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7C38AEA0-2A70-430C-B78D-BAD6A49B4C43} = {3085A273-44F0-4361-9486-5B2DA5006226}
+		{B6EFA3CF-5A41-4A66-8909-DCFCC2C298FB} = {3085A273-44F0-4361-9486-5B2DA5006226}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06D4C238-5C66-46B4-B9AF-1B44E87FF3CA}

@@ -23,7 +23,8 @@ namespace RepositoryPattern.Commands
         public void Execute()
         {
             var choosenProduct = _productRepository.Get(_selectedProducts.ProductId);
-            choosenProduct.Quantity -= 1;
+            //choosenProduct.Quantity -= 1;
+            choosenProduct.Quantity = choosenProduct.Quantity - 1;
             _productRepository.Update(choosenProduct);
         }
 
