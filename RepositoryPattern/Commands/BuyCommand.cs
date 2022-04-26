@@ -26,6 +26,7 @@ namespace RepositoryPattern.Commands
             //choosenProduct.Quantity -= 1;
             choosenProduct.Quantity = choosenProduct.Quantity - 1;
             _productRepository.Update(choosenProduct);
+
         }
 
         public void Undo()
