@@ -2,20 +2,35 @@ using Moq;
 using RepositoryPattern.Commands;
 using RepositoryPattern.Context;
 using System;
-using Xunit;
+using NUnit.Framework;
 
 namespace RepositoryPattern.Tests
 {
-    public class BuyCommandTests
+    [TestFixture]
+    public class BuyCommandTestsMockRepositoryTests
     {
-        [Theory]
-        [InlineData(9, 8)]
-        [InlineData(1, 0)]
+        public MockRepository MockRepository { get; set; }
+        private Mock<IRepository<Product>> productRepositoryMock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            MockRepository = new MockRepository(MockBehavior.Strict);
+            productRepositoryMock = MockRepository.Create<IRepository<Product>>();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            MockRepository.VerifyAll(); //Check everything (mocks) was setup
+        }
+
+        [TestCase(9, 8)]
+        [TestCase(1, 0)]
         public void Execute_DefaultQuantity_QuantityDecreasedByOne(int defaultQuantity, int expectedQuantity)
         {
             //Arrange
             var product = new Product { Quantity = defaultQuantity };
-            var productRepositoryMock = new Mock<IRepository<Product>>(MockBehavior.Strict);
             productRepositoryMock.Setup(pr => pr.Get(It.IsAny<Guid>())).Returns(product);
             productRepositoryMock.Setup(pr => pr.Update(It.IsAny<Product>())).Returns(product);
 
@@ -25,20 +40,18 @@ namespace RepositoryPattern.Tests
             buyCommand.Execute();
 
             //Assert
-            Assert.Equal(expectedQuantity, product.Quantity);
+            Assert.AreEqual(expectedQuantity, product.Quantity);
 
             //Should be in a separated test
             productRepositoryMock.Verify(mrp => mrp.Update(It.IsAny<Product>()), Times.Exactly(1));
         }
 
-        [Theory]
-        [InlineData(true, 1)]
-        [InlineData(false, 0)]
+        [TestCase(true, 1)]
+        [TestCase(false, 0)]
         public void CanExecute(bool expectedResult, int defaultQuantity)
         {
             //Arrange
             var product = new Product { Quantity = defaultQuantity };
-            var productRepositoryMock = new Mock<IRepository<Product>>(MockBehavior.Strict);
             var buyCommand = new BuyCommand(product, productRepositoryMock.Object);
             productRepositoryMock.Setup(pr => pr.Get(It.IsAny<Guid>())).Returns(product);
 
@@ -46,17 +59,15 @@ namespace RepositoryPattern.Tests
             var result = buyCommand.CanExecute();
 
             //Assert
-            Assert.Equal(expectedResult, result);
+            Assert.AreEqual(expectedResult, result);
         }
 
-        [Theory]
-        [InlineData(8, 9)]
-        [InlineData(0, 1)]
+        [TestCase(8, 9)]
+        [TestCase(0, 1)]
         public void Undo_DefaultQuantity_QuantityIncreasedByOne(int defaultQuantity, int expectedQuantity)
         {
             //Arrange
             var product = new Product { Quantity = defaultQuantity };
-            var productRepositoryMock = new Mock<IRepository<Product>>(MockBehavior.Strict);
             productRepositoryMock.Setup(pr => pr.Get(It.IsAny<Guid>())).Returns(product);
             productRepositoryMock.Setup(pr => pr.Update(It.IsAny<Product>())).Returns(product);
 
@@ -66,7 +77,7 @@ namespace RepositoryPattern.Tests
             buyCommand.Undo();
 
             //Assert
-            Assert.Equal(expectedQuantity, product.Quantity);
+            Assert.AreEqual(expectedQuantity, product.Quantity);
 
             //Should be in a separated test
             productRepositoryMock.Verify(mrp => mrp.Update(It.IsAny<Product>()), Times.Exactly(1));
