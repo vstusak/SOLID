@@ -7,24 +7,15 @@ using NUnit.Framework;
 namespace RepositoryPattern.Tests
 {
     [TestFixture]
-    public class BuyCommandTestsMockRepositoryTests
+    public class BuyCommandTestsMockRepositoryTests : TestsBase
     {
-        public MockRepository MockRepository { get; set; }
         private Mock<IRepository<Product>> productRepositoryMock;
 
         [SetUp]
-        public void SetUp()
+        public new void SetUp()
         {
-            MockRepository = new MockRepository(MockBehavior.Strict);
             productRepositoryMock = MockRepository.Create<IRepository<Product>>();
         }
-
-        [TearDown]
-        public void TearDown()
-        {
-            MockRepository.VerifyAll(); //Check everything (mocks) was setup
-        }
-
         [TestCase(9, 8)]
         [TestCase(1, 0)]
         public void Execute_DefaultQuantity_QuantityDecreasedByOne(int defaultQuantity, int expectedQuantity)

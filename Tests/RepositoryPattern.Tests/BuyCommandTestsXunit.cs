@@ -6,7 +6,7 @@ using Xunit;
 
 namespace RepositoryPattern.Tests
 {
-    public class BuyCommandTests
+    public class BuyCommandTestsXunit
     {
         [Theory]
         [InlineData(9, 8)]
