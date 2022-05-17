@@ -3,61 +3,54 @@ using NUnit.Framework;
 using RepositoryPattern;
 using RepositoryPattern.Commands;
 using RepositoryPattern.Context;
-using System;
 
 namespace RepositoryPattern.Tests.Commands
 {
     [TestFixture]
-    public class BuyCommandTests : TestsBase
+    public class BuyCommandTests_ExampleForBoilerplate : TestsBase
     {
-        private Mock<IRepository<Product>> mockRepository;
+
+        private Mock<Product> mockProduct;
+        private Mock<IRepository<Product>> productRepositoryMock;
 
         [SetUp]
         public void SetUp()
         {
-            mockRepository = MockRepository.Create<IRepository<Product>>();
+            mockProduct = MockRepository.Create<Product>();
+            productRepositoryMock = MockRepository.Create<IRepository<Product>>();
         }
 
         private BuyCommand CreateBuyCommand()
         {
             return new BuyCommand(
-                new Product() { },
-                mockRepository.Object);
+                mockProduct.Object,
+                productRepositoryMock.Object);
         }
 
-        //Test for quantity=0 needed as well
         [Test]
         public void CanExecute_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var product = new Product { Quantity = 1 };
-
             var buyCommand = CreateBuyCommand();
-            mockRepository.Setup(mr => mr.Get(It.IsAny<Guid>())).Returns(product);
-
 
             // Act
             var result = buyCommand.CanExecute();
 
             // Assert
-            Assert.IsTrue(result);
+            Assert.Fail();
         }
 
         [Test]
-        public void Execute_DecreasesQuantity()
+        public void Execute_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var product = new Product { Quantity = 1 };
             var buyCommand = CreateBuyCommand();
-            mockRepository.Setup(mr => mr.Update(It.IsAny<Product>())).Returns(product);
-            //set up get
-
 
             // Act
             buyCommand.Execute();
 
             // Assert
-            Assert.AreEqual(0, product.Quantity);
+            Assert.Fail();
         }
 
         [Test]

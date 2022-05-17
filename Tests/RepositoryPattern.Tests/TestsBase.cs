@@ -1,21 +1,23 @@
 using Moq;
 using NUnit.Framework;
 
-namespace RepositoryPattern.Tests;
-
-public class TestsBase
+namespace RepositoryPattern.Tests
 {
-    public MockRepository MockRepository { get; set; }
-
-    [SetUp]
-    public void SetUp()
+    public class TestsBase
     {
-        MockRepository = new MockRepository(MockBehavior.Strict);
-    }
+        public MockRepository MockRepository { get; set; }
 
-    [TearDown]
-    public void TearDown()
-    {
-        MockRepository.VerifyAll(); //Check everything (mocks) was setup
+        [SetUp]
+        public void SetUp()
+        {
+            MockRepository = new MockRepository(MockBehavior.Strict);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            MockRepository.VerifyAll(); //Check everything (mocks) was setup
+        }
     }
 }
+
