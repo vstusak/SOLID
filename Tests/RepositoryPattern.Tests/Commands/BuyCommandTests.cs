@@ -50,8 +50,7 @@ namespace RepositoryPattern.Tests.Commands
             var product = new Product { Quantity = 1 };
             var buyCommand = CreateBuyCommand();
             mockRepository.Setup(mr => mr.Update(It.IsAny<Product>())).Returns(product);
-            //set up get
-
+            mockRepository.Setup(mr => mr.Get(It.IsAny<Guid>())).Returns(product);
 
             // Act
             buyCommand.Execute();
