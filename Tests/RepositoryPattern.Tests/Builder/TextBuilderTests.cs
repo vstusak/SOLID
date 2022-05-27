@@ -2,6 +2,7 @@
 using BuilderPattern.Builder;
 using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace RepositoryPattern.Tests.Builder
@@ -28,12 +29,15 @@ namespace RepositoryPattern.Tests.Builder
         {
             // Arrange
             var textBuilder = CreateTextBuilder();
-
+           
             // Act
-            var result = textBuilder.SetHeader();
+            //var result = textBuilder.SetHeader().Build();
+            textBuilder.SetHeader();
+            var result = textBuilder._result.ToString();
 
             // Assert
-            Assert.Fail();
+            //Assert.Fail();
+            Assert.AreEqual("Welcome to our library, there is a list of books." + Environment.NewLine, result);
         }
 
         [Test]
