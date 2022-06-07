@@ -30,7 +30,7 @@ namespace BuilderPattern
                 Console.WriteLine(author);
             }
 
-            var builder = new TextBuilder(books);
+            var builder = new TextBuilder(books, new DateTimeAdapter());
             //var director = new ReportDirector(builder);
             
             var report = builder.SetHeader().WriteLibrary().SetFooter().AddDateStamp().Build();

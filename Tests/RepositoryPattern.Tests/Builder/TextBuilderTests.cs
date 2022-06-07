@@ -4,24 +4,27 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 
 namespace RepositoryPattern.Tests.Builder
 {
     [TestFixture]
     public class TextBuilderTests : TestsBase
     {
-        private Mock<IEnumerable<Book>> mockEnumerable;
+        private Mock<IDateTimeAdapter> mockEnumerable;
 
         [SetUp]
         public void SetUp()
         {
-            mockEnumerable = MockRepository.Create<IEnumerable<Book>>();
+            mockEnumerable = MockRepository.Create<IDateTimeAdapter>();
         }
 
         private TextBuilder CreateTextBuilder()
         {
-            return new TextBuilder(
-                mockEnumerable.Object);
+            var books = new List<Book>();
+
+            return new TextBuilder(books, mockEnumerable.Object);
         }
 
         [Test]
@@ -29,7 +32,7 @@ namespace RepositoryPattern.Tests.Builder
         {
             // Arrange
             var textBuilder = CreateTextBuilder();
-           
+
             // Act
             //var result = textBuilder.SetHeader().Build();
             textBuilder.SetHeader();
@@ -73,10 +76,13 @@ namespace RepositoryPattern.Tests.Builder
             var textBuilder = CreateTextBuilder();
 
             // Act
-            var result = textBuilder.AddDateStamp();
+            textBuilder.AddDateStamp();
+            var result = textBuilder._result.ToString();
+
+            Thread.Sleep(1000);
 
             // Assert
-            Assert.Fail();
+            Assert.AreEqual(DateTime.UtcNow.ToString(CultureInfo.InvariantCulture) + Environment.NewLine, result);
         }
 
         [Test]
