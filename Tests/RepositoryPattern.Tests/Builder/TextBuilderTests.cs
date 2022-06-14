@@ -12,19 +12,19 @@ namespace RepositoryPattern.Tests.Builder
     [TestFixture]
     public class TextBuilderTests : TestsBase
     {
-        private Mock<IDateTimeAdapter> mockEnumerable;
+        private Mock<IDateTimeAdapter> mockDateTimeAdapter;
 
         [SetUp]
         public void SetUp()
         {
-            mockEnumerable = MockRepository.Create<IDateTimeAdapter>();
+            mockDateTimeAdapter = MockRepository.Create<IDateTimeAdapter>();
         }
 
         private TextBuilder CreateTextBuilder()
         {
             var books = new List<Book>();
 
-            return new TextBuilder(books, mockEnumerable.Object);
+            return new TextBuilder(books, mockDateTimeAdapter.Object);
         }
 
         [Test]
@@ -74,6 +74,8 @@ namespace RepositoryPattern.Tests.Builder
         {
             // Arrange
             var textBuilder = CreateTextBuilder();
+            var expectedDateTime = new DateTime(2022, 6, 16, 9, 28, 31);
+            mockDateTimeAdapter.Setup(mdta => mdta.UtcNow()).Returns(expectedDateTime);
 
             // Act
             textBuilder.AddDateStamp();
@@ -82,7 +84,7 @@ namespace RepositoryPattern.Tests.Builder
             Thread.Sleep(1000);
 
             // Assert
-            Assert.AreEqual(DateTime.UtcNow.ToString(CultureInfo.InvariantCulture) + Environment.NewLine, result);
+            Assert.AreEqual(expectedDateTime.ToString(CultureInfo.InvariantCulture) + Environment.NewLine, result);
         }
 
         [Test]
@@ -90,7 +92,7 @@ namespace RepositoryPattern.Tests.Builder
         {
             // Arrange
             var textBuilder = CreateTextBuilder();
-
+            
             // Act
             var result = textBuilder.Build();
 
