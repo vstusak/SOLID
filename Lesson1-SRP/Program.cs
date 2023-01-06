@@ -8,6 +8,7 @@ namespace Lesson1_SRP
 {
     public class Program
     {
+
         static void Main(string[] args)
         {
             var retirementCalculator = new RetirementCalculator();
