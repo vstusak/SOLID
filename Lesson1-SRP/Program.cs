@@ -37,6 +37,7 @@ namespace Lesson1_SRP
             if (salaries.Count() > 50)
             {
                 multiplication += 0.3;
+
             }
 
             if (salaries.Select(salary => salary.Value).Average() > 30000)
