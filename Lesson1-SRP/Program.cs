@@ -8,6 +8,8 @@ namespace Lesson1_SRP
 {
     public class Program
     {
+        private const string CongratulationsAndHaveANiceRetirement = "Congratulations and have a nice retirement";
+        private const string YouWillNeedAdditionalWorkNowOrInRetirementSorry = "You will need additional work now or in retirement, sorry";
 
         static void Main(string[] args)
         {
@@ -16,42 +18,23 @@ namespace Lesson1_SRP
             var retirementCalculator = new RetirementCalculator();
 
             //retirementCalculator.GenerateSalaries();
-            retirementCalculator.Process(salaries);
+            var retirementSalary = retirementCalculator.Process(salaries,10000);
 
-            Console.WriteLine(retirementCalculator.RetirementSalary > 20000
-                ? "Congratulations and have a nice retirement"
-                : "You will need additional work now or in retirement, sorry");
+            Console.WriteLine(retirementSalary > 20000
+                ? CongratulationsAndHaveANiceRetirement
+                : YouWillNeedAdditionalWorkNowOrInRetirementSorry);
         }
     }
 
     public class RetirementCalculator
     {
-        public int RetirementSalary { get; set; }
-
-        public void Process(List<Salary> salaries)
+       public int Process(List<Salary> salaries, int baseRetirementSalary)
         {
-            var baseSalary = 10000;
-            double multiplication = 1;
-            var bonuses = new List<int>();
+           var retirementRulesProvider = new RetirementRulesProvider();
+            var multiplication = retirementRulesProvider.GetMultiplication(salaries);
+            var bonusSum = retirementRulesProvider.GetBonuses(salaries);
 
-
-            if (salaries.Count() > 50)
-            {
-                multiplication += 0.3;
-
-            }
-
-            if (salaries.Select(salary => salary.Value).Average() > 30000)
-            {
-                multiplication += 1;
-            }
-
-            if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
-            {
-                bonuses.Add(2000);
-            }
-
-            RetirementSalary = Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+            return Convert.ToInt32(baseRetirementSalary * multiplication + bonusSum);
         }
     }
 
@@ -60,4 +43,33 @@ namespace Lesson1_SRP
         public DateTime DateTime { get; set; }
         public int Value { get; set; }
     }
+
+    public class RetirementRulesProvider
+    {
+        public double GetMultiplication(List<Salary> salaries)
+        {
+            double multiplication = 1;
+            if (salaries.Count() > 50)
+            {
+                multiplication += 0.3;
+            }
+            
+            if (salaries.Select(salary => salary.Value).Average() > 30000)
+            {
+                multiplication += 1;
+            }
+            return multiplication;
+        }
+
+        public int GetBonuses(List<Salary> salaries)
+        {
+            var bonuses = new List<int>();
+            if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
+            {
+                bonuses.Add(2000);
+            }
+            return bonuses.Sum();
+        }
+    }
+
 }
