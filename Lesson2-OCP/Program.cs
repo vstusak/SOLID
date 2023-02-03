@@ -15,9 +15,9 @@ namespace Lesson2_OCP
             ocpApproaches.InheritanceBased();
             ocpApproaches = new OCPApproachesInherited();
             ocpApproaches.InheritanceBased();
-
-            ocpApproaches = new OCPApproachesInjection(new GreetingsService());
-            ((OCPApproachesInjection)ocpApproaches).InjectedBased();
+            ((OCPApproaches)ocpApproaches).InheritanceBased();
+            var obj = new OCPApproachesInjection();
+            obj.InjectedBased();
         }
     }
 
@@ -47,26 +47,41 @@ namespace Lesson2_OCP
         }
     }
 
-    public class OCPApproachesInjection : OCPApproaches
+    public class OCPApproachesInjection
     {
-        private readonly GreetingsService _greetingsService;
+        //private readonly IService _greetingsService;
 
-        public OCPApproachesInjection(GreetingsService greetingsService)
-        {
-            _greetingsService = greetingsService;
-        }
+        //public OCPApproachesInjection(IService greetingsService)
+        //{
+        //    _greetingsService = greetingsService;
+        //}
 
         public void InjectedBased()
         {
+            var _greetingsService = new TServisa();
             Console.WriteLine(_greetingsService.GetMessage());
         }
     }
 
-    public class GreetingsService
+    public class GreetingsService : IService
     {
         public string GetMessage()
         {
             return "Hello World! Injected.";
+        }
+    }
+
+    public interface IService
+    {
+        string GetMessage();
+
+    }
+
+    public class TServisa : IService
+    {
+        public string GetMessage()
+        {
+            return "Hello it's Friday";
         }
     }
 }
