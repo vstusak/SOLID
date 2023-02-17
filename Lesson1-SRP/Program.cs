@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 
 namespace Lesson1_SRP
 {
@@ -18,7 +16,7 @@ namespace Lesson1_SRP
             var retirementCalculator = new RetirementCalculator();
 
             //retirementCalculator.GenerateSalaries();
-            var retirementSalary = retirementCalculator.Process(salaries,10000);
+            var retirementSalary = retirementCalculator.Process(salaries, 10000);
 
             Console.WriteLine(retirementSalary > 20000
                 ? CongratulationsAndHaveANiceRetirement
@@ -28,14 +26,25 @@ namespace Lesson1_SRP
 
     public class RetirementCalculator
     {
-       public int Process(List<Salary> salaries, int baseRetirementSalary)
+        private readonly RetirementRulesProvider _rulesProvider;
+        public RetirementCalculator()
         {
-           var retirementRulesProvider = new RetirementRulesProvider();
-            var multiplication = retirementRulesProvider.GetMultiplication(salaries);
-            var bonusSum = retirementRulesProvider.GetBonuses(salaries);
+            _rulesProvider = new RetirementRulesProvider();
+        }
+
+        public int Process(List<Salary> salaries, int baseRetirementSalary)
+        {
+            var multiplication = _rulesProvider.GetMultiplication(salaries);
+            var bonusSum = _rulesProvider.GetBonuses(salaries);
 
             return Convert.ToInt32(baseRetirementSalary * multiplication + bonusSum);
         }
+    }
+
+    public interface IRetirementRulesProvider
+    {
+        double GetMultiplication(List<Salary> salaries);
+        int GetBonuses(List<Salary> salaries);
     }
 
     public class Salary
@@ -53,7 +62,35 @@ namespace Lesson1_SRP
             {
                 multiplication += 0.3;
             }
-            
+
+            if (salaries.Select(salary => salary.Value).Average() > 30000)
+            {
+                multiplication += 1;
+            }
+            return multiplication;
+        }
+
+        public int GetBonuses(List<Salary> salaries)
+        {
+            var bonuses = new List<int>();
+            if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
+            {
+                bonuses.Add(2000);
+            }
+            return bonuses.Sum();
+        }
+    }
+
+    public class RetirementRulesProvider2023
+    {
+        public double GetMultiplication(List<Salary> salaries)
+        {
+            double multiplication = 1;
+            if (salaries.Count() > 50)
+            {
+                multiplication += 0.3;
+            }
+
             if (salaries.Select(salary => salary.Value).Average() > 30000)
             {
                 multiplication += 1;
