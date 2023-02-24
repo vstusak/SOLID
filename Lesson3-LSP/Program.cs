@@ -6,8 +6,9 @@ namespace Lesson3_LSP
     {
         static void Main(string[] args)
         {
-            var square = new Square();
-            square.
+            Shape square = new Square();
+            var calculator = new Calculator();
+            calculator.CalculateArea(square);
             Console.WriteLine("Hello World!");
         }
 

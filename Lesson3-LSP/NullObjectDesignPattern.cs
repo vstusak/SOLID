@@ -9,9 +9,8 @@ namespace Lesson3_LSP
             var factory = new CalculatorFactory();
             var calculator = factory.Create("kids");
 
-            var result = calculator?.Calculate();
+            var result = calculator.Calculate();
             Console.WriteLine(result);
-            
         }
     }
 
@@ -26,7 +25,7 @@ namespace Lesson3_LSP
                 case "science":
                     return new ScienceCalculator();
                 default:
-                    return null;
+                    return new NullCalculator(type);
             }
         }
     }
@@ -44,6 +43,20 @@ namespace Lesson3_LSP
         public virtual int Calculate()
         {
             return 1;
+        }
+    }
+
+    public class NullCalculator : Calculator
+    {
+        private readonly string _calculator;
+        public NullCalculator(string calculator)
+        {
+            _calculator = calculator;
+        }
+
+        public override int Calculate()
+        {
+            throw new ArgumentException($"Calculator has not been created. Requested type of calculator was: {_calculator}. ");
         }
     }
 }
