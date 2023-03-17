@@ -10,6 +10,7 @@ namespace Lesson4_ISP
             Console.WriteLine("Hello World!");
         }
     }
+    //TODO fdslj
 
     public interface INotificationService
     {
@@ -39,7 +40,7 @@ namespace Lesson4_ISP
         void ShowPopup(string clientUri, string message);
     }
 
-    Dedicnost interfaců
-        Adapter design pattern
+    //Dedicnost interfaců
+      //  Adapter design pattern
 
 }
