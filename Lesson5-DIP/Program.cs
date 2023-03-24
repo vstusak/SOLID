@@ -6,7 +6,9 @@ namespace Lesson5_DIP
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var reader = new CSVDataReader();
+            var jobsAcces = new PrinterJobsDataAccess(reader);
+            var jobs = jobsAcces.GetJobs(new ParameterCollection());
         }
     }
 

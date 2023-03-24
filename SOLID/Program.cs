@@ -9,7 +9,10 @@ namespace SOLID
         {
             Console.WriteLine("Set Command (+. -, *, /");
             var key = Console.ReadKey();
-
+            //call new object Calculator -> method Calculated
+            //method calculate should return Result
+            //5-7 rows
+            //only Main in class Program
             switch (key.KeyChar)
             {
                 case '+':
