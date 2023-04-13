@@ -24,7 +24,7 @@ namespace SOLID
             //action.OutputResult();
             //action.LogHistory();
 
-            action.SetEquation();
+            action.GetValues();
             action.Count();
             GetResult();
             LogHistory(output);
