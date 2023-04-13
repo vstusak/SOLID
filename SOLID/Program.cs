@@ -3,77 +3,91 @@ using System.IO;
 
 namespace SOLID
 {
+    public interface ICalculator
+    {
+        int Calculate(int value1, int value2);
+    }
+
+    public interface ILogger
+    {
+        void Log(string message);
+    }
+
+    public class Add : ICalculator
+    {
+        public int Calculate(int value1, int value2) => value1 + value2;
+    }
+
+    public class Sub : ICalculator
+    {
+        public int Calculate(int value1, int value2) => value1 - value2;
+    }
+
+    public class Mul : ICalculator
+    {
+        public int Calculate(int value1, int value2) => value1 * value2;
+    }
+
+    public class Div : ICalculator
+    {
+        public int Calculate(int value1, int value2) => value1 / value2;
+    }
+
+    public class ConsoleLogger : ILogger
+    {
+        public void Log(string message) => Console.WriteLine(message);
+    }
+
+    public class FileLogger : ILogger
+    {
+        public void Log(string message)
+        {
+            File.AppendAllText("log.json", $"{DateTime.UtcNow} : {message}\n");
+        }
+    }
+
+    public class CalculatorHandler
+    {
+        private readonly ILogger _logger;
+
+        public CalculatorHandler(ILogger logger)
+        {
+            _logger = logger;
+        }
+
+        public void Execute(char operation)
+        {
+            ICalculator calculator = operation switch
+            {
+                '+' => new Add(),
+                '-' => new Sub(),
+                '*' => new Mul(),
+                '/' => new Div(),
+                _ => throw new NotSupportedException("Operation not supported")
+            };
+
+            int value1 = ReadIntValue("\nset value 1");
+            int value2 = ReadIntValue("set value 2");
+            int result = calculator.Calculate(value1, value2);
+            string output = $"{value1} {operation} {value2} = {result}";
+            _logger.Log(output);
+        }
+
+        private int ReadIntValue(string prompt)
+        {
+            Console.WriteLine(prompt);
+            return int.Parse(Console.ReadLine());
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Set Command (+. -, *, /");
+            Console.WriteLine("Set Command (+, -, *, /):");
             var key = Console.ReadKey();
-            //call new object Calculator -> method Calculated
-            //method calculate should return Result
-            //5-7 rows
-            //only Main in class Program
-            switch (key.KeyChar)
-            {
-                case '+':
-                    Add();
-                    break;
-                case '-':
-                    Sub();
-                    break;
-                case '*':
-                    Mul();
-                    break;
-                case '/':
-                    Div();
-                    break;
-                default:
-                    Console.WriteLine("Not supported");
-                    break;
-            }
-        }
-
-        private static void Add()
-        {
-            Console.WriteLine("\nset value 1");
-            var value1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("set value 2");
-            var value2 = int.Parse(Console.ReadLine());
-
-            var result = value1 + value2;
-
-            var output = $"{value1} + {value2} = {result}";
-            Console.WriteLine(output);
-            LogHistory(output);
-        }
-
-        private static void Sub()
-        {
-            Console.WriteLine("\nset value 1");
-            var value1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("set value 2");
-            var value2 = int.Parse(Console.ReadLine());
-
-            var result = value1 - value2;
-
-            var output = $"{value1} - {value2} = {result}";
-            Console.WriteLine(output);
-            LogHistory(output);
-        }
-
-        private static void Mul()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void Div()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void LogHistory(string output)
-        {
-            File.AppendAllText("log.json", $"{DateTime.UtcNow} : {output}\n");
+            var handler = new CalculatorHandler(new ConsoleLogger());
+            handler.Execute(key.KeyChar);
         }
     }
 }
