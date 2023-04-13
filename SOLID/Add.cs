@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SOLID
 {
-    internal class Add : IAction
+    internal class Add : ICalculator
     {
         public void SetOperator()
         {
