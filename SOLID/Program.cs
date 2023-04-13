@@ -15,10 +15,11 @@ namespace SOLID
         static void Main(string[] args)
         {
             var calculator = new Calculator();
+            var action = new Action();
 
-            calculator.GetValues();
-            calculator.GetOperator();
-            calculator.Count(_operatorKey, _value1, _value2);
+            action.GetValues();
+            action.GetOperator();
+            action.Count(_operatorKey, _value1, _value2);
             calculator.LogHistory(_output);
         }
     }
