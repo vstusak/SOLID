@@ -7,20 +7,19 @@ namespace SOLID
 {
     internal class Program
     {
-        public static int Value1;
-        public static int Value2;
-        public static ConsoleKeyInfo OperatorKey;
-        public static string Output;
+        private static int _value1;
+        private static int _value2;
+        private static ConsoleKeyInfo _operatorKey;
+        private static string _output;
 
         static void Main(string[] args)
         {
-            //TODO: pass values
             var calculator = new Calculator();
 
             calculator.GetValues();
             calculator.GetOperator();
-            calculator.Count(OperatorKey, Value1, Value2);
-            calculator.LogHistory(Output);
+            calculator.Count(_operatorKey, _value1, _value2);
+            calculator.LogHistory(_output);
         }
     }
 }
