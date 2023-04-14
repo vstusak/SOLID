@@ -16,10 +16,7 @@ namespace SOLID
     {
         static void Main(string[] args)
         {
-            //var valueGetter = new ValueGetter();
-            //var input1 = valueGetter.GetValue1();
-            //var input2 = valueGetter.GetValue2();
-            //var calculationMethod = new CalculationMethodSelector(new CalculationMethodInputter());
+
             var calculator = new Calculator(new ValueGetter().GetValue1(), new ValueGetter().GetValue2(), new CalculationMethodSelector(new CalculationMethodInputter()).SelectCalculationMethod());
             var resultsManager = new ResultsManager(calculator);
 
