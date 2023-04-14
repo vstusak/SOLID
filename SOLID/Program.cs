@@ -16,11 +16,12 @@ namespace SOLID
     {
         static void Main(string[] args)
         {
-
-            var calculator = new Calculator(new ValueGetter().GetValue1(), new ValueGetter().GetValue2(), new CalculationMethodSelector(new CalculationMethodInputter()).SelectCalculationMethod());
+            var value1 = new ValueGetter().GetValue1();
+            var value2 = new ValueGetter().GetValue2();
+            var calculator = new Calculator(new CalculationMethodSelector(new CalculationMethodInputter()).SelectCalculationMethod());
             var resultsManager = new ResultsManager(calculator);
 
-            calculator.Calculate();
+            calculator.Calculate(value1,value2);
             resultsManager.ManageResults();
         }
     }
