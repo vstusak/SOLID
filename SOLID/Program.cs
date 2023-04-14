@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http.Headers;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 
@@ -12,20 +13,61 @@ namespace SOLID
     //only Main in class Program
     class Program
     {
-        void Main(string[] args)
+        static void Main(string[] args)
         {
-            var value1 = ValueGetter1();
-            var value2 = ValueGetter2();
-            var calculator = new Calculator(CalculationMethodSelector(InputCalculationMethod(out ConsoleKeyInfo key)));
-            calculator.Calculate(value1, value2);
+            //var value1 = ValueGetter1();
+            //var value2 = ValueGetter2();
+            var valueGetter = new ValueGetter();
+            var value1class = valueGetter.GetValue1();
+            var value2class = valueGetter.GetValue2();
+            var methodInputterClass = new MethodInputter();
+            var calculationMethodClass = new CalculationMethodSelectorClass(methodInputterClass);
+            var calculatorClass = new Calculator(calculationMethodClass.SelectCalulationMethod(), value1class, value2class);
+            //var calculator = new Calculator(CalculationMethodSelector(InputCalculationMethod(out ConsoleKeyInfo key)));
+            //calculator.Calculate(value1, value2);
+            calculatorClass.Calculate();
+            //var resultsManager = new ResultsManager(calculator);
+            //resultsManager.ManageResults();
         }
 
-        public ICalculatorMethodProvider CalculationMethodSelector(char keychar)
+        public class CalculationMethodSelectorClass
         {
-       
+            private readonly MethodInputter _methodInputter;
+            public CalculationMethodSelectorClass(MethodInputter methodInputter)
+            {
+                _methodInputter = methodInputter;
+            }
+
+            public ICalculatorMethodProvider SelectCalulationMethod()
+            {
+             
+                switch (_methodInputter.InputCalculationMethod(out ConsoleKeyInfo key))
+                {
+
+                    case '+':
+                        var add = new CalculatorMethodProviderAdd();
+                        return add;
+                    case '-':
+                        var sub = new CalculatorMethodProviderSub();
+                        return sub;
+                    case '*':
+                        var mul = new CalculatorMethodProviderMul();
+                        return mul;
+                    case '/':
+                        var div = new CalculatorMethodProviderDiv();
+                        return div;
+                    default:
+                        Console.WriteLine("Not supported");
+                        return null;
+                }
+            }
+        }
+        public static ICalculatorMethodProvider CalculationMethodSelector(char keychar)
+        {
+
             switch (keychar)
             {
-               
+
                 case '+':
                     var add = new CalculatorMethodProviderAdd();
                     return add;
@@ -33,7 +75,7 @@ namespace SOLID
                     var sub = new CalculatorMethodProviderSub();
                     return sub;
                 case '*':
-                    var mul = new CalculatorMethodProviderDiv();
+                    var mul = new CalculatorMethodProviderMul();
                     return mul;
                 case '/':
                     var div = new CalculatorMethodProviderDiv();
@@ -44,9 +86,22 @@ namespace SOLID
             }
         }
 
-       private static char InputCalculationMethod(out ConsoleKeyInfo key)
+        public class MethodInputter
+
         {
-            Console.WriteLine("Set Command (+. -, *, /");
+            public MethodInputter()
+            {
+            }
+            public char InputCalculationMethod(out ConsoleKeyInfo key)
+            {
+                Console.WriteLine("Set Command (+. -, *, /)");
+                key = Console.ReadKey();
+                return key.KeyChar;
+            }
+        }
+        private static char InputCalculationMethod(out ConsoleKeyInfo key)
+        {
+            Console.WriteLine("Set Command (+. -, *, /)");
             key = Console.ReadKey();
             return key.KeyChar;
         }
@@ -62,16 +117,23 @@ namespace SOLID
             public string Process(int value1, int value2)
             {
                 var result = value1 + value2;
-                var resultMessage = $"{value1} + {value2} = {result}";
+                var resultMessage = $"\n{value1} + {value2} = {result}";
+                Console.WriteLine(resultMessage);
                 return resultMessage;
             }
         }
         public class CalculatorMethodProviderSub : ICalculatorMethodProvider
         {
+            //private readonly ICalculatorMethodProvider _calculatorMethodProvider;
+            //public CalculatorMethodProviderSub(ICalculatorMethodProvider calculatorMethodProvider)
+            //{
+            //    _calculatorMethodProvider = calculatorMethodProvider;
+            //}
             public string Process(int value1, int value2)
             {
                 var result = value1 - value2;
-                var resultMessage = $"{value1} - {value2} = {result}";
+                var resultMessage = $"\n{value1} - {value2} = {result}";
+                Console.WriteLine(resultMessage);
                 return resultMessage;
             }
         }
@@ -80,7 +142,8 @@ namespace SOLID
             public string Process(int value1, int value2)
             {
                 var result = value1 * value2;
-                var resultMessage = $"{value1} * {value2} = {result}";
+                var resultMessage = $"\n {value1} * {value2} = {result}";
+                Console.WriteLine(resultMessage);
                 return resultMessage;
             }
         }
@@ -89,7 +152,8 @@ namespace SOLID
             public string Process(int value1, int value2)
             {
                 var result = value1 / value2;
-                var resultMessage = $"{value1} / {value2} = {result}";
+                var resultMessage = $"\n {value1} / {value2} = {result}";
+                Console.WriteLine(resultMessage);
                 return resultMessage;
             }
         }
@@ -97,50 +161,58 @@ namespace SOLID
         public class Calculator
         {
             private readonly ICalculatorMethodProvider _calculatorMethodProvider;
-            public Calculator(ICalculatorMethodProvider calculatorMethodProvider)
+            private readonly int _value1;
+            private readonly int _value2;
+            public Calculator(ICalculatorMethodProvider calculatorMethodProvider, int value1, int value2)
             {
                 _calculatorMethodProvider = calculatorMethodProvider;
+                _value1 = value1;
+                _value2 = value2;
             }
 
-            public void Calculate(int value1, int value2)
+            public string Calculate()
             {
-                _calculatorMethodProvider.Process(value1, value2);
+                var result = _calculatorMethodProvider.Process(_value1, _value2).ToString();
+                return result;
+
             }
         }
-        //public class RetirementCalculator
-        //{
-        //    private readonly IRetirementRulesProvider _rulesProvider;
-        //    public RetirementCalculator(IRetirementRulesProvider rulesProvider)
-        //    {
-        //        _rulesProvider = rulesProvider;
-        //    }
 
-        //    public int Process(List<Salary> salaries, int baseRetirementSalary)
-        //    {
-        //        var multiplication = _rulesProvider.GetMultiplication(salaries);
-        //        var bonusSum = _rulesProvider.GetBonuses(salaries);
-
-        //        return Convert.ToInt32(baseRetirementSalary * multiplication + bonusSum);
-        //    }
-        //}
         public class ResultsManager
         {
-                private readonly ICalculatorMethodProvider _calculatorMethodProvider;
-            public ResultsManager(ICalculatorMethodProvider calculatorMethodProvider)
+            private readonly Calculator _calculator;
+            public ResultsManager(Calculator calculator)
             {
-                _calculatorMethodProvider = calculatorMethodProvider;
+                _calculator = calculator;
             }
 
-            public void WriteResult(string output)
+            public void ManageResults()
             {
-                Console.WriteLine(output);
-            }
-            public void LogHistory(string _output)
-            {
-                File.AppendAllText("salaries.json", $"{DateTime.UtcNow} : {_output}\n");
+                //var resultMessage = _calculator.Calculate()
+                Console.WriteLine(_calculator);
+                File.AppendAllText("salaries.json", $"{DateTime.UtcNow} : {_calculator}\n");
             }
         }
-  
+
+        public class ValueGetter
+        {
+            public ValueGetter()
+            {
+            }
+            public int GetValue1()
+            {
+                Console.WriteLine("set value 1");
+                var value2 = int.Parse(Console.ReadLine());
+                return value2;
+            }
+            public int GetValue2()
+            {
+                Console.WriteLine("set value 2");
+                var value2 = int.Parse(Console.ReadLine());
+                return value2;
+            }
+
+        }
         private static int ValueGetter2()
         {
             Console.WriteLine("set value 2");
@@ -150,7 +222,7 @@ namespace SOLID
 
         private static int ValueGetter1()
         {
-            Console.WriteLine("\nset value 1");
+            Console.WriteLine("set value 1");
             var value1 = int.Parse(Console.ReadLine());
             return value1;
         }
