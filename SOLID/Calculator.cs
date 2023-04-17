@@ -34,20 +34,20 @@ namespace SOLID
 
     private static double Add(double a, double b)
         {
-            var result = a + b;
+            var outcome = a + b;
 
-            var output = $"{a} + {b} = {result}";
+            var output = $"{a} + {b} = {outcome}";
             LogHistory(output);
-            return result;
+            return outcome;
         }
 
         private static double Div(double a, double b)
         {
-            var result = a / b;
+            var outcome = a / b;
 
-            var output = $"{a} / {b} = {result}";
+            var output = $"{a} / {b} = {outcome}";
             LogHistory(output);
-            return result;
+            return outcome;
         }
 
         private static void LogHistory(string output)
@@ -57,20 +57,20 @@ namespace SOLID
 
         private static double Mul(double a, double b)
         {
-            var result = a * b;
+            var outcome = a * b;
 
-            var output = $"{a} * {b} = {result}";
+            var output = $"{a} * {b} = {outcome}";
             LogHistory(output);
-            return result;
+            return outcome;
         }
 
         private static double Sub(double a, double b)
         {
-            var result = a - b;
+            var outcome = a - b;
 
-            var output = $"{a} - {b} = {result}";
+            var output = $"{a} - {b} = {outcome}";
             LogHistory(output);
-            return result;
+            return outcome;
         }
     }
 }

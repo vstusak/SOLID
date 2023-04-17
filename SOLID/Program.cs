@@ -7,14 +7,13 @@ namespace SOLID
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Write operation (+. -, *, /)");
             var reader = new lineReader();
-            var calculator = new Calculator();
             var operation = reader.ReadCommand();
             var value1 = reader.ReadValue();
             var value2 = reader.ReadValue();
+        
+            Calculator.Calculated(value1, value2, operation);
 
-            calculator.Calculated(value1, value2, operation);
             //call new object Calculator -> method Calculated
             //method calculate should return Result
             //5-7 rows

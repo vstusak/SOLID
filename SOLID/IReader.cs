@@ -22,7 +22,7 @@ namespace SOLID
 
         public double ReadValue()
         {
-            Console.WriteLine("Write numeric value.");
+            Console.WriteLine("\nWrite numeric value.");
             var value = Console.ReadLine();
 
             if (double.TryParse(value, out double result))
@@ -30,7 +30,7 @@ namespace SOLID
                 return result;
             }
 
-
+            throw new Exception("Input is not a valid number");
         }
     }
 }
