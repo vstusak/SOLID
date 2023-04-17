@@ -6,12 +6,12 @@ namespace SOLID
     internal class Calculator
     {
 
-        public static void Calculated(double a, double b, string operation)
+        public static void Calculated(double a, double b, char operation)
         {
             double result = 0;
             switch (operation)
             {
-                case operation == '+':
+                case '+':
                     result = Add(a, b);
                     break;
                 case '-':

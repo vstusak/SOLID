@@ -8,23 +8,29 @@ namespace SOLID
 {
     public interface IReader
     {
-        string ReadCommand();
+        char ReadCommand();
         double ReadValue();
     }
 
     public class lineReader : IReader
     {
-        public string ReadCommand()
+        public char ReadCommand()
         {
             Console.WriteLine("Write operation (+. -, *, /)");
-            return Console.ReadLine();
+            return Console.ReadKey().KeyChar;
         }
 
         public double ReadValue()
         {
             Console.WriteLine("Write numeric value.");
             var value = Console.ReadLine();
-            return double.Parse(value);
+
+            if (double.TryParse(value, out double result))
+            {
+                return result;
+            }
+
+
         }
     }
 }
