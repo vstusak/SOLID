@@ -1,18 +1,20 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using SOLID.IO;
 
 namespace SOLID
 {
-    class Program : Calculator
+    class Program
     {
         static void Main(string[] args)
         {
-            var reader = new lineReader();
+            var writer = new Writer();
+            var reader = new lineReader(writer);
             var operation = reader.ReadCommand();
+            var calculator = new Calculator(writer);
             var value1 = reader.ReadValue();
             var value2 = reader.ReadValue();
         
-            Calculator.Calculated(value1, value2, operation);
+            calculator.Calculated(value1, value2, operation);
 
             //call new object Calculator -> method Calculated
             //method calculate should return Result
@@ -20,5 +22,7 @@ namespace SOLID
             //only Main in class Program
             
         }
+
+       
     }
 }

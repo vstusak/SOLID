@@ -1,12 +1,19 @@
-﻿using System;
+﻿using SOLID.IO;
+using System;
 using System.IO;
 
 namespace SOLID
 {
     internal class Calculator
     {
+        private IWriter writer;
 
-        public static void Calculated(double a, double b, char operation)
+        public Calculator(IWriter writer)
+        {
+            this.writer = writer;
+        }
+
+        public void Calculated(double a, double b, char operation)
         {
             double result = 0;
             switch (operation)
@@ -24,15 +31,15 @@ namespace SOLID
                     result = Div(a, b);
                     break;
                 default:
-                    Console.WriteLine("Not supported");
+                    writer.Write("Not supported");
                     break;
             }
-            Console.WriteLine($"{a} {operation} {b} = {result}");
+            writer.Write($"{a} {operation} {b} = {result}");
         }
         
 
 
-    private static double Add(double a, double b)
+    private  double Add(double a, double b)
         {
             var outcome = a + b;
 
@@ -41,7 +48,7 @@ namespace SOLID
             return outcome;
         }
 
-        private static double Div(double a, double b)
+        private  double Div(double a, double b)
         {
             var outcome = a / b;
 
@@ -50,12 +57,12 @@ namespace SOLID
             return outcome;
         }
 
-        private static void LogHistory(string output)
+        private  void LogHistory(string output)
         {
             File.AppendAllText("log.json", $"{DateTime.UtcNow} : {output}\n");
         }
 
-        private static double Mul(double a, double b)
+        private  double Mul(double a, double b)
         {
             var outcome = a * b;
 
@@ -64,7 +71,7 @@ namespace SOLID
             return outcome;
         }
 
-        private static double Sub(double a, double b)
+        private  double Sub(double a, double b)
         {
             var outcome = a - b;
 

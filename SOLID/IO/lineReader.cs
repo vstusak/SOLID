@@ -1,28 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SOLID
+namespace SOLID.IO
 {
-    public interface IReader
-    {
-        char ReadCommand();
-        double ReadValue();
-    }
-
     public class lineReader : IReader
     {
+        private IWriter writer;
+
+        public lineReader(IWriter writer)
+        {
+            this.writer = writer;
+        }
+
         public char ReadCommand()
         {
-            Console.WriteLine("Write operation (+. -, *, /)");
+            writer.Write("Write operation (+. -, *, /)");
             return Console.ReadKey().KeyChar;
         }
 
         public double ReadValue()
         {
-            Console.WriteLine("\nWrite numeric value.");
+            writer.Write("\nWrite numeric value.");
             var value = Console.ReadLine();
 
             if (double.TryParse(value, out double result))
