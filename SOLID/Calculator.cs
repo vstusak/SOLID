@@ -9,10 +9,10 @@ namespace SOLID
     {
 
 
-        public void LogHistory(string output)
-        {
-            File.AppendAllText("log.json", $"{DateTime.UtcNow} : {output}\n");
-        }
+        //public void LogHistory(string output)
+        //{
+        //    File.AppendAllText("log.json", $"{DateTime.UtcNow} : {output}\n");
+        //}
 
         public int Execute(ConsoleKeyInfo operatorKey, int value1, int value2)
         {
