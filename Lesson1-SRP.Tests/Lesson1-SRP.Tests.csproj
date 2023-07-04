@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lesson1-SRP\Lesson1-SRP.csproj" />
+  </ItemGroup>
+
 </Project>
