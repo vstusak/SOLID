@@ -30,9 +30,11 @@ namespace Lesson1_SRP.Tests
             Assert.AreEqual(0, result);
         }
 
-        [TestCase(47000, 0)]//SalaryOver47000_ExpectedBonus2000
         [TestCase(47001, 2000, Category=TestCategories.Positive)]
+        [TestCase(47000, 0, Category=TestCategories.Positive)]
         [TestCase(0, 0, Category= TestCategories.Negative)]
+        [TestCase(-1, 0, Category= TestCategories.Negative)]
+        [TestCase(999999999, 2000, Category= TestCategories.Positive)]
         [Category(TestCategories.UnitTest)]
 
         public void GetBonuses_Salary_ExpectedBonus(int salary, int expectedBonus)
