@@ -7,7 +7,7 @@ namespace Lesson1_SRP.Tests
         [Test]
         public void GetBonuses_SalaryOver50000_ExpectBonus2000()
         {
-            //arange
+            //arrange
             var rulesProvider = new RetirementRulesProvider2021();
             var salaries = new List<Salary>();
             salaries.Add(new Salary() { Value = 55000 });
@@ -20,7 +20,7 @@ namespace Lesson1_SRP.Tests
         [Test]
         public void GetBonuses_SalaryUnder45000_ExpectNoBonus()
         {
-            //arange
+            //arrange
             var rulesProvider = new RetirementRulesProvider2021();
             var salaries = new List<Salary>();
             salaries.Add(new Salary(){Value = 44000});
@@ -39,7 +39,7 @@ namespace Lesson1_SRP.Tests
 
         public void GetBonuses_Salary_ExpectedBonus(int salary, int expectedBonus)
         {
-            //arange
+            //arrange
             var rulesProvider = new RetirementRulesProvider2021();
             var salaries = new List<Salary>();
             salaries.Add(new Salary(){Value = salary});

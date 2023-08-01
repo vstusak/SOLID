@@ -19,5 +19,4 @@ namespace Lesson1_SRP
             return Convert.ToInt32(baseRetirementSalary * multiplication + bonusSum);
         }
     }
-
 }
