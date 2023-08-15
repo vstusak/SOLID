@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using System.Diagnostics.CodeAnalysis;
+using Moq;
 using NUnit.Framework;
 
 namespace Lesson1_SRP.Tests
@@ -38,16 +39,27 @@ namespace Lesson1_SRP.Tests
             retirementRulesProviderMock.Setup(rrp => rrp.GetBonuses(It.IsAny<List<Salary>>())).Returns(3);
             var retirementCalculator = new RetirementCalculator(retirementRulesProviderMock.Object);
             var salaries = new List<Salary>();
+            try
+            {
+                var div = 0;
+                var result = 5 / div;
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine(e);
+                throw new ArgumentOutOfRangeException("", e);
+            }
             
             //act
-            Assert.Throws<Exception>(() => retirementCalculator.Process(salaries, baseRetirementSalary),"Expected exception was not thrown.");
+            Assert.Throws<NegativeSalaryException>(() => retirementCalculator.Process(salaries, baseRetirementSalary),"Expected exception was not thrown.");
             //var actualResult = retirementCalculator.Process(salaries, baseRetirementSalary);
 
             //assert
             //Assert.AreEqual(expectedResult, actualResult, $"CHECK: Calculation of retirement failed:");
         }
-        //TODO continue: finish exception test, finish exception implementation
-        //TODO create Expected Exception Attribute
+
+        //
+        //Debug Exception and check call stacks
         //TODO create Mock Repository
         //TODO use boiler Template Test
 
