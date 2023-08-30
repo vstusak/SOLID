@@ -15,15 +15,37 @@ namespace Lesson1_SRP
 
         public int Process(List<Salary> salaries, int baseRetirementSalary)
         {
-            if (baseRetirementSalary <= 0)
+            try
             {
-                throw new NegativeSalaryException();
-
+                if (baseRetirementSalary <= 0)
+                {
+                    try
+                    {
+                        RaiseException();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
             var multiplication = _rulesProvider.GetMultiplication(salaries);
             var bonusSum = _rulesProvider.GetBonuses(salaries);
 
             return Convert.ToInt32(baseRetirementSalary * multiplication + bonusSum);
+        }
+
+        private void RaiseException()
+        {
+            throw new NegativeSalaryException();
+            //TODO: Immediate window debugging 
         }
     }
 }

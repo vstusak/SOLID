@@ -39,17 +39,7 @@ namespace Lesson1_SRP.Tests
             retirementRulesProviderMock.Setup(rrp => rrp.GetBonuses(It.IsAny<List<Salary>>())).Returns(3);
             var retirementCalculator = new RetirementCalculator(retirementRulesProviderMock.Object);
             var salaries = new List<Salary>();
-            try
-            {
-                var div = 0;
-                var result = 5 / div;
-            }
-            catch (DivideByZeroException e)
-            {
-                Console.WriteLine(e);
-                throw new ArgumentOutOfRangeException("", e);
-            }
-            
+
             //act
             Assert.Throws<NegativeSalaryException>(() => retirementCalculator.Process(salaries, baseRetirementSalary),"Expected exception was not thrown.");
             //var actualResult = retirementCalculator.Process(salaries, baseRetirementSalary);
