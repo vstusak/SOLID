@@ -15,25 +15,19 @@ namespace Lesson1_SRP
 
         public int Process(List<Salary> salaries, int baseRetirementSalary)
         {
-            try
+            if (baseRetirementSalary <= 0)
             {
-                if (baseRetirementSalary <= 0)
+                try
                 {
-                    try
-                    {
-                        RaiseException();
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                        throw;
-                    }
+                    RaiseException();
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                    //throw new Exception();
+                    //throw e;
+                }
             }
 
             var multiplication = _rulesProvider.GetMultiplication(salaries);

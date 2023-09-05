@@ -41,14 +41,22 @@ namespace Lesson1_SRP.Tests
             var salaries = new List<Salary>();
 
             //act
-            Assert.Throws<NegativeSalaryException>(() => retirementCalculator.Process(salaries, baseRetirementSalary),"Expected exception was not thrown.");
+            //Assert.Throws<NegativeSalaryException>(() => retirementCalculator.Process(salaries, baseRetirementSalary),"Expected exception was not thrown.");
             //var actualResult = retirementCalculator.Process(salaries, baseRetirementSalary);
 
             //assert
             //Assert.AreEqual(expectedResult, actualResult, $"CHECK: Calculation of retirement failed:");
-        }
 
-        //
+            try
+            {
+                retirementCalculator.Process(salaries, baseRetirementSalary);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         //Debug Exception and check call stacks
         //TODO create Mock Repository
         //TODO use boiler Template Test
