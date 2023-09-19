@@ -21,6 +21,13 @@ namespace Lesson1_SRP
                 {
                     RaiseException();
                 }
+                catch (NegativeSalaryException nse)
+                {
+                    Console.WriteLine(nse);
+                    //throw;
+                    //throw new NegativeSalaryException();
+                    throw nse;
+                }
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
@@ -32,6 +39,9 @@ namespace Lesson1_SRP
 
             var multiplication = _rulesProvider.GetMultiplication(salaries);
             var bonusSum = _rulesProvider.GetBonuses(salaries);
+            multiplication = _rulesProvider.GetMultiplication(salaries);
+            bonusSum = _rulesProvider.GetBonuses(salaries);
+
 
             return Convert.ToInt32(baseRetirementSalary * multiplication + bonusSum);
         }
@@ -39,7 +49,6 @@ namespace Lesson1_SRP
         private void RaiseException()
         {
             throw new NegativeSalaryException();
-            //TODO: Immediate window debugging 
         }
     }
 }

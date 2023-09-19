@@ -4,7 +4,7 @@ using System.Linq;
 namespace Lesson1_SRP
 {
     public class RetirementRulesProvider2022 : IRetirementRulesProvider
-    {
+    { 
         public double GetMultiplication(List<Salary> salaries)
         {
             double multiplication = 1;
