@@ -39,10 +39,7 @@ namespace Lesson1_SRP
 
             var multiplication = _rulesProvider.GetMultiplication(salaries);
             var bonusSum = _rulesProvider.GetBonuses(salaries);
-            multiplication = _rulesProvider.GetMultiplication(salaries);
-            bonusSum = _rulesProvider.GetBonuses(salaries);
-
-
+           
             return Convert.ToInt32(baseRetirementSalary * multiplication + bonusSum);
         }
 

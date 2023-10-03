@@ -7,17 +7,22 @@ namespace Lesson1_SRP.Tests
     public class RetirementCalculatorTest
     {
         private Mock<IRetirementRulesProvider> _retirementRulesProviderMock;
-
+        private MockRepository _mockRepo = new MockRepository(MockBehavior.Strict);
         [SetUp]
         public void Setup()
         {
-           _retirementRulesProviderMock = new Mock<IRetirementRulesProvider>(MockBehavior.Strict);
+          // _retirementRulesProviderMock = new Mock<IRetirementRulesProvider>(MockBehavior.Strict);
+            
+            _retirementRulesProviderMock = _mockRepo.Create<IRetirementRulesProvider>();
+        }
+
+        public void TearDown()
+        {
+            _mockRepo.VerifyAll();
         }
 
         [TestCase(10000, 2, 3, 20003)]
         [TestCase(10000, 0.001, 0, 10)]
-        [TestCase(0, 2, 3, 3)]
-        [TestCase(-10000, 2, 3, 3)]
 
         public void Proces_ValidInputs_ExpectedOutputs(int baseRetirementSalary, double multiplication, int bonuses, int expectedResult)
         {
@@ -35,11 +40,12 @@ namespace Lesson1_SRP.Tests
             Assert.AreEqual(expectedResult, actualResult, $"CHECK: Calculation of retirement failed:");
         }
         
-        [Test]
-        public void Process_NegativeBaseSalary_ExpectedExceptionThrown()
+        [TestCase(-5)]
+        [TestCase(0)]
+        public void Process_NegativeBaseSalary_ExpectedExceptionThrown(int baseRetirementSalary)
         {
             //arrange
-            var baseRetirementSalary = -5;
+            //var baseRetirementSalary = -5;
             //var retirementRulesProvider2021 = new RetirementRulesProvider2021();
             _retirementRulesProviderMock.Setup(rrp => rrp.GetMultiplication(It.IsAny<List<Salary>>())).Returns(2);
             _retirementRulesProviderMock.Setup(rrp => rrp.GetBonuses(It.IsAny<List<Salary>>())).Returns(3);
