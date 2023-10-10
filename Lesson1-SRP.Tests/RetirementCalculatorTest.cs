@@ -15,7 +15,8 @@ namespace Lesson1_SRP.Tests
             
             _retirementRulesProviderMock = _mockRepo.Create<IRetirementRulesProvider>();
         }
-
+        
+        [TearDown]
         public void TearDown()
         {
             _mockRepo.VerifyAll();

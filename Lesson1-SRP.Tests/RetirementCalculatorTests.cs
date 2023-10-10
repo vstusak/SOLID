@@ -31,7 +31,7 @@ namespace Lesson1_SRP.Tests
         {
             // Arrange
             var retirementCalculator = this.CreateRetirementCalculator();
-            List salaries = null;
+            List <Salary> salaries = null;
             int baseRetirementSalary = 0;
 
             // Act
