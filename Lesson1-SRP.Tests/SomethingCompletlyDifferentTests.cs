@@ -13,7 +13,7 @@ namespace Lesson1_SRP.Tests
         [SetUp]
         public void SetUp()
         {
-            mockRetirementRulesProvider = mockRepository.Create<IRetirementRulesProvider>();
+            mockRetirementRulesProvider = MockRepository.Create<IRetirementRulesProvider>();
         }
 
         private SomethingCompletlyDifferent CreateSomethingCompletlyDifferent()
@@ -27,17 +27,15 @@ namespace Lesson1_SRP.Tests
         {
             // Arrange
             var somethingCompletlyDifferent = this.CreateSomethingCompletlyDifferent();
-            List salaries = null;
+            List<Salary> salaries = null;
             int baseRetirementSalary = 0;
 
             // Act
-            var result = somethingCompletlyDifferent.Process(
-                salaries,
-                baseRetirementSalary);
+            var result = somethingCompletlyDifferent.Process(salaries, baseRetirementSalary);
 
             // Assert
             Assert.Fail();
-            this.mockRepository.VerifyAll();
+            this.MockRepository.VerifyAll();
         }
     }
 }

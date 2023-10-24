@@ -12,19 +12,19 @@ namespace Lesson1_SRP.Tests
 {
     public class TestBase
     {
-        protected MockRepository mockRepository;
+        protected MockRepository MockRepository;
 
         [SetUp]
         public void SetUp()
         {
-            this.mockRepository = new MockRepository(MockBehavior.Strict);
+            MockRepository = new MockRepository(MockBehavior.Strict);
 
         }
 
         [TearDown]
         public void TearDown()
         {
-            mockRepository.VerifyAll();
+            MockRepository.VerifyAll();
         }
     }
 }
