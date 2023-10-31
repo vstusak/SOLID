@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson4-ISP", "Lesson4-ISP\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson5-DIP", "Lesson5-DIP\Lesson5-DIP.csproj", "{E0ADA729-07F2-4718-B708-9DA21D8FBEC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson1-SRP.Tests", "Lesson1-SRP.Tests\Lesson1-SRP.Tests.csproj", "{3E098009-5A7D-4CFC-8F02-3C9FEDFB7230}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1-SRP.Tests", "Lesson1-SRP.Tests\Lesson1-SRP.Tests.csproj", "{3E098009-5A7D-4CFC-8F02-3C9FEDFB7230}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TryMeProjectTests", "TryMeProjectTests\TryMeProjectTests.csproj", "{51B792C4-2BB3-4120-893C-1E2C07063338}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{3E098009-5A7D-4CFC-8F02-3C9FEDFB7230}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E098009-5A7D-4CFC-8F02-3C9FEDFB7230}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E098009-5A7D-4CFC-8F02-3C9FEDFB7230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51B792C4-2BB3-4120-893C-1E2C07063338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B792C4-2BB3-4120-893C-1E2C07063338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B792C4-2BB3-4120-893C-1E2C07063338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B792C4-2BB3-4120-893C-1E2C07063338}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
