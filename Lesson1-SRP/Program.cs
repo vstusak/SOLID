@@ -8,13 +8,18 @@ namespace Lesson1_SRP
 {
     public class Program
     {
+        // imagine: tato metoda Main je "controller" pro api endpoint "GetMyRetirement"
+        // Needs to follow our (imaginary) Business rule:
+        //  As a logged-in user I need to be able to call api endpoint to get calculation whether I will need to work during retirement.
         static void Main(string[] args)
         {
             var retirementCalculator = new RetirementCalculator();
 
             //retirementCalculator.GenerateSalaries();
-            retirementCalculator.Process();
+            retirementCalculator.Process(); // wrong - can not see what 'Process' does
 
+            // TODO output - lower abstraction level - should not be in main.
+            // i.e. output writer - choose output method, give it output message
             Console.WriteLine(retirementCalculator.RetirementSalary > 20000
                 ? "Congratulations and have a nice retirement"
                 : "You will need additional work now or in retirement, sorry");
