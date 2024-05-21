@@ -16,18 +16,47 @@ namespace Lesson1_SRP
             var retirementCalculator = new RetirementCalculator();
 
             //retirementCalculator.GenerateSalaries();
-            retirementCalculator.Process(); // wrong - can not see what 'Process' does
+            retirementCalculator.Process(); // TODO refactor to see and have control over what 'Process' does
 
-            // TODO output - lower abstraction level - should not be in main.
-            // i.e. output writer - choose output method, give it output message
-            Console.WriteLine(retirementCalculator.RetirementSalary > 20000
-                ? "Congratulations and have a nice retirement"
-                : "You will need additional work now or in retirement, sorry");
+            var wordingProvider = new WordingProvider();
+            var outputMessage = wordingProvider.GetOutputMessageForRetirementSalaryCalculation(retirementCalculator.RetirementSalary);
+
+            var outputWriter = new OutputWriter();
+            outputWriter.WriteToConsole(outputMessage);
+        }
+    }
+
+    public class WordingProvider
+    {
+        private const string HappyRetirementMsg = "Congratulations and have a nice retirement.";
+        private const string YourRetirementWillSuckMsg = "You will need additional work now or in retirement, sorry.";
+
+        public string GetOutputMessageForRetirementSalaryCalculation(int retirementSalary)
+        {
+            if (retirementSalary > 20000) //TODO refactor the limit value usage
+            {
+                // standardized output should be in separate constants outside code
+                // at least a const within the class such as above
+                return HappyRetirementMsg; 
+            }
+            else
+            {
+                return YourRetirementWillSuckMsg;
+            }
+        }
+    }
+
+    public class OutputWriter
+    {
+        public void WriteToConsole(string outputMessage)
+        {
+            Console.WriteLine(outputMessage);
         }
     }
 
     public class RetirementCalculator
     {
+
         public int RetirementSalary { get; set; }
 
         public void Process()
@@ -64,7 +93,7 @@ namespace Lesson1_SRP
             for (int i = 0; i < 100; i++)
             {
                 salaries.Add(new Salary
-                    { DateTime = new DateTime(2020, 9, 13).AddMonths(i * -1), Value = salaryGenerator.Next(5000, 50000) });
+                { DateTime = new DateTime(2020, 9, 13).AddMonths(i * -1), Value = salaryGenerator.Next(5000, 50000) });
             }
 
             var json = JsonSerializer.Serialize(salaries);
