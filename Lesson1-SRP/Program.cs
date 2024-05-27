@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace Lesson1_SRP
 {
+    //Single responsibility principle - jeden duvod ke zmene, tridy/metody delaji jen jednu vec
     public class Program
     {
         static void Main(string[] args)
@@ -13,19 +14,17 @@ namespace Lesson1_SRP
             var retirementCalculator = new RetirementCalculator();
 
             //retirementCalculator.GenerateSalaries();
-            retirementCalculator.Process();
+            var retirementSalary = retirementCalculator.Process();
 
-            Console.WriteLine(retirementCalculator.RetirementSalary > 20000
+            Console.WriteLine(retirementSalary > 20000
                 ? "Congratulations and have a nice retirement"
                 : "You will need additional work now or in retirement, sorry");
         }
     }
-
+    //TODO - premistit tridu do jineho souboru
     public class RetirementCalculator
     {
-        public int RetirementSalary { get; set; }
-
-        public void Process()
+        public int Process()
         {
             var baseSalary = 10000;
             double multiplication = 1;
@@ -48,9 +47,10 @@ namespace Lesson1_SRP
                 bonuses.Add(2000);
             }
 
-            RetirementSalary = Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
+            return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
         }
 
+        //TODO - getSalaryConditions? method - presunout ify
         public void GenerateSalaries()
         {
             var salaryGenerator = new Random();
