@@ -14,17 +14,8 @@ namespace Lesson1_SRP
             //retirementCalculator.GenerateSalaries();
             var retirementSalary = retirementCalculator.Process(10000);
 
-            //TODO nahradit konzoli nahráváním do souboru
-            //2 zodpovědnosti: vypsání, if
-            var message = wordingProvider.GetMessage(retirementSalary);
-            outputWriter.WriteMessage(message);
+            var retirementMessage = wordingProvider.GetRetirementMessage(retirementSalary);
+            outputWriter.WriteMessage(retirementMessage);
         }
-    }
-    //TODO - premistit tridu do jineho souboru
-
-    public class Salary
-    {
-        public DateTime DateTime { get; set; }
-        public int Value { get; set; }
     }
 }

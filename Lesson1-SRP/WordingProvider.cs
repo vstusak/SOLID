@@ -8,7 +8,7 @@ namespace Lesson1_SRP
 {
     public class WordingProvider
     {
-        public string GetMessage(int monthlyRetirementSalary)
+        public string GetRetirementMessage(int monthlyRetirementSalary)
         {
             if (monthlyRetirementSalary > 20000)
             {
