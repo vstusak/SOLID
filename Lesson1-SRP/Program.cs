@@ -8,13 +8,16 @@ namespace Lesson1_SRP
         static void Main(string[] args)
         {
             var retirementCalculator = new RetirementCalculator();
+            var wordingProvider = new WordingProvider();
+            var outputWriter = new OutputWriter();
 
             //retirementCalculator.GenerateSalaries();
             var retirementSalary = retirementCalculator.Process(10000);
 
-            Console.WriteLine(retirementSalary > 20000
-                ? "Congratulations and have a nice retirement"
-                : "You will need additional work now or in retirement, sorry");
+            //TODO nahradit konzoli nahráváním do souboru
+            //2 zodpovědnosti: vypsání, if
+            var message = wordingProvider.GetMessage(retirementSalary);
+            outputWriter.WriteMessage(message);
         }
     }
     //TODO - premistit tridu do jineho souboru
