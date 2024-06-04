@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lesson1_SRP
+namespace Lesson1_SRP.Entities
 {
     public class Salary
     {

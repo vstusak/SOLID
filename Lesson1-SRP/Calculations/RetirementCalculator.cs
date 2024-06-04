@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using Lesson1_SRP.Entities;
 
-namespace Lesson1_SRP
+namespace Lesson1_SRP.Calculations
 {
     public class RetirementCalculator
     {
+        private readonly MultiplicationProvider _multiplicationProvider = new MultiplicationProvider();
+        private readonly BonusProvider _bonusProvider = new BonusProvider();
 
-        
+
         public int CalculateRetirementSalary(List<Salary> salaries)
         {
             var baseSalary = 10000;
-            var multiplication = GetMultiplication(salaries);
-            var bonuses = GetBonuses(salaries);
+            var multiplication = _multiplicationProvider.GetMultiplication(salaries);
+            var bonuses = _bonusProvider.GetBonuses(salaries);
 
             return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
         }
 
+        /*
         public void GenerateSalaries()
         {
             var salaryGenerator = new Random();
@@ -33,34 +37,6 @@ namespace Lesson1_SRP
             var json = JsonSerializer.Serialize(salaries);
             File.AppendAllText("salaries.json", json);
         }
-
-        public double GetMultiplication(List<Salary> salaries)
-        {
-            double multiplication = 1;
-
-            if (salaries.Count() > 50)
-            {
-                multiplication += 0.3;
-            }
-
-            if (salaries.Select(salary => salary.Value).Average() > 30000)
-            {
-                multiplication += 1;
-            }
-
-            return multiplication;
-        }
-
-        public List<int> GetBonuses(List<Salary> salaries)
-        {
-            var bonuses = new List<int>();
-
-            if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
-            {
-                bonuses.Add(2000);
-            }
-
-            return bonuses;
-        }
+*/
     }
 }

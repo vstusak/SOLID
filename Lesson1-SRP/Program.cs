@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using Lesson1_SRP.Entities;
 
 namespace Lesson1_SRP
 {
@@ -13,15 +14,15 @@ namespace Lesson1_SRP
         static void Main(string[] args)
         {
             var retirementCalculator = new RetirementCalculator();
+            var wordingProvider = new WordingProvider();
+            var outputWriter = new OutputWriter();
 
             var salaries = JsonSerializer.Deserialize<IEnumerable<Salary>>(File.ReadAllText("salaries.json")).ToList(); //TODO extract to own class.
             //retirementCalculator.GenerateSalaries();
-            var retirementSalaryResult = retirementCalculator.CalculateRetirementSalary(salaries); // TODO refactor to see and have control over what 'CalculateRetirementSalary' does
+            var retirementSalaryResult = retirementCalculator.CalculateRetirementSalary(salaries);
 
-            var wordingProvider = new WordingProvider();
             var outputMessage = wordingProvider.GetOutputMessageForRetirementSalaryCalculation(retirementSalaryResult);
 
-            var outputWriter = new OutputWriter();
             outputWriter.WriteToConsole(outputMessage);
         }
     }
