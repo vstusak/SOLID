@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lesson1_SRP
 {
-    public class BonusProvider
+    public class BonusProvider : IBonusProvider
     {
         public List<int> GetBonuses(List<Salary> salaries)
         {

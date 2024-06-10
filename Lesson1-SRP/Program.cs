@@ -7,7 +7,20 @@ namespace Lesson1_SRP
     {
         static void Main(string[] args)
         {
-            var retirementCalculator = new RetirementCalculator();
+            var year = 2030;
+            
+            IBonusProvider bonusProvider;
+            if (year >= 2030)
+            {
+                /*true*/
+                bonusProvider = new BonusProvider2030();
+            }
+            /*false*/
+            else
+            {
+                bonusProvider = new BonusProvider();
+            }
+            var retirementCalculator = new RetirementCalculator(bonusProvider);
             var wordingProvider = new WordingProvider();
             var outputWriter = new OutputWriter();
 

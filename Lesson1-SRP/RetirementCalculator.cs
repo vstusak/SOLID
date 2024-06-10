@@ -8,18 +8,26 @@ namespace Lesson1_SRP;
 
 public class RetirementCalculator
 {
+    private readonly IBonusProvider _bonusProvider;
+
+    public RetirementCalculator(IBonusProvider bonusProvider)
+    {
+        _bonusProvider = bonusProvider;
+    }
     public int Process(int baseSalary)
     {
         var salariesLoader = new SalaryLoader();
         var multiplicationProvider = new MultiplicationProvider();
-        var bonusProvider = new BonusProvider();
+       
 
         var salaries = salariesLoader.GetSalaries();
         var multiplication = multiplicationProvider.GetMultiplication(salaries);
-        var bonuses = bonusProvider.GetBonuses(salaries);
+        var bonuses = _bonusProvider.GetBonuses(salaries);
 
         return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
     }
+
+
 
     //TODO - getSalaryConditions? method - presunout ify
     //public void GenerateSalaries()
