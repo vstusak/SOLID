@@ -16,9 +16,45 @@ namespace Lesson2_OCP
             ocpApproaches = new OCPApproachesInherited();
             ocpApproaches.InheritanceBased();
 
-            ocpApproaches = new OCPApproachesInjection(new GreetingsService());
-            ((OCPApproachesInjection)ocpApproaches).InjectedBased();
+            var ocpApproachesInjected = new OCPApproachesInjection(new GoodbyeService());
+            ocpApproachesInjected.InjectedBased();
         }
+    }
+
+    public class OCPApproachesInjection 
+    {
+        private readonly IGetMessage _greetingsService;
+
+        public OCPApproachesInjection(IGetMessage greetingsService)
+        {
+            _greetingsService = greetingsService;
+        }
+
+        public void InjectedBased()
+        {
+            Console.WriteLine(_greetingsService.GetMessage());
+        }
+    }
+
+    public class GreetingsService : IGetMessage
+    {
+        public string GetMessage()
+        {
+            return "Hello World! Injected.";
+        }
+    }
+
+    public class GoodbyeService : IGetMessage
+    {
+        public string GetMessage()
+        {
+            return "Bye - bye.";
+        }
+    }
+
+    public interface IGetMessage 
+    {
+        string GetMessage();
     }
 
     public class OCPApproaches
@@ -44,29 +80,6 @@ namespace Lesson2_OCP
         public override void InheritanceBased()
         {
             Console.WriteLine("Hello World! Inherited child.");
-        }
-    }
-
-    public class OCPApproachesInjection : OCPApproaches
-    {
-        private readonly GreetingsService _greetingsService;
-
-        public OCPApproachesInjection(GreetingsService greetingsService)
-        {
-            _greetingsService = greetingsService;
-        }
-
-        public void InjectedBased()
-        {
-            Console.WriteLine(_greetingsService.GetMessage());
-        }
-    }
-
-    public class GreetingsService
-    {
-        public string GetMessage()
-        {
-            return "Hello World! Injected.";
         }
     }
 }
