@@ -17,13 +17,27 @@ namespace Lesson1_SRP
         {
             //Pro lidi od roku 1950 je fixní bonus 5,-Kč
             var personBirth = new DateTime(1948,01,01);
-            var retirementCalculator = new RetirementCalculator();
+            //var bonusProvider = new BonusProvider();
+            IBonusProvider bonusProvider;
+            if (personBirth.Year >= 1950)
+            {
+                bonusProvider = new BonusProvider1950AndYounger();
+            }
+            else
+            {
+                bonusProvider = new BonusProvider();
+            }
+            
+            
+            
+            
+            var retirementCalculator = new RetirementCalculator(bonusProvider);
             var wordingProvider = new WordingProvider();
             var salariesProvider = new SalariesLoader();
             var outputWriter = new OutputWriter();
             List<Salary> salaries = salariesProvider.GetSalaries();
             //retirementCalculator.GenerateSalaries();
-            var retirementSalaryResult = retirementCalculator.CalculateRetirementSalary(salaries, personBirth);
+            var retirementSalaryResult = retirementCalculator.CalculateRetirementSalary(salaries);
 
             var outputMessage = wordingProvider.GetOutputMessageForRetirementSalaryCalculation(retirementSalaryResult);
 

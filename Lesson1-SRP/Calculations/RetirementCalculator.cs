@@ -10,14 +10,19 @@ namespace Lesson1_SRP.Calculations
     public class RetirementCalculator
     {
         private readonly MultiplicationProvider _multiplicationProvider = new MultiplicationProvider();
-        private readonly BonusProvider _bonusProvider = new BonusProvider();
+        private readonly IBonusProvider _bonusProvider;
+
+        public RetirementCalculator(IBonusProvider bonusProvider)
+        {
+            _bonusProvider = bonusProvider;
+        }
 
 
-        public int CalculateRetirementSalary(List<Salary> salaries, DateTime personBirth)
+        public int CalculateRetirementSalary(List<Salary> salaries)
         {
             var baseSalary = 10000;
             var multiplication = _multiplicationProvider.GetMultiplication(salaries);
-            var bonuses = _bonusProvider.GetBonuses(salaries, personBirth);
+            var bonuses = _bonusProvider.GetBonuses(salaries);
 
             return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
         }
