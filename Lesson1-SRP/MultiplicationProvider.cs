@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lesson1_SRP
 {
-    public class MultiplicationProvider
+    public class MultiplicationProvider : IMultiplicationProvider
     {
         public double GetMultiplication(List<Salary> salaries)
         {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -9,19 +8,21 @@ namespace Lesson1_SRP;
 public class RetirementCalculator
 {
     private readonly IBonusProvider _bonusProvider;
+    private INewMultiplicationProvider _multiplicationProvider;
 
-    public RetirementCalculator(IBonusProvider bonusProvider)
+    public RetirementCalculator(IBonusProvider bonusProvider, INewMultiplicationProvider multiplicationProvider)
     {
         _bonusProvider = bonusProvider;
+        _multiplicationProvider = multiplicationProvider;
     }
     public int Process(int baseSalary)
     {
         var salariesLoader = new SalaryLoader();
-        var multiplicationProvider = new MultiplicationProvider();
-       
+
+
 
         var salaries = salariesLoader.GetSalaries();
-        var multiplication = multiplicationProvider.GetMultiplication(salaries);
+        var multiplication = _multiplicationProvider.GetMultiplication(salaries);
         var bonuses = _bonusProvider.GetBonuses(salaries);
 
         return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
