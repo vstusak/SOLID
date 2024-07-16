@@ -28,10 +28,9 @@ namespace Lesson1_SRP
                 bonusProvider = new BonusProvider();
             }
             
+            var multiplicationProvider = new MultiplicationProvider();
             
-            
-            
-            var retirementCalculator = new RetirementCalculator(bonusProvider);
+            var retirementCalculator = new RetirementCalculator(bonusProvider, multiplicationProvider);
             var wordingProvider = new WordingProvider();
             var salariesProvider = new SalariesLoader();
             var outputWriter = new OutputWriter();
@@ -43,7 +42,6 @@ namespace Lesson1_SRP
 
             outputWriter.WriteToConsole(outputMessage);
         }
-        //TODO: opravit rozšíření pro rok 1950 (odstranit předávání dat parametry, dodělat pro bonusProvider interface a použít dependency ingestion)
 
     }
 }

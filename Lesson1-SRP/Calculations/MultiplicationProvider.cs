@@ -4,7 +4,7 @@ using Lesson1_SRP.Entities;
 
 namespace Lesson1_SRP.Calculations
 {
-    public class MultiplicationProvider
+    public class MultiplicationProvider : IMultiplicationProvider
     {
         public double GetMultiplication(List<Salary> salaries)
         {

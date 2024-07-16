@@ -25,19 +25,4 @@ namespace Lesson1_SRP.Calculations
             return bonuses;
         }
     }
-
-    public class BonusProvider1950AndYounger : IBonusProvider
-    {
-        public List<int> GetBonuses(List<Salary> salaries)
-        {
-            var bonuses = new List<int>();
-            bonuses.Add(5);
-            return bonuses;
-        }
-    }
-
-    public interface IBonusProvider
-    {
-        List<int> GetBonuses(List<Salary> salaries);
-    }
 }

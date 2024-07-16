@@ -9,12 +9,13 @@ namespace Lesson1_SRP.Calculations
 {
     public class RetirementCalculator
     {
-        private readonly MultiplicationProvider _multiplicationProvider = new MultiplicationProvider();
+        private readonly IMultiplicationProvider _multiplicationProvider;
         private readonly IBonusProvider _bonusProvider;
 
-        public RetirementCalculator(IBonusProvider bonusProvider)
+        public RetirementCalculator(IBonusProvider bonusProvider, IMultiplicationProvider multiplicationProvider)
         {
             _bonusProvider = bonusProvider;
+            _multiplicationProvider = multiplicationProvider;
         }
 
 
@@ -44,4 +45,5 @@ namespace Lesson1_SRP.Calculations
         }
 */
     }
+
 }
