@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Lesson1-SRP": {
+      "commandName": "Project",
+      "commandLineArgs": "salaries.json"
+    }
+  }
+}

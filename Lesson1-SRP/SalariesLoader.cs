@@ -10,11 +10,9 @@ namespace Lesson1_SRP
 {
     public class SalariesLoader
     {
-        private const string SalariesFileName = "salaries.json";
-
-        public List<Salary> GetSalaries()  // TODO introduce "salaries" parameter from console from args
+        public List<Salary> GetSalaries(string path)
         {
-            var readAllText = File.ReadAllText(SalariesFileName);
+            var readAllText = File.ReadAllText(path);
             var salaries = JsonSerializer.Deserialize<IEnumerable<Salary>>(readAllText).ToList();
             return salaries;
         }

@@ -15,8 +15,19 @@ namespace Lesson1_SRP
         //  As a logged-in user I need to be able to call api endpoint to get calculation whether I will need to work during retirement.
         static void Main(string[] args)
         {
+            if (args.Length != 1)
+            {
+                throw new ArgumentException("Application started with wrong number of parameters.");
+            }
+            // TODO validation method for args - 1) file exists, 2) file is in json format (maybe not)
+            // TODO extract method to separate class
+            // TODO app run based on user input (select salaries source file while application is running)
+
+            var salarySourcePath = args.First();
+
+
             //Pro lidi od roku 1950 je fixní bonus 5,-Kč
-            var personBirth = new DateTime(1948,01,01);
+            var personBirth = new DateTime(1948, 01, 01);
             //var bonusProvider = new BonusProvider();
             IBonusProvider bonusProvider;
             if (personBirth.Year >= 1950)
@@ -27,14 +38,14 @@ namespace Lesson1_SRP
             {
                 bonusProvider = new BonusProvider();
             }
-            
+
             var multiplicationProvider = new MultiplicationProvider();
-            
+
             var retirementCalculator = new RetirementCalculator(bonusProvider, multiplicationProvider);
             var wordingProvider = new WordingProvider();
             var salariesProvider = new SalariesLoader();
             var outputWriter = new OutputWriter();
-            List<Salary> salaries = salariesProvider.GetSalaries();
+            List<Salary> salaries = salariesProvider.GetSalaries(salarySourcePath);
             //retirementCalculator.GenerateSalaries();
             var retirementSalaryResult = retirementCalculator.CalculateRetirementSalary(salaries);
 
