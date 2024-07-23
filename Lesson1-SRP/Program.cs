@@ -19,11 +19,25 @@ namespace Lesson1_SRP
             {
                 throw new ArgumentException("Application started with wrong number of parameters.");
             }
+            var salarySourcePath = args.First();
+
+            if (!File.Exists(salarySourcePath))
+            {
+                throw new ArgumentException("File doesnt exist.");
+            }
+            
             // TODO validation method for args - 1) file exists, 2) file is in json format (maybe not)
             // TODO extract method to separate class
             // TODO app run based on user input (select salaries source file while application is running)
 
-            var salarySourcePath = args.First();
+
+            IApplicationInputValidator applicationInputValidator = new ApplicationInputValidator();
+            var isApplicationInputValid = applicationInputValidator.Validate(args);
+            if (!isApplicationInputValid)
+            {
+                throw new ArgumentException("Invalid input");
+            }
+
 
 
             //Pro lidi od roku 1950 je fixní bonus 5,-Kč
