@@ -40,7 +40,8 @@ namespace Lesson1_SRP
             // DONE validation method for args - 1) file exists, 2) file is in json format (maybe not)
             // DONE extract method to separate class
             // TODO app run based on user input (select salaries source file while application is running)
-            // TODO revert finished DONEs and implement from usage point of view
+            // TODO implement not implemented exception
+            // TODO LONGTERM next topic test driven development (TDD)
 
             //Pro lidi od roku 1950 je fixní bonus 5,-Kč
             var personBirth = new DateTime(1948, 01, 01);
