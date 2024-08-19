@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lesson1_SRP
 {
-    public class MultiplicationProvider : IMultiplicationProvider
+    public class MultiplicationProvider : INewMultiplicationProvider
     {
-        public double GetMultiplication(List<Salary> salaries)
+        public int GetMultiplication(IEnumerable<Salary> salaries)
         {
             double multiplication = 1;
             if (salaries.Count() > 50)
@@ -21,7 +21,7 @@ namespace Lesson1_SRP
                 multiplication += 1;
             }
 
-            return multiplication;
+            return Convert.ToInt32(multiplication);
         }
     }
 }

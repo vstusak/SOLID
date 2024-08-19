@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -15,15 +16,15 @@ public class RetirementCalculator
         _bonusProvider = bonusProvider;
         _multiplicationProvider = multiplicationProvider;
     }
-    public int Process(int baseSalary)
+    public int Process(List<Salary> salaries)
     {
-        var salariesLoader = new SalaryLoader();
-
-
-
-        var salaries = salariesLoader.GetSalaries();
         var multiplication = _multiplicationProvider.GetMultiplication(salaries);
         var bonuses = _bonusProvider.GetBonuses(salaries);
+        
+        // TODO remove hard dependency (use constructor DI)
+        // TODO various base salary loaders based on worker position
+        var baseSalaryLoader = new BaseSalaryLoader();
+        var baseSalary = baseSalaryLoader.GetBaseSalary();
 
         return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
     }

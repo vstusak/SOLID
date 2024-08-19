@@ -20,12 +20,14 @@ namespace Lesson1_SRP
             {
                 bonusProvider = new BonusProvider();
             }
-            var retirementCalculator = new RetirementCalculator(bonusProvider);
+            var salariesLoader = new SalaryLoader();
+            var multiplicationProvider = new MultiplicationProvider();
+            var retirementCalculator = new RetirementCalculator(bonusProvider, multiplicationProvider);
             var wordingProvider = new WordingProvider();
             var outputWriter = new OutputWriter();
-
-            //retirementCalculator.GenerateSalaries();
-            var retirementSalary = retirementCalculator.Process(10000);
+         
+            var salaries = salariesLoader.GetSalaries();
+            var retirementSalary = retirementCalculator.Process(salaries);
 
             var retirementMessage = wordingProvider.GetRetirementMessage(retirementSalary);
             outputWriter.WriteMessage(retirementMessage);

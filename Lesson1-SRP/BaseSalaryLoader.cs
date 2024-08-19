@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Lesson1_SRP
 {
-    public interface IBonusProvider
+    internal class BaseSalaryLoader
     {
-        List<int> GetBonuses(IEnumerable<Salary> salaries);
+        public int GetBaseSalary()
+        {
+            return 10000;
+        }
     }
-
-    
 }
