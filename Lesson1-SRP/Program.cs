@@ -106,8 +106,6 @@ namespace Lesson1_SRP
             //}
         }
 
-        // TODO Explain stringbuilder
-
         public string GetMessages()
         {
             var sb = new StringBuilder();
