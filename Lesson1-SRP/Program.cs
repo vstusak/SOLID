@@ -21,8 +21,12 @@ namespace Lesson1_SRP
                 bonusProvider = new BonusProvider();
             }
             var salariesLoader = new SalaryLoader();
+
+            // TODO various base salary loaders based on worker position
+
+            var baseSalaryLoader = new BaseSalaryLoader();
             var multiplicationProvider = new MultiplicationProvider();
-            var retirementCalculator = new RetirementCalculator(bonusProvider, multiplicationProvider);
+            var retirementCalculator = new RetirementCalculator(bonusProvider, multiplicationProvider, baseSalaryLoader);
             var wordingProvider = new WordingProvider();
             var outputWriter = new OutputWriter();
          

@@ -9,22 +9,21 @@ namespace Lesson1_SRP;
 public class RetirementCalculator
 {
     private readonly IBonusProvider _bonusProvider;
-    private INewMultiplicationProvider _multiplicationProvider;
+    private readonly INewMultiplicationProvider _multiplicationProvider;
+    private readonly IBaseSalaryLoader _baseSalaryLoader;
 
-    public RetirementCalculator(IBonusProvider bonusProvider, INewMultiplicationProvider multiplicationProvider)
+    public RetirementCalculator(IBonusProvider bonusProvider, INewMultiplicationProvider multiplicationProvider, IBaseSalaryLoader baseSalaryLoader)
     {
         _bonusProvider = bonusProvider;
         _multiplicationProvider = multiplicationProvider;
+        _baseSalaryLoader = baseSalaryLoader;
     }
     public int Process(List<Salary> salaries)
     {
         var multiplication = _multiplicationProvider.GetMultiplication(salaries);
         var bonuses = _bonusProvider.GetBonuses(salaries);
         
-        // TODO remove hard dependency (use constructor DI)
-        // TODO various base salary loaders based on worker position
-        var baseSalaryLoader = new BaseSalaryLoader();
-        var baseSalary = baseSalaryLoader.GetBaseSalary();
+        var baseSalary = _baseSalaryLoader.GetBaseSalary();
 
         return Convert.ToInt32(baseSalary * multiplication + bonuses.Sum());
     }
