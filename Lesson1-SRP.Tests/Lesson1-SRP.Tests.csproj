@@ -5,6 +5,11 @@
     <RootNamespace>Lesson1_SRP.Tests</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit" Version="2.9.0" />
+  </ItemGroup>
 
 </Project>
