@@ -12,4 +12,8 @@
     <PackageReference Include="xunit" Version="2.9.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lesson1-SRP\Lesson1-SRP.csproj" />
+  </ItemGroup>
+
 </Project>
