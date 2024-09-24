@@ -34,6 +34,7 @@ namespace SOLID
         {
             Console.WriteLine("\nset value 1");
             var value1 = int.Parse(Console.ReadLine());
+            
             Console.WriteLine("set value 2");
             var value2 = int.Parse(Console.ReadLine());
 

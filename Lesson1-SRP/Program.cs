@@ -29,7 +29,7 @@ namespace Lesson1_SRP
 
             // DONE validation method for args - 1) file exists, 2) file is in json format (maybe not)
             // DONE extract method to separate class
-            // TODO app run based on user input (select salaries source file while application is running)
+            // DONE app run based on user input (select salaries source file while application is running)
             // TODO LONGTERM next topic test driven development (TDD)
 
             //Pro lidi od roku 1950 je fixní bonus 5,-Kč
