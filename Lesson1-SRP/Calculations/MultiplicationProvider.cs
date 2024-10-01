@@ -15,7 +15,7 @@ namespace Lesson1_SRP.Calculations
                 multiplication += 0.3;
             }
 
-            if (salaries.Select(salary => salary.Value).Average() > 30000)
+            if (salaries.Count > 0 && salaries.Select(salary => salary.Value).Average() > 30000)
             {
                 multiplication += 1;
             }

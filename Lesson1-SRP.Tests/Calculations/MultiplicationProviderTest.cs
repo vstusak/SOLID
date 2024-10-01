@@ -42,12 +42,13 @@ namespace Lesson1_SRP.Tests.Calculations
         {
             //arrange
             List<Salary> salaries = new List<Salary>();
-            var count = 0;
-            while (count < 50)
+
+            for (int i = 0; i < 50; i++)
             {
                 var salary = new Salary() { DateTime = new DateTime(1990, 2, 1), Value = 7300 };
                 salaries.Add(salary);
             }
+
             var multiplicationProvider = new MultiplicationProvider();
             int expectedResult = 1;
             //act
@@ -61,12 +62,13 @@ namespace Lesson1_SRP.Tests.Calculations
         {
             //arrange
             List<Salary> salaries = new List<Salary>();
-            var count = 0;
-            while (count < 51)
+
+            for (int i = 0; i < 51; i++)
             {
                 var salary = new Salary() { DateTime = new DateTime(1990, 2, 1), Value = 7300 };
                 salaries.Add(salary);
             }
+
             var multiplicationProvider = new MultiplicationProvider();
             double expectedResult = 1.3;
             //act
@@ -110,12 +112,13 @@ namespace Lesson1_SRP.Tests.Calculations
         {
             //arrange
             List<Salary> salaries = new List<Salary>();
-            var count = 0;
-            while (count < 50)
+
+            for (int i = 0; i < 50; i++)
             {
                 var salary = new Salary() { DateTime = new DateTime(1990, 2, 1), Value = 33333 };
                 salaries.Add(salary);
             }
+
             var multiplicationProvider = new MultiplicationProvider();
             int expectedResult = 2;
             //act
@@ -129,12 +132,13 @@ namespace Lesson1_SRP.Tests.Calculations
         {
             //arrange
             List<Salary> salaries = new List<Salary>();
-            var count = 0;
-            while (count < 51)
+
+            for (int i = 0; i < 51; i++)
             {
                 var salary = new Salary() { DateTime = new DateTime(1990, 2, 1), Value = 33333 };
                 salaries.Add(salary);
             }
+
             var multiplicationProvider = new MultiplicationProvider();
             double expectedResult = 2.3;
             //act

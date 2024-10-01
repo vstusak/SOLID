@@ -5,7 +5,8 @@
     <RootNamespace>Lesson1_SRP.Tests</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <OutputType>Library</OutputType>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Lesson1_SRP.Tests.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
