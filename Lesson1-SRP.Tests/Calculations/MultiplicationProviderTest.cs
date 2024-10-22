@@ -7,6 +7,7 @@ namespace Lesson1_SRP.Tests.Calculations
 
     public class MultiplicationProviderTest
     {
+        //Naming of tests:
         //given-> when-> then
         //when-> given-> then
         [Fact]
@@ -14,10 +15,10 @@ namespace Lesson1_SRP.Tests.Calculations
         {
             //arrange
             List<Salary> emptySalaries = new List<Salary>();
-            var multiplicationProvider = new MultiplicationProvider();
+            var underTest = new MultiplicationProvider();
             int expectedResult = 1;
             //act
-            var actualResult = multiplicationProvider.GetMultiplication(emptySalaries);
+            var actualResult = underTest.GetMultiplication(emptySalaries);
             //assert
             Assert.Equal(expectedResult, actualResult, 0.01);
         }
