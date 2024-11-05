@@ -9,6 +9,10 @@ namespace Lesson1_SRP.Calculations
     {
         public List<int> GetBonuses(List<Salary> salaries)//, DateTime personBirth)
         {
+            if (salaries == null)
+            {
+                throw new Exception("Nic jsi neposlal.");
+            }
             var bonuses = new List<int>();
 
             //if (personBirth.Year >= 1950)
@@ -17,6 +21,7 @@ namespace Lesson1_SRP.Calculations
            // }
            // else
            // { 
+
                 if (salaries.Select(salary => salary.Value).Any(value => value > 47000))
                 {
                     bonuses.Add(2000);

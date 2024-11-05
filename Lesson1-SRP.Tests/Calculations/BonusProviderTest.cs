@@ -16,6 +16,7 @@ namespace Lesson1_SRP.Tests.Calculations
         [TestCase(46000, 0)]
         [TestCase(47000, 0)]
         [TestCase(0, 0)]
+        [TestCase(-10000, 0)]
         public void SalarySentByParameter_GetBonuses_ExpectedResultByParameter(int salaryValue, int expectedResult)
         {
             //arrange
@@ -41,6 +42,17 @@ namespace Lesson1_SRP.Tests.Calculations
             //assert
             NUnit.Framework.Assert.That(actualResult, Is.EqualTo(expectedResult));
         }
+
+        [Test]
+        public void NullListOfSalaries_GetBonuses_NullArgumentException()
+        {
+            //arrange
+            List<Salary> nullSalaries = null;
+            var underTest = new BonusProvider();
+            //act + assert -> nunit assert exception
+            var resultException = NUnit.Framework.Assert.Throws<Exception>(()=>underTest.GetBonuses(nullSalaries));
+            NUnit.Framework.Assert.That(resultException.Message, Is.EqualTo("Nic jsi neposlal."));
+        }
     }
 }
 
@@ -48,6 +60,6 @@ namespace Lesson1_SRP.Tests.Calculations
 //salary < 47000 -> salary stays the same
 //salary = 47000 -> salary stays the same
 //salary = 0 -> salary stays the same
-//TODO: salary with negative value -> salary stays the same
-//TODO: List<Salary> salaries = null
+//salary with negative value -> salary stays the same
+//List<Salary> salaries = null
 //List<Salary> salaries - empty
