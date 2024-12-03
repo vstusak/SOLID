@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.9.34622.214
+VisualStudioVersion = 17.10.35201.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SOLID", "SOLID\SOLID.csproj", "{FC9E95F2-A517-4283-BBEE-D65AD0F5F596}"
 EndProject
@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson5-DIP", "Lesson5-DIP\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B026C972-6AE9-4B0E-AE56-FB30AE58DC71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson1-SRP.Tests", "Lesson1-SRP.Tests\Lesson1-SRP.Tests.csproj", "{641FD11B-EFE5-46D1-9F07-356C78E101B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson1-SRP.Tests", "Lesson1-SRP.Tests\Lesson1-SRP.Tests.csproj", "{641FD11B-EFE5-46D1-9F07-356C78E101B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC1DC86E-8A3D-4469-A70D-47C647E72F36}"
 EndProject
