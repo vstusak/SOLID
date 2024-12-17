@@ -14,5 +14,6 @@ namespace Reports
         public required DateTime DataCreated { get; set; }
         public required string Body { get; set; }
 
+
     }
 }
