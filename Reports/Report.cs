@@ -13,7 +13,9 @@ namespace Reports
         public required string Header { get; set; } //TODO: replace required by constructor
         public required DateTime DataCreated { get; set; }
         public required string Body { get; set; }
-
-
+        public override string ToString()
+        {
+            return Header + ": " + Body + ": " + DataCreated.ToString();
+        }
     }
 }

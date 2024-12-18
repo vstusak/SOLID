@@ -17,4 +17,17 @@
 // 6. Připojit DataReader na reálnou DB
 // 7. Nahradit tiskárnu uložením do DB
 
+//TODO: Jak
+
+using Reports;
+
 Console.WriteLine("Hello, World!");
+
+ReportFactory reportFactory = new ReportFactory();
+var report = reportFactory.CreateReport();
+
+Printer printer = new Printer();
+printer.Print(report);
+
+var fileReportWriter = new FileReportWriter();
+fileReportWriter.SaveFile(report);
