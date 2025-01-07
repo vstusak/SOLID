@@ -23,8 +23,10 @@ using Reports;
 
 Console.WriteLine("Hello, World!");
 
-ReportFactory reportFactory = new ReportFactory();
-var report = reportFactory.CreateReport();
+HeaderType headerType = HeaderType.Colleagues;
+DataReader datatReader = new DataReader();
+ReportFactory reportFactory = new ReportFactory(datatReader);
+var report = reportFactory.CreateReport(headerType);
 
 Printer printer = new Printer();
 printer.Print(report);

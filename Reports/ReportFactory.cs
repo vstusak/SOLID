@@ -15,12 +15,12 @@ namespace Reports
             _dataReader = dataReader;
         }
 
-        public Report CreateReport()
+        public Report CreateReport(HeaderType headerType)
         {
-            //TODO: finish headerReader parameter to select type
             //TODO: before using dependency injection try to write some test
             var headerReader = new HeaderReader();
-            string header = headerReader.GetHeader();
+
+            string header = headerReader.GetHeader(headerType);
             DateTime createdDate = DateTime.UtcNow;
 
             var data = _dataReader.GetData();
