@@ -8,7 +8,7 @@ namespace Lesson5_DIP
         {
             Console.WriteLine("Hello World!");
             var jobsDataAccess = new PrinterJobsDataAccess();
-            var jobs = jobsDataAccess.GetJobs();
+            //var jobs = jobsDataAccess.GetJobs();
         }
     }
 }

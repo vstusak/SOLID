@@ -9,17 +9,21 @@ namespace Report.Tests
         public void ReportCreationTest()
         {
             //Arrange
+            var expectedDateTime = DateTime.UtcNow;
             //TODO: DataReader should be replaced by mock
             DataReader dataReader = new DataReader();
-            ReportFactory underTest = new ReportFactory(dataReader);
+            //TODO: Create mock for dateTimeProvider (23.1.2025)
+            ReportFactory underTest = new ReportFactory(dataReader, mockDateTimeProvider.Object);
 
             //Act
             var result = underTest.CreateReport(HeaderType.Employees);
 
             //Assert
             Assert.That(result.Header, Is.EqualTo("All"));
-            //TODO: Assert other properties
+            Assert.That(result.Body, Is.EqualTo("světe"));
+            Assert.That(result.DataCreated, Is.EqualTo(expectedDateTime));
         }
+        //TODO: Assert other properties
 
     }
 }

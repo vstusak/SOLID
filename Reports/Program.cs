@@ -25,7 +25,8 @@ Console.WriteLine("Hello, World!");
 
 HeaderType headerType = HeaderType.Colleagues;
 DataReader datatReader = new DataReader();
-ReportFactory reportFactory = new ReportFactory(datatReader);
+DateTimeProvider dateTimeProvider = new DateTimeProvider();
+ReportFactory reportFactory = new ReportFactory(datatReader, dateTimeProvider);
 var report = reportFactory.CreateReport(headerType);
 
 Printer printer = new Printer();

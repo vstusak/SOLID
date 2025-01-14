@@ -9,10 +9,12 @@ namespace Reports
     public class ReportFactory
     {
         private readonly DataReader _dataReader;
+        private readonly IDateTimeProvider _dateTimeProvider;
 
-        public ReportFactory(DataReader dataReader)
+        public ReportFactory(DataReader dataReader, IDateTimeProvider dateTimeProvider)
         {
             _dataReader = dataReader;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         public Report CreateReport(HeaderType headerType)
@@ -21,7 +23,7 @@ namespace Reports
             var headerReader = new HeaderReader();
 
             string header = headerReader.GetHeader(headerType);
-            DateTime createdDate = DateTime.UtcNow;
+            DateTime createdDate = _dateTimeProvider.UtcNow;
 
             var data = _dataReader.GetData();
             //TODO: resolve converision between data and body
