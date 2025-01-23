@@ -26,25 +26,34 @@ namespace Reports
             DateTime createdDate = _dateTimeProvider.UtcNow;
 
             var data = _dataReader.GetData();
-            //TODO: resolve converision between data and body
-            string body = "světe";
+            //TODO: explain StringBuilder how it works 30.1.
+            var body = new StringBuilder();
+            foreach (var row in data)
+            {
+                body.AppendLine($"{row.Key} : {row.Value}");
+            }
 
             var report = new Report()
             {
                 Header = header,
                 DataCreated = createdDate,
-                Body = body
+                Body = body.ToString()
             };
 
             return report;
         }
     }
 
-    public class DataReader
+    public class DataReader : IOurDataReader 
     {
         public Dictionary<string,int> GetData()
         {
             return new Dictionary<string, int>();
         }
+    }
+
+    public interface IOurDataReader
+    {
+        Dictionary<string, int> GetData();
     }
 }
