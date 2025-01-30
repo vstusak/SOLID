@@ -8,10 +8,10 @@ namespace Reports
 {
     public class ReportFactory
     {
-        private readonly DataReader _dataReader;
+        private readonly IOurDataReader _dataReader;
         private readonly IDateTimeProvider _dateTimeProvider;
 
-        public ReportFactory(DataReader dataReader, IDateTimeProvider dateTimeProvider)
+        public ReportFactory(IOurDataReader dataReader, IDateTimeProvider dateTimeProvider)
         {
             _dataReader = dataReader;
             _dateTimeProvider = dateTimeProvider;
@@ -48,7 +48,14 @@ namespace Reports
     {
         public Dictionary<string,int> GetData()
         {
-            return new Dictionary<string, int>();
+            var warehouse = new Dictionary<string, int>
+            {
+                { "rohlik", 5 },
+                { "chleba", 10 },
+                { "kolac", 3 },
+                { "veka", 5 }
+            };
+            return warehouse;
         }
     }
 
