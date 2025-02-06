@@ -35,14 +35,13 @@ namespace Report.Tests
         {
             //Arrange
             var expectedDateTime = new DateTime(2025, 1, 23, 8, 55, 24);
-            //TODO: use data in dataReader not use empty Dictionary 30.1. // formátování pro přehlednost 
+
             var dataReaderMock = new Mock<IOurDataReader>(MockBehavior.Strict);
-            dataReaderMock.Setup(mock => mock.GetData()).Returns(new Dictionary<string, int>()
-                {{"chleba", 5}});
+            dataReaderMock.Setup(mock => mock.GetData()).Returns(new Dictionary<string, int>{{"chleba", 5}});
 
             var dateTimeProviderMock = new Mock<IDateTimeProvider>(MockBehavior.Strict);
-
             dateTimeProviderMock.Setup(mock => mock.UtcNow).Returns(expectedDateTime);
+
             ReportFactory underTest = new ReportFactory(dataReaderMock.Object, dateTimeProviderMock.Object);
 
             //Act
@@ -52,8 +51,9 @@ namespace Report.Tests
             Assert.That(result.Header, Is.EqualTo("All"));
             Assert.That(result.Body, Is.EqualTo($"chleba : 5{Environment.NewLine}"));
             Assert.That(result.DataCreated, Is.EqualTo(expectedDateTime));
-        }
-        //TODO: Assert other properties
 
+            //TODO: Set correct names for tests
+            //TODO: TDD + project calculator
+        }
     }
 }

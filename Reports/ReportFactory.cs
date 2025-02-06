@@ -26,7 +26,6 @@ namespace Reports
             DateTime createdDate = _dateTimeProvider.UtcNow;
 
             var data = _dataReader.GetData();
-            //TODO: explain StringBuilder how it works 30.1.
             var body = new StringBuilder();
             foreach (var row in data)
             {
