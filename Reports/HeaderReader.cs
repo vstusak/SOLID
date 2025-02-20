@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Reports
 {
     //1. a) HeaderReader class: Načíst hlavičku - pěknou, obyč.a ugly (nastavení parametrem)
-    public class HeaderReader
+    public class HeaderReader : IHeaderReader
     {
         public string GetHeader(HeaderType headerType)
         {

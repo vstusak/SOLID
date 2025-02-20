@@ -12,14 +12,17 @@ namespace Report.Tests
         {
             //Arrange
             var expectedDateTime = new DateTime(2025, 1, 23, 8, 55, 24, DateTimeKind.Local);
-            //TODO formátování pro přehlednost 
+            
             var dataReaderMock = new Mock<IOurDataReader>(MockBehavior.Strict);
             dataReaderMock.Setup(mock => mock.GetData()).Returns(new Dictionary<string, int>());
 
             var dateTimeProviderMock = new Mock<IDateTimeProvider>(MockBehavior.Strict);
-
             dateTimeProviderMock.Setup(mock => mock.UtcNow).Returns(expectedDateTime);
-            ReportFactory underTest = new ReportFactory(dataReaderMock.Object, dateTimeProviderMock.Object);
+
+            var headerReaderMock = new Mock<IHeaderReader>(MockBehavior.Strict);
+            headerReaderMock.Setup(mock => mock.GetHeader(It.IsAny<HeaderType>())).Returns(String.Empty);
+
+            ReportFactory underTest = new ReportFactory(dataReaderMock.Object, dateTimeProviderMock.Object, headerReaderMock.Object);
 
             //Act
             var result = underTest.CreateReport(HeaderType.Employees);
@@ -40,7 +43,10 @@ namespace Report.Tests
             var dateTimeProviderMock = new Mock<IDateTimeProvider>(MockBehavior.Strict);
             dateTimeProviderMock.Setup(mock => mock.UtcNow).Returns(expectedDateTime);
 
-            ReportFactory underTest = new ReportFactory(dataReaderMock.Object, dateTimeProviderMock.Object);
+            var headerReaderMock = new Mock<IHeaderReader>(MockBehavior.Strict);
+            headerReaderMock.Setup(mock => mock.GetHeader(It.IsAny<HeaderType>())).Returns(String.Empty);
+
+            ReportFactory underTest = new ReportFactory(dataReaderMock.Object, dateTimeProviderMock.Object, headerReaderMock.Object);
 
             //Act
             var result = underTest.CreateReport(HeaderType.Employees);
@@ -48,12 +54,10 @@ namespace Report.Tests
             //Assert
             Assert.That(result.Body, Is.EqualTo($"chleba : 5{Environment.NewLine}"));
 
-            //TODO: Set correct names for tests
             //TODO: TDD + project calculator
         }
-        //TODO: Rename test according to the assert
         [Test]
-        public void CreateReport_HeaderTypeEmpoyees_ReportInCorrectFormat()
+        public void CreateReport_HeaderTypeEmpoyees_AllInHeader()
         {
             //Arrange
             var expectedDateTime = new DateTime(2025, 1, 23, 8, 55, 24);
@@ -61,10 +65,13 @@ namespace Report.Tests
             var dataReaderMock = new Mock<IOurDataReader>(MockBehavior.Strict);
             dataReaderMock.Setup(mock => mock.GetData()).Returns(new Dictionary<string, int> { { "chleba", 5 } });
 
+            var headerReaderMock = new Mock<IHeaderReader>(MockBehavior.Strict);
+            headerReaderMock.Setup(mock => mock.GetHeader(It.IsAny<HeaderType>())).Returns("All");
+
             var dateTimeProviderMock = new Mock<IDateTimeProvider>(MockBehavior.Strict);
             dateTimeProviderMock.Setup(mock => mock.UtcNow).Returns(expectedDateTime);
 
-            ReportFactory underTest = new ReportFactory(dataReaderMock.Object, dateTimeProviderMock.Object);
+            ReportFactory underTest = new ReportFactory(dataReaderMock.Object, dateTimeProviderMock.Object, headerReaderMock.Object);
 
             //Act
             var result = underTest.CreateReport(HeaderType.Employees);
@@ -72,5 +79,7 @@ namespace Report.Tests
             //Assert
             Assert.That(result.Header, Is.EqualTo("All"));
         }
+
+        //TODO: Cover HearderReader by tests
     }
 }

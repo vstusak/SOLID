@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,19 +11,19 @@ namespace Reports
     {
         private readonly IOurDataReader _dataReader;
         private readonly IDateTimeProvider _dateTimeProvider;
+        private readonly IHeaderReader _headerReader;
 
-        public ReportFactory(IOurDataReader dataReader, IDateTimeProvider dateTimeProvider)
+
+        public ReportFactory(IOurDataReader dataReader, IDateTimeProvider dateTimeProvider, IHeaderReader headerReader)
         {
             _dataReader = dataReader;
             _dateTimeProvider = dateTimeProvider;
+            _headerReader = headerReader;
         }
 
         public Report CreateReport(HeaderType headerType)
         {
-            //TODO: before using dependency injection try to write some test
-            var headerReader = new HeaderReader();
-
-            string header = headerReader.GetHeader(headerType);
+            string header = _headerReader.GetHeader(headerType);
             DateTime createdDate = _dateTimeProvider.UtcNow;
 
             var data = _dataReader.GetData();
@@ -41,6 +42,11 @@ namespace Reports
 
             return report;
         }
+    }
+
+    public interface IHeaderReader
+    {
+        string GetHeader(HeaderType headerType);
     }
 
     public class DataReader : IOurDataReader 
