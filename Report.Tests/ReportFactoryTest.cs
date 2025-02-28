@@ -59,6 +59,8 @@ namespace Report.Tests
         [Test]
         public void CreateReport_HeaderTypeEmpoyees_AllInHeader()
         {
+            //TODO: verify that headerReader has been called by mock
+
             //Arrange
             var expectedDateTime = new DateTime(2025, 1, 23, 8, 55, 24);
 
@@ -80,6 +82,6 @@ namespace Report.Tests
             Assert.That(result.Header, Is.EqualTo("All"));
         }
 
-        //TODO: Cover HearderReader by tests
+        //TODO: Cover HearderReader by tests      
     }
 }
