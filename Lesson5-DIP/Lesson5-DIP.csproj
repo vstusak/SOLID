@@ -6,4 +6,8 @@
     <RootNamespace>Lesson5_DIP</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
+  </ItemGroup>
+
 </Project>
