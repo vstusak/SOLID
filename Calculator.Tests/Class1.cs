@@ -42,18 +42,35 @@ namespace Calculator.Tests
             //Assert
             Assert.That(result, Is.EqualTo(value1*value2));
         }
-
-        //TODO 27.03.: Handle divide by zero, do not support
-        //TODO: Assertion of double 
-        [TestCase(1, 0)]
+        
+        //TODO: Assertion of double - Rename test for div of double
+        //TODO: Chceme funkcni kalkulacku. Mame jen jednu tridu se zakladnimi operacemi
+        [TestCase(1, 1)]
         public void Division_InputData_DataDivided(double value1, double value2)
         {
             //Arrange
             var underTest = new TddCalculator();
+            var deviationLimit = 0.005;
+            var expected = value1 / value2;
             //Act
             var result = underTest.Div(value1, value2);
+            var realDeviation = Math.Abs(result - expected);
             //Assert
-            Assert.That(result, Is.EqualTo(value1 / value2));
+            Assert.That(realDeviation, Is.LessThan(deviationLimit));
+        }
+
+        [TestCase(1)]
+        public void Division_DivideByZero_ExceptionIsThrown(double value1)
+        {
+            //Arrange
+            var underTest = new TddCalculator();
+            //All values should be in variables, do not want magic numbers :)
+            //Anyway hardcoded according to the test name
+            var zero = 0;
+
+            //Act & Assert
+            var ex = Assert.Throws(typeof(DivideByZeroException), () => underTest.Div(value1, zero));
+            Assert.That(ex.Message, Is.EqualTo($"You are trying divide {value1} by 0."));
         }
     }
 }

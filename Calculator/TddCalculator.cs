@@ -25,6 +25,10 @@ namespace Calculator
 
         public double Div(double value1, double value2)
         {
+            if (value2 == 0)
+            {
+                throw new DivideByZeroException($"You are trying divide {value1} by 0.");
+            }
 
             return value1 / value2;
         }
