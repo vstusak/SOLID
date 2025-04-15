@@ -43,7 +43,6 @@ namespace Calculator.Tests
             Assert.That(result, Is.EqualTo(value1*value2));
         }
         
-        //TODO: Assertion of double - Rename test for div of double
         //TODO: Chceme funkcni kalkulacku. Mame jen jednu tridu se zakladnimi operacemi
         [TestCase(1, 1)]
         public void Division_InputData_DataDivided(double value1, double value2)
