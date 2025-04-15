@@ -9,16 +9,31 @@ namespace Calculator.Tests
 {
     internal class ConsoleDataReaderTests
     {
-        [TestCase()]
-        public void ReadValue_Get_ReturnValue()
+        [TestCase("5", 5)]
+        public void ReadValue_Get_ReturnValue(string inputString, int expectedValue)
         {
             //Arrange
             var underTest = new ConsoleDataReader();
-            var expected = 5;
             //Act
             var result = underTest.ReadValue();
             //Assert
-            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(result, Is.EqualTo(expectedValue));
+        }
+
+        [TestCase("+", OperationEnum.Add)]
+        [TestCase("-", OperationEnum.Sub)]
+        [TestCase("*", OperationEnum.Mult)]
+        [TestCase("/", OperationEnum.Div)]
+        public void ReadOperator_Get_MatchToOperationEnum(string inputOperationString, OperationEnum expectedOperationEnum)
+        {
+            //Arrange
+            var underTest = new ConsoleDataReader();
+            // //Act
+            var result = underTest.ReadOperator();
+            // //Assert
+            Assert.That(result, Is.EqualTo(expectedOperationEnum));
         }
     }
+
+
 }

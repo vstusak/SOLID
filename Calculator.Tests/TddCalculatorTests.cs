@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Calculator.Tests
 {
-    public class CalculatorTests
+    public class TddCalculatorTests
     {
         [TestCase(1, 2)]
         [TestCase(1, 0)]
