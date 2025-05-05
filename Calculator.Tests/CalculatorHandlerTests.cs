@@ -13,14 +13,14 @@ namespace Calculator.Tests
         public void Execute_InputData_ExpectedResult(int value1, int value2, OperationEnum operation, double expectedResult)
         {
             //Arrange
-            var reader = new Mock<ConsoleDataReader>();
+            var reader = new Mock<IConsoleDataReader>();
             reader.SetupSequence(rm => rm.ReadValue()).Returns(value1).Returns(value2);
             reader.Setup(rm => rm.ReadOperator()).Returns(operation);
             
             var writer = new Mock<ConsoleDataWriter>();
 
-            var calculatorCore = new Mock<TddCalculator>();
-            //calculatorCore.Setup(ccm => ccm.) //TODO finish calculatorCore mock setup
+            var calculatorCore = new Mock<CalculatorCoreCore>();
+            //calculatorCoreCore.Setup(ccm => ccm.) //TODO finish calculatorCoreCore mock setup
             
             var underTest = new CalculatorHandler(reader.Object, writer.Object, calculatorCore.Object);
          
@@ -31,5 +31,4 @@ namespace Calculator.Tests
             // TODO write asserts
         }
     }
-
 }

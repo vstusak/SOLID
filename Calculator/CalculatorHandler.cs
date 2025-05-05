@@ -8,15 +8,15 @@ namespace Calculator
 {
     public class CalculatorHandler
     {
-        private readonly ConsoleDataReader _reader;
-        private readonly ConsoleDataWriter _writer;
-        private readonly TddCalculator _calculatorCore;
+        private readonly IConsoleDataReader _reader;
+        private readonly IConsoleDataWriter _writer;
+        private readonly ICalculatorCore _calculatorCoreCore;
 
-        public CalculatorHandler(ConsoleDataReader reader, ConsoleDataWriter writer, TddCalculator calculatorCore)
+        public CalculatorHandler(IConsoleDataReader reader, IConsoleDataWriter writer, ICalculatorCore calculatorCoreCore)
         {
             _reader = reader;
             _writer = writer;
-            _calculatorCore = calculatorCore;
+            _calculatorCoreCore = calculatorCoreCore;
         }
 
         public double Execute()

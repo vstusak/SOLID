@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
-    public class ConsoleDataWriter
+    public class ConsoleDataWriter : IConsoleDataWriter
     {
         public void WriteValue()
         {
             throw new NotImplementedException();
         }
+    }
+    public interface IConsoleDataWriter
+    {
+        void WriteValue();
     }
 }

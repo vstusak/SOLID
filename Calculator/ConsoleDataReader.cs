@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
-    public class ConsoleDataReader
+    public class ConsoleDataReader : IConsoleDataReader
     {
         public int ReadValue()
         {
@@ -17,5 +17,10 @@ namespace Calculator
         {
             throw new NotImplementedException();
         }
+    }
+    public interface IConsoleDataReader
+    {
+        int ReadValue();
+        OperationEnum ReadOperator();
     }
 }

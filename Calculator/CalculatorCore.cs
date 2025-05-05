@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
-    public class TddCalculator
+    public class CalculatorCoreCore : ICalculatorCore
     {
         public int Add(int value1, int value2)
         {
@@ -32,5 +32,12 @@ namespace Calculator
 
             return value1 / value2;
         }
+    }
+    public interface ICalculatorCore
+    {
+        int Add(int value1, int value2);
+        int Sub(int value1, int value2);
+        int Mult(int value1, int value2);
+        double Div(double value1, double value2);
     }
 }
