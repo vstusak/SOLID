@@ -4,14 +4,14 @@ using NUnit.Framework;
 
 namespace Calculator.Tests
 {
-    public class CalculatorCoreCoreTests
+    public class CalculatorCoreTests
     {
         [TestCase(1, 2)]
         [TestCase(1, 0)]
         public void Add_InputData_DataAddedTogether(int value1, int value2)
         {
             //Arrange
-            var underTest = new CalculatorCoreCore();
+            var underTest = new CalculatorCore();
             //Act
             var result = underTest.Add(value1, value2);
             //Assert
@@ -24,7 +24,7 @@ namespace Calculator.Tests
         public void Sub_InputData_DataSubstituted(int value1, int value2)
         {
             //Arrange
-            var underTest = new CalculatorCoreCore();
+            var underTest = new CalculatorCore();
             //Act
             var result = underTest.Sub(value1, value2);
             //Assert
@@ -36,7 +36,7 @@ namespace Calculator.Tests
         public void Multiplication_InputData_DataMultiplicated(int value1, int value2)
         {
             //Arrange
-            var underTest = new CalculatorCoreCore();
+            var underTest = new CalculatorCore();
             //Act
             var result = underTest.Mult(value1, value2);
             //Assert
@@ -48,7 +48,7 @@ namespace Calculator.Tests
         public void Division_InputData_DataDivided(double value1, double value2)
         {
             //Arrange
-            var underTest = new CalculatorCoreCore();
+            var underTest = new CalculatorCore();
             var deviationLimit = 0.005;
             var expected = value1 / value2;
             //Act
@@ -62,7 +62,7 @@ namespace Calculator.Tests
         public void Division_DivideByZero_ExceptionIsThrown(double value1)
         {
             //Arrange
-            var underTest = new CalculatorCoreCore();
+            var underTest = new CalculatorCore();
             //All values should be in variables, do not want magic numbers :)
             //Anyway hardcoded according to the test name
             var zero = 0;

@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
-    public class CalculatorCoreCore : ICalculatorCore
+    public class CalculatorCore : ICalculatorCore
     {
-        public int Add(int value1, int value2)
+        public double Add(int value1, int value2)
         {
             return value1 + value2;
         }
 
-        public int Sub(int value1, int value2)
+        public double Sub(int value1, int value2)
         {
             return value1 - value2;
         }
 
-        public int Mult(int value1, int value2)
+        public double Mult(int value1, int value2)
         {
           return   value1 * value2;
         }
@@ -35,9 +35,9 @@ namespace Calculator
     }
     public interface ICalculatorCore
     {
-        int Add(int value1, int value2);
-        int Sub(int value1, int value2);
-        int Mult(int value1, int value2);
+        double Add(int value1, int value2);
+        double Sub(int value1, int value2);
+        double Mult(int value1, int value2);
         double Div(double value1, double value2);
     }
 }

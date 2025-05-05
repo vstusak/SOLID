@@ -21,7 +21,36 @@ namespace Calculator
 
         public double Execute()
         {
-            throw new NotImplementedException();
+            var operatorIdentifier = _reader.ReadOperator();
+            
+            var value1 = _reader.ReadValue();
+            var value2 = _reader.ReadValue();
+            
+            double result;
+            switch (operatorIdentifier)
+            {
+                case OperationEnum.Undefined:
+                    throw new InvalidOperationException();
+                    break;
+                case OperationEnum.Add:
+                    result = _calculatorCoreCore.Add(value1, value2);
+                    return result;
+                case OperationEnum.Sub:
+                    result = _calculatorCoreCore.Sub(value1, value2);
+                    return result;
+                case OperationEnum.Mult:
+                    result = _calculatorCoreCore.Mult(value1, value2);
+                    return result;
+                case OperationEnum.Div: // TODO div not passing in test
+                    result = _calculatorCoreCore.Div(value1, value2);
+                    return result; 
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            //TODO output result to console via writer
+            
+            return result;
         }
     }
 }
