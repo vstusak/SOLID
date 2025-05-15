@@ -36,7 +36,7 @@ namespace Calculator.Tests
 
             var calculatorCoreMock = new Mock<ICalculatorCore>();
             calculatorCoreMock.Setup(ccm => ccm.Add(It.IsAny<int>(), It.IsAny<int>())).Returns(expectedResult);
-            calculatorCoreMock.Setup(ccm => ccm.Div(It.IsAny<int>(), It.IsAny<int>())).Returns(expectedResult);
+            calculatorCoreMock.Setup(ccm => ccm.Div(It.IsAny<double>(), It.IsAny<double>())).Returns(expectedResult);
             calculatorCoreMock.Setup(ccm => ccm.Mult(It.IsAny<int>(), It.IsAny<int>())).Returns(expectedResult);
             calculatorCoreMock.Setup(ccm => ccm.Sub(It.IsAny<int>(), It.IsAny<int>())).Returns(expectedResult);
 
@@ -55,25 +55,25 @@ namespace Calculator.Tests
             {
                 case OperationEnum.Add:
                     calculatorCoreMock.Verify(ccm => ccm.Add(It.IsAny<int>(), It.IsAny<int>()), Times.Exactly(1));
-                    calculatorCoreMock.Verify(ccm => ccm.Div(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
+                    calculatorCoreMock.Verify(ccm => ccm.Div(It.IsAny<double>(), It.IsAny<double>()), Times.Never);
                     calculatorCoreMock.Verify(ccm => ccm.Mult(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
                     calculatorCoreMock.Verify(ccm => ccm.Sub(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
                     break;
                 case OperationEnum.Sub:
                     calculatorCoreMock.Verify(ccm => ccm.Add(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
-                    calculatorCoreMock.Verify(ccm => ccm.Div(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
+                    calculatorCoreMock.Verify(ccm => ccm.Div(It.IsAny<double>(), It.IsAny<double>()), Times.Never);
                     calculatorCoreMock.Verify(ccm => ccm.Mult(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
                     calculatorCoreMock.Verify(ccm => ccm.Sub(It.IsAny<int>(), It.IsAny<int>()), Times.Exactly(1));
                     break;
                 case OperationEnum.Mult:
                     calculatorCoreMock.Verify(ccm => ccm.Add(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
-                    calculatorCoreMock.Verify(ccm => ccm.Div(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
+                    calculatorCoreMock.Verify(ccm => ccm.Div(It.IsAny<double>(), It.IsAny<double>()), Times.Never);
                     calculatorCoreMock.Verify(ccm => ccm.Mult(It.IsAny<int>(), It.IsAny<int>()), Times.Exactly(1));
                     calculatorCoreMock.Verify(ccm => ccm.Sub(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
                     break;
                 case OperationEnum.Div:
                     calculatorCoreMock.Verify(ccm => ccm.Add(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
-                    calculatorCoreMock.Verify(ccm => ccm.Div(It.IsAny<int>(), It.IsAny<int>()), Times.Exactly(1));
+                    calculatorCoreMock.Verify(ccm => ccm.Div(It.IsAny<double>(), It.IsAny<double>()), Times.Exactly(1));
                     calculatorCoreMock.Verify(ccm => ccm.Mult(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
                     calculatorCoreMock.Verify(ccm => ccm.Sub(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
                     break;
@@ -84,7 +84,7 @@ namespace Calculator.Tests
 
             // assert that output from CalculatorCore was not altered by CalculatorHandler 
             Assert.That(result, Is.EqualTo(expectedResult));
-
+            writerMock.Verify(wm=>wm.WriteValue(expectedResult),Times.Exactly(1));
         }
     }
 }

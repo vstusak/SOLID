@@ -15,7 +15,7 @@ namespace Calculator.Tests
             //Arrange
             var underTest = new ConsoleDataWriter();
             //Act
-            underTest.WriteValue();
+            underTest.WriteValue(5);
 
             //Assert
             Assert.Fail("Finish test, check console output.");

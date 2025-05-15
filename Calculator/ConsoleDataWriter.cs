@@ -8,13 +8,13 @@ namespace Calculator
 {
     public class ConsoleDataWriter : IConsoleDataWriter
     {
-        public void WriteValue()
+        public void WriteValue(double value)
         {
             throw new NotImplementedException();
         }
     }
     public interface IConsoleDataWriter
     {
-        void WriteValue();
+        void WriteValue(double value);
     }
 }

@@ -34,22 +34,21 @@ namespace Calculator
                     break;
                 case OperationEnum.Add:
                     result = _calculatorCoreCore.Add(value1, value2);
-                    return result;
+                    break;
                 case OperationEnum.Sub:
                     result = _calculatorCoreCore.Sub(value1, value2);
-                    return result;
+                    break;
                 case OperationEnum.Mult:
                     result = _calculatorCoreCore.Mult(value1, value2);
-                    return result;
+                    break;
                 case OperationEnum.Div: // TODO div not passing in test
                     result = _calculatorCoreCore.Div(value1, value2);
-                    return result; 
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            //TODO output result to console via writer
-            
+            _writer.WriteValue(result);
             return result;
         }
     }
