@@ -8,6 +8,14 @@ namespace Calculator
 {
     public class ConsoleDataReader : IConsoleDataReader
     {
+        private readonly IConsoleAdapter _consoleAdapter;
+
+        public ConsoleDataReader(IConsoleAdapter consoleAdapter)
+        {
+            _consoleAdapter = consoleAdapter;
+
+        }
+
         public int ReadValue()
         {
             throw new NotImplementedException();

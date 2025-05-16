@@ -47,7 +47,7 @@ namespace Calculator.Tests
 
             //Assert
 
-            //Assert that ReadValue was called twice and ReadOperator once.
+            //Assert that ReadLine was called twice and ReadOperator once.
             readerMock.Verify(rm => rm.ReadValue(), Times.Exactly(2));
             readerMock.Verify(rm => rm.ReadOperator(), Times.Exactly(1));
 

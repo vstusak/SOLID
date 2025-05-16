@@ -8,11 +8,26 @@ namespace Calculator
 {
     public class ConsoleDataWriter : IConsoleDataWriter
     {
+        private readonly IConsoleAdapter _consoleAdapter;
+
+        public ConsoleDataWriter(IConsoleAdapter consoleAdapter)
+        {
+            _consoleAdapter = consoleAdapter;
+
+        }
+
         public void WriteValue(double value)
         {
-            throw new NotImplementedException();
+            _consoleAdapter.WriteLine("Result is: " + value.ToString());
         }
     }
+
+    public interface IConsoleAdapter
+    {
+        void ReadLine();
+        void WriteLine(string value);
+    }
+
     public interface IConsoleDataWriter
     {
         void WriteValue(double value);
