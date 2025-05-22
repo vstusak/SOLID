@@ -18,7 +18,9 @@ namespace Calculator
 
         public int ReadValue()
         {
-            throw new NotImplementedException();
+            var valueString = _consoleAdapter.ReadLine();
+            var result = Convert.ToInt32(valueString);
+            return result;
         }
 
         public OperationEnum ReadOperator()

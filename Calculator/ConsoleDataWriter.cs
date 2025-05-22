@@ -24,7 +24,7 @@ namespace Calculator
 
     public interface IConsoleAdapter
     {
-        void ReadLine();
+        string ReadLine();
         void WriteLine(string value);
     }
 
