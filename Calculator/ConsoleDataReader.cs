@@ -25,7 +25,21 @@ namespace Calculator
 
         public OperationEnum ReadOperator()
         {
-            throw new NotImplementedException();
+            //TODO: refactor to use description to enum.
+            var valueString = _consoleAdapter.ReadLine();
+            switch (valueString)
+            {
+                case "+":
+                    return OperationEnum.Add;
+                case "-":
+                    return OperationEnum.Sub;
+                case "*":
+                    return OperationEnum.Mult;
+                case "/":
+                    return OperationEnum.Div;
+                default:
+                    throw new ArgumentException();
+            }
         }
     }
     public interface IConsoleDataReader

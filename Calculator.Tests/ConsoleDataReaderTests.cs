@@ -45,15 +45,17 @@ namespace Calculator.Tests
         [TestCase("b")]
         [TestCase(":")]
         [TestCase("1")]
-        public void ReadOperator_InvalidChar_ThrowsException(string inputOperationString, OperationEnum expectedOperationEnum)
+        public void ReadOperator_InvalidChar_ThrowsException(string inputOperationString)
         {
             //Arrange
-           
+            var consoleAdapterMock = new Mock<IConsoleAdapter>();
+            consoleAdapterMock.Setup(ca => ca.ReadLine()).Returns(inputOperationString);
+            var underTest = new ConsoleDataReader(consoleAdapterMock.Object);
+
             // //Act
 
             // //Assert
+            Assert.Catch<ArgumentException>(()=>underTest.ReadOperator());
         }
     }
-
-
 }
