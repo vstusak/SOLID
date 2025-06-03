@@ -21,6 +21,7 @@ namespace Calculator
 
         public double Execute()
         {
+            _writer.WriteMessage("");
             var operatorIdentifier = _reader.ReadOperator();
             
             var value1 = _reader.ReadValue();
@@ -41,7 +42,7 @@ namespace Calculator
                 case OperationEnum.Mult:
                     result = _calculatorCoreCore.Mult(value1, value2);
                     break;
-                case OperationEnum.Div: // TODO div not passing in test
+                case OperationEnum.Div: 
                     result = _calculatorCoreCore.Div(value1, value2);
                     break;
                 default:

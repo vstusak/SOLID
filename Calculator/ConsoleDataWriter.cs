@@ -31,5 +31,6 @@ namespace Calculator
     public interface IConsoleDataWriter
     {
         void WriteValue(double value);
+        void WriteMessage(string empty);
     }
 }
