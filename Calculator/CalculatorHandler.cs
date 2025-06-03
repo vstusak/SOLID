@@ -21,10 +21,13 @@ namespace Calculator
 
         public double Execute()
         {
-            _writer.WriteMessage("");
+            _writer.WriteMessage("Fill the operator in:");
             var operatorIdentifier = _reader.ReadOperator();
-            
+
+            _writer.WriteMessage("Fill the first value in:");
             var value1 = _reader.ReadValue();
+
+            _writer.WriteMessage("Fill the second value in:");
             var value2 = _reader.ReadValue();
             
             double result;

@@ -20,6 +20,11 @@ namespace Calculator
         {
             _consoleAdapter.WriteLine("Result is: " + value.ToString());
         }
+
+        public void WriteMessage(string message)
+        {
+            _consoleAdapter.WriteLine(message);
+        }
     }
 
     public interface IConsoleAdapter
@@ -31,6 +36,6 @@ namespace Calculator
     public interface IConsoleDataWriter
     {
         void WriteValue(double value);
-        void WriteMessage(string empty);
+        void WriteMessage(string message);
     }
 }
