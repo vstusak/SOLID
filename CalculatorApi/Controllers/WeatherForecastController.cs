@@ -18,15 +18,17 @@ namespace CalculatorApi.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         //[HttpGet(Name = "GetWeatherForecast")]
-        //public int Get(int abc)
-        //{
+        public int Get()
+        {
 
-        //    return abc;
-        //}
+            return 3;
+        }
 
-        [HttpGet(Name = "GetWeatherForecast2")]
-        public int TwoGet([FromBody]int abc) // bere hodnotu z Body
+        [HttpPost]
+        //[HttpGet(Name = "GetWeatherForecast2")]
+        public int TwoGet( int abc) // bere hodnotu z Body
         {
 
             return abc;
