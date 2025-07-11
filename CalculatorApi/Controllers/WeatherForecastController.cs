@@ -35,5 +35,10 @@ namespace CalculatorApi.Controllers
         }
     }
 
-    // TODO: add POST method
+    //TODO: use TDD where is possible
+    //TODO: create data class with values and operator
+    //TODO: create POST - send value1, value2 and operator (instance data class)
+    //TODO: create CalculatorAPIHandler
+    //TODO: compare CalculatorHandler and CalculatorAPIHandler and refactor them
+    //TODO: clean up weather forecast everywhere
 }
