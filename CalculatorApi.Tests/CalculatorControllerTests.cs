@@ -1,7 +1,9 @@
 ﻿using Calculator;
 using CalculatorApi.Controllers;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace CalculatorApi.Tests
 {
@@ -12,9 +14,10 @@ namespace CalculatorApi.Tests
         {
             //Arrange
             var number = 1;
-            var contorllerApiHandlerMock = new Mock<ICalculatorApiHandler>();
+            var contorllerApiHandlerMock = new Mock<ICalculatorApiHandler>(MockBehavior.Strict);
             contorllerApiHandlerMock.Setup(cahm => cahm.Execute(It.IsAny<InputData>())).Returns(number);
-            var underTest = new CalculatorController(contorllerApiHandlerMock.Object);
+            var loggerMock = new Mock<ILogger<CalculatorController>>();
+            var underTest = new CalculatorController(contorllerApiHandlerMock.Object, loggerMock.Object);
             InputData inputData = new InputData(1, 1, OperationEnum.Add);
             
             //Act

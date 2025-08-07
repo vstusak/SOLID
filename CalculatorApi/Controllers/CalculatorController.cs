@@ -2,6 +2,7 @@ using Calculator;
 using Microsoft.AspNetCore.Mvc;
 namespace CalculatorApi.Controllers;
 
+//TODO: Run from Swagger - resolve exception!
 [ApiController]
 [Route("[controller]")]
 public class CalculatorController: ControllerBase
