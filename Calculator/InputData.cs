@@ -12,10 +12,10 @@ namespace Calculator
         {
             Value1 = value1;
             Value2 = value2;
-            Operator = operation;
+            Operation = operation;
         }
-        public OperationEnum Operator; 
-        public int Value1;
-        public int Value2;
+        public OperationEnum Operation { get; set; } 
+        public int Value1 { get; set; }
+        public int Value2 { get; set; }
     }
 }

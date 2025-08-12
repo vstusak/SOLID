@@ -19,7 +19,7 @@ namespace Calculator
         public double Execute(InputData inputData)
         {
             double result;
-            switch (inputData.Operator)
+            switch (inputData.Operation)
             {
                 case OperationEnum.Undefined:
                     throw new InvalidOperationException();
