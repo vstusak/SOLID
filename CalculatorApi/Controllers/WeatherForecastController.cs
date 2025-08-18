@@ -36,9 +36,9 @@ namespace CalculatorApi.Controllers
     }
 
     //TODO: use TDD where is possible
-    //TODO: create data class with values and operator
-    //TODO: create POST - send value1, value2 and operator (instance data class)
-    //TODO: create CalculatorAPIHandler
+    //TODO: CalculatorCore.ProcessInput not tested (logic currently  in CalculatorHandlerTests)
+    //TODO: fix CalculatorHandlerTests (same as CalculatorApiHandlerTests)
     //TODO: compare CalculatorHandler and CalculatorAPIHandler and refactor them
     //TODO: clean up weather forecast everywhere
+    //TODO: refactor to use description to enum. (use operator)
 }
