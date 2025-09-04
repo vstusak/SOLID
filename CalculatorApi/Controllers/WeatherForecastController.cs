@@ -37,8 +37,6 @@ namespace CalculatorApi.Controllers
 
     //TODO: use TDD where is possible
     //TODO: CalculatorCore.ProcessInput not tested (logic currently  in CalculatorHandlerTests)
-    //TODO: fix CalculatorHandlerTests (same as CalculatorApiHandlerTests)
-    //TODO: compare CalculatorHandler and CalculatorAPIHandler and refactor them
     //TODO: clean up weather forecast everywhere
     //TODO: refactor to use description to enum. (use operator)
 }

@@ -16,7 +16,7 @@ namespace Calculator.Tests
         public void Execute_InputData_ExpectedResult(double expectedResult)
         {
             //Arrange
-            var calculatorCoreMock = new Mock<ICalculatorCore>();
+            var calculatorCoreMock = new Mock<ICalculatorCore>(MockBehavior.Strict);
             
             calculatorCoreMock.Setup(ccm => ccm.ProcessInput(It.IsAny<InputData>())).Returns(expectedResult);
             
