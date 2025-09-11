@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
-    public class CalculatorHandler
+    /// <summary>
+    /// Facilitates interaction with console.
+    /// Provides - reading from and writing to.
+    /// (used to have a switch that called specific operation from CalculatorCore)
+    /// now the input is read from console and passed as an object to CalculatorCOre
+    /// </summary>
+    public class CalculatorConsoleHandler
     {
         private readonly IConsoleDataReader _reader;
         private readonly IConsoleDataWriter _writer;
         private readonly ICalculatorCore _calculatorCore;
 
-        public CalculatorHandler(IConsoleDataReader reader, IConsoleDataWriter writer, ICalculatorCore calculatorCore)
+        public CalculatorConsoleHandler(IConsoleDataReader reader, IConsoleDataWriter writer, ICalculatorCore calculatorCore)
         {
             _reader = reader;
             _writer = writer;

@@ -34,7 +34,7 @@ namespace Calculator.Tests
             var calculatorCoreMock = new Mock<ICalculatorCore>(MockBehavior.Strict);
             calculatorCoreMock.Setup(ccm => ccm.ProcessInput(It.IsAny<InputData>())).Returns(expectedResult);
 
-            var underTest = new CalculatorHandler(readerMock.Object, writerMock.Object, calculatorCoreMock.Object);
+            var underTest = new CalculatorConsoleHandler(readerMock.Object, writerMock.Object, calculatorCoreMock.Object);
 
             //Act
             var result = underTest.Execute();

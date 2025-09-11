@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
+    /// <summary>
+    /// Core provides core calculator functionality => operations (add, sub, mult, div).
+    /// Used to have only methods for operations (add, sub..) that were called directly by handlers.
+    /// Now contains switch in "ProcessInput" method, that is called by both Handlers.
+    /// </summary>
     public class CalculatorCore : ICalculatorCore
     {
         public double Add(int value1, int value2)
@@ -20,7 +25,7 @@ namespace Calculator
 
         public double Mult(int value1, int value2)
         {
-          return   value1 * value2;
+            return value1 * value2;
         }
 
         public double Div(double value1, double value2)

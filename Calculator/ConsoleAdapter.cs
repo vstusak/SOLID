@@ -2,6 +2,11 @@
 
 namespace Calculator
 {
+    /// <summary>
+    /// Created to be able to mock console input - output data.
+    /// Because the ConsoleDataReader and ConsoleDataWriter were public static
+    /// Thus were not possible to use in tests.
+    /// </summary>
     public class ConsoleAdapter : IConsoleAdapter
     {
         public string ReadLine()
