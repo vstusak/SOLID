@@ -43,7 +43,6 @@ namespace Calculator.Tests
             Assert.That(result, Is.EqualTo(value1*value2));
         }
         
-        //TODO: Chceme funkcni kalkulacku. Mame jen jednu tridu se zakladnimi operacemi
         [TestCase(1, 1)]
         public void Division_InputData_DataDivided(double value1, double value2)
         {
@@ -71,7 +70,6 @@ namespace Calculator.Tests
             var ex = Assert.Throws(typeof(DivideByZeroException), () => underTest.Div(value1, zero));
             Assert.That(ex.Message, Is.EqualTo($"You are trying divide {value1} by 0."));
         }
-        //TODO - hide implementation of operations and test them.
 
         [TestCase(1, 2, OperationEnum.Add, 3)]
         [TestCase(1, 2, OperationEnum.Div, 0.5)]

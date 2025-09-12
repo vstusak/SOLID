@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+
+[assembly: InternalsVisibleTo("Calculator.Tests")]
 
 namespace Calculator
 {
@@ -11,24 +14,25 @@ namespace Calculator
     /// Used to have only methods for operations (add, sub..) that were called directly by handlers.
     /// Now contains switch in "ProcessInput" method, that is called by both Handlers.
     /// </summary>
+
     public class CalculatorCore : ICalculatorCore
     {
-        public double Add(int value1, int value2)
+        internal double Add(int value1, int value2)
         {
             return value1 + value2;
         }
 
-        public double Sub(int value1, int value2)
+        internal double Sub(int value1, int value2)
         {
             return value1 - value2;
         }
 
-        public double Mult(int value1, int value2)
+        internal double Mult(int value1, int value2)
         {
             return value1 * value2;
         }
 
-        public double Div(double value1, double value2)
+        internal double Div(double value1, double value2)
         {
             if (value2 == 0)
             {
@@ -67,10 +71,14 @@ namespace Calculator
     }
     public interface ICalculatorCore
     {
-        double Add(int value1, int value2);
-        double Sub(int value1, int value2);
-        double Mult(int value1, int value2);
-        double Div(double value1, double value2);
+     //commented out because of change to private
+        //double Add(int value1, int value2);
+        //double Sub(int value1, int value2);
+        //double Mult(int value1, int value2);
+        //double Div(double value1, double value2);
         double ProcessInput(InputData inputData);
     }
+    //TODO: use TDD where is possible
+    //TODO: clean up weather forecast everywhere
+    //TODO: refactor to use description to enum. (use operator)
 }

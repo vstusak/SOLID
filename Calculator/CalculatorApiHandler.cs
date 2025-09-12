@@ -27,6 +27,5 @@ namespace Calculator
             var result = _calculatorCore.ProcessInput(inputData);
             return result;
         }
-
     }
 }
