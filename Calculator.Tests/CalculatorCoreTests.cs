@@ -71,5 +71,22 @@ namespace Calculator.Tests
             var ex = Assert.Throws(typeof(DivideByZeroException), () => underTest.Div(value1, zero));
             Assert.That(ex.Message, Is.EqualTo($"You are trying divide {value1} by 0."));
         }
+        //TODO - hide implementation of operations and test them.
+
+        [TestCase(1, 2, OperationEnum.Add, 3)]
+        [TestCase(1, 2, OperationEnum.Div, 0.5)]
+        [TestCase(3, 2, OperationEnum.Mult, 6)]
+        [TestCase(1, 2, OperationEnum.Sub, -1)]
+        public void ProcessInput_InputData_DataProcessed(int value1, int value2, OperationEnum op, double expectedResult)
+        {
+            var inputData = new InputData(value1, value2, op);
+
+            //Arrange
+            var underTest = new CalculatorCore();
+            //Act
+            var result = underTest.ProcessInput(inputData);
+            //Assert
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
     }
 }
