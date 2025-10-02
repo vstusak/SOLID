@@ -79,6 +79,12 @@ namespace Calculator
         double ProcessInput(InputData inputData);
     }
     //TODO: use TDD where is possible
-    //TODO: clean up weather forecast everywhere
+    //TODO: Add asp net core web project (razor pages) and create UI and call API backend
+            //TODO: Add button for calculator in a layout
+            //TODO: Create razor page for calculator
+            //TODO: Create service to call API backend get calculator result
+    //TODO: Add asp net core web project (blazor pages) and create UI and call API backend
+    //TODO: Run all of 3 projects (API, RAZOR, BLAZOR) together and try it out
+    //TODO: Introduce microsoft aspire for project above
     //TODO: refactor to use description to enum. (use operator)
 }
