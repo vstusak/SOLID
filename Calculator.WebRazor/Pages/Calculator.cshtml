@@ -1,0 +1,13 @@
+﻿@page
+@model Calculator.WebRazor.Pages.CalculatorModel
+@{
+    ViewData["Title"] = "Calculator page";
+}
+<form method="post">
+    <input type="text" name="Value1" value="@Model.Hodnota1" />
+    <input type="submit" />
+</form>
+
+@* <form method="post" asp-page-handler="First">
+    <input type="submit"></input>
+</form> *@
