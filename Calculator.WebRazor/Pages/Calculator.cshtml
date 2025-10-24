@@ -5,8 +5,25 @@
 }
 <form method="post">
     <input type="text" name="Value1" value="@Model.Hodnota1" />
+    <br />
+    @* <input type="text" name="Operand" value="@Model.Operand" /> *@
+    
+    <label for="OperandDropdown"> Choose operand:</label>
+
+    <select name="Operand" id="OperandDropdown">
+        <option value="+">+</option>
+        <option value="-">−</option>
+        <option value="*">×</option>
+        <option value="/">÷</option>
+    </select>
+ 
+    <br />
+    <input type="text" name="Value2" value="@Model.Hodnota2" />
+    <br />
     <input type="submit" />
 </form>
+
+@Model.Result
 
 @* <form method="post" asp-page-handler="First">
     <input type="submit"></input>
