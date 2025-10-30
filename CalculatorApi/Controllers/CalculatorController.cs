@@ -23,7 +23,7 @@ public class CalculatorController: ControllerBase
     }
 
     [HttpPost]
-    public double Post(InputData inputData)
+    public double Post([FromBody]InputData inputData)
     {
         var result = _calculatorApiHandler.Execute(inputData);
         return result;

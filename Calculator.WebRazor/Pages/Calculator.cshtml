@@ -6,15 +6,14 @@
 <form method="post">
     <input type="text" name="Value1" value="@Model.Hodnota1" />
     <br />
-    @* <input type="text" name="Operand" value="@Model.Operand" /> *@
     
     <label for="OperandDropdown"> Choose operand:</label>
-
+    
     <select name="Operand" id="OperandDropdown">
-        <option value="+">+</option>
-        <option value="-">−</option>
-        <option value="*">×</option>
-        <option value="/">÷</option>
+        <option value="Add" selected="@(Model.Operand == OperationEnum.Add ? "selected" : null)">+</option>
+        <option value="Sub" selected="@(Model.Operand == OperationEnum.Sub ? "selected" : null)">−</option>
+        <option value="Mult" selected="@(Model.Operand == OperationEnum.Mult ? "selected" : null)">×</option>
+        <option value="Div" selected="@(Model.Operand == OperationEnum.Div ? "selected" : null)">÷</option>
     </select>
  
     <br />
