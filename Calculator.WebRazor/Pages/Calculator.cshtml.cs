@@ -23,11 +23,11 @@ namespace Calculator.WebRazor.Pages
             _logger.LogWarning("We are in Calculator page.");
         }
 
-        //public void OnPostFirst()
-        //{
-        //    _logger.LogWarning("We are in method First post.");
-        //}
-        public void OnPost(InputData data)
+        public void OnPostFirst()
+        {
+            _logger.LogWarning("We are in method First post.");
+        }
+        public async Task OnPostAsync(InputData data)
         {
             _logger.LogWarning("We are in method post.");
             _logger.LogInformation(
@@ -36,19 +36,20 @@ namespace Calculator.WebRazor.Pages
             Hodnota2 = (data.Value2);
             Operand = data.Operation;
 
-            switch (Operand) //TODO replace this local POC with an API call. 
-            {
-                case OperationEnum.Add:
-                    Result = (Hodnota1 + Hodnota2).ToString();
-                    break;
-                default:
-                    Result = ($"[{nameof(Operand)}] [{Operand}] is not yet supported.");
-                    break;
-            }
+            var client = new HttpClient();
+            //Port you can find in CalculatorApi project->Properties->launchSettings-> 'http' part
+            client.BaseAddress = new Uri("http://localhost:5062");
+            var response = await client.PostAsync();
+
+            //switch (Operand) //TODO replace this local POC with an API call. 
+            //{
+            //    case OperationEnum.Add:
+            //        Result = (Hodnota1 + Hodnota2).ToString();
+            //        break;
+            //    default:
+            //        Result = ($"[{nameof(Operand)}] [{Operand}] is not yet supported.");
+            //        break;
+            //}
         }
     }
-    //Create Calculator.Contracts
-    //Move InputData to it
-    //Clean related classes used (Stupid)InputData
-
 }
