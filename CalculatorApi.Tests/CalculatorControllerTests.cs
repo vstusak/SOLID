@@ -1,4 +1,5 @@
 ﻿using Calculator;
+using Calculator.Contracts;
 using CalculatorApi.Controllers;
 using Microsoft.Extensions.Logging;
 using Moq;

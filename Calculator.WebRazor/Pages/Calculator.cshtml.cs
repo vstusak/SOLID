@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel;
+using Calculator.Contracts;
 
 namespace Calculator.WebRazor.Pages
 {
@@ -26,14 +27,14 @@ namespace Calculator.WebRazor.Pages
         //{
         //    _logger.LogWarning("We are in method First post.");
         //}
-        public void OnPost(StupidInputData data)
+        public void OnPost(InputData data)
         {
             _logger.LogWarning("We are in method post.");
             _logger.LogInformation(
-                $"[{nameof(data.Value1)}] is [{data.Value1}], [{nameof(data.Operand)}] is [{data.Operand}], [{nameof(data.Value2)}] is [{data.Value2}]");
+                $"[{nameof(data.Value1)}] is [{data.Value1}], [{nameof(data.Operation)}] is [{data.Operation}], [{nameof(data.Value2)}] is [{data.Value2}]");
             Hodnota1 = (data.Value1); //TODO create validations, handle errors
             Hodnota2 = (data.Value2);
-            Operand = data.Operand;
+            Operand = data.Operation;
 
             switch (Operand) //TODO replace this local POC with an API call. 
             {
@@ -46,21 +47,8 @@ namespace Calculator.WebRazor.Pages
             }
         }
     }
+    //Create Calculator.Contracts
+    //Move InputData to it
+    //Clean related classes used (Stupid)InputData
 
-    public class StupidInputData
-    {
-        public int Value1 { get; set; }
-        public int Value2 { get; set; }
-        public OperationEnum Operand { get; set; }
-
-    }
-
-    public enum OperationEnum
-    {
-        Undefined,
-        [Description("+")] Add,
-        [Description("-")] Sub,
-        [Description("*")] Mult,
-        [Description("/")] Div
-    }
 }

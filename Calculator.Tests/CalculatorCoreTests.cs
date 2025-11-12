@@ -1,4 +1,5 @@
 ﻿
+using Calculator.Contracts;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 

@@ -1,4 +1,6 @@
-﻿namespace Calculator;
+﻿using Calculator.Contracts;
+
+namespace Calculator;
 
 public interface ICalculatorApiHandler
 {
