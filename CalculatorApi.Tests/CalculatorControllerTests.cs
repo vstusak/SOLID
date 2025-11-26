@@ -3,6 +3,7 @@ using Calculator.Contracts;
 using CalculatorApi.Controllers;
 using Microsoft.Extensions.Logging;
 using Moq;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
@@ -19,7 +20,7 @@ namespace CalculatorApi.Tests
             controllerApiHandlerMock.Setup(cahm => cahm.Execute(It.IsAny<InputData>())).Returns(number);
             var loggerMock = new Mock<ILogger<CalculatorController>>();
             var underTest = new CalculatorController(controllerApiHandlerMock.Object, loggerMock.Object);
-            InputData inputData = new InputData(1, 1, OperationEnum.Add);
+            InputData inputData = new InputData { Value1 = 1, Value2 = 1, Operation = OperationEnum.Add };
             
             //Act
             var result = underTest.Post(inputData);

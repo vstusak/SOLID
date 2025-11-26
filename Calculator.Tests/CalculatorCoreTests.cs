@@ -78,7 +78,7 @@ namespace Calculator.Tests
         [TestCase(1, 2, OperationEnum.Sub, -1)]
         public void ProcessInput_InputData_DataProcessed(int value1, int value2, OperationEnum op, double expectedResult)
         {
-            var inputData = new InputData(value1, value2, op);
+            var inputData = new InputData{ Value1 = value1, Value2 = value2, Operation = op };
 
             //Arrange
             var underTest = new CalculatorCore();

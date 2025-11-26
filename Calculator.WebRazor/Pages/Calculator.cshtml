@@ -11,7 +11,7 @@
     
     <label for="OperandDropdown"> Choose operand:</label>
     
-    <select name="Operand" id="OperandDropdown">
+    <select name="Operation" id="OperandDropdown">
         <option value="Add" selected="@(Model.Operand == OperationEnum.Add ? "selected" : null)">+</option>
         <option value="Sub" selected="@(Model.Operand == OperationEnum.Sub ? "selected" : null)">−</option>
         <option value="Mult" selected="@(Model.Operand == OperationEnum.Mult ? "selected" : null)">×</option>
@@ -26,6 +26,6 @@
 
 @Model.Result
 
-<form method="post" asp-page-handler="First">
+@* <form method="post" asp-page-handler="First">
     <input type="submit"></input>
-</form>
+</form> *@

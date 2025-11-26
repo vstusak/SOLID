@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel;
+using System.Globalization;
 using Calculator.Contracts;
 
 namespace Calculator.WebRazor.Pages
@@ -23,10 +24,10 @@ namespace Calculator.WebRazor.Pages
             _logger.LogWarning("We are in Calculator page.");
         }
 
-        public void OnPostFirst()
-        {
-            _logger.LogWarning("We are in method First post.");
-        }
+        //public void OnPostFirst()
+        //{
+        //    _logger.LogWarning("We are in method First post.");
+        //}
         public async Task OnPostAsync(InputData data)
         {
             _logger.LogWarning("We are in method post.");
@@ -39,8 +40,9 @@ namespace Calculator.WebRazor.Pages
             var client = new HttpClient();
             //Port you can find in CalculatorApi project->Properties->launchSettings-> 'http' part
             client.BaseAddress = new Uri("http://localhost:5062");
-            var response = await client.PostAsync();
-
+            var response = await client.PostAsJsonAsync<InputData>("/Calculator",data);
+            var resultResponse = await response.Content.ReadFromJsonAsync<double>();
+            Result = resultResponse.ToString(CultureInfo.InvariantCulture);
             //switch (Operand) //TODO replace this local POC with an API call. 
             //{
             //    case OperationEnum.Add:

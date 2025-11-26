@@ -1,11 +1,12 @@
-﻿using Moq;
+﻿using Calculator.Contracts;
+using Moq;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Calculator.Contracts;
 
 namespace Calculator.Tests
 {
@@ -24,7 +25,7 @@ namespace Calculator.Tests
             var underTest = new CalculatorApiHandler(calculatorCoreMock.Object);
 
             //Act
-            var inputData = new InputData(1, 0, OperationEnum.Add);
+            var inputData = new InputData { Value1 = 1, Value2 = 0, Operation = OperationEnum.Add };
             var result = underTest.Execute(inputData);
 
             //Assert

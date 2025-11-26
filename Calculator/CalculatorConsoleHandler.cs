@@ -37,7 +37,7 @@ namespace Calculator
             _writer.WriteMessage("Fill the second value in:");
             var value2 = _reader.ReadValue();
             
-            var inputData = new InputData(value1, value2, operatorIdentifier);
+            var inputData = new InputData{Value1 = value1, Value2 = value2, Operation = operatorIdentifier};
             
             var result = _calculatorCore.ProcessInput(inputData);
             _writer.WriteValue(result);
