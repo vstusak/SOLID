@@ -43,15 +43,8 @@ namespace Calculator.WebRazor.Pages
             var response = await client.PostAsJsonAsync<InputData>("/Calculator",data);
             var resultResponse = await response.Content.ReadFromJsonAsync<double>();
             Result = resultResponse.ToString(CultureInfo.InvariantCulture);
-            //switch (Operand) //TODO replace this local POC with an API call. 
-            //{
-            //    case OperationEnum.Add:
-            //        Result = (Hodnota1 + Hodnota2).ToString();
-            //        break;
-            //    default:
-            //        Result = ($"[{nameof(Operand)}] [{Operand}] is not yet supported.");
-            //        break;
-            //}
+            //TODO exception(error response)
+            //TODO HTTP client use dependency injection
         }
     }
 }
