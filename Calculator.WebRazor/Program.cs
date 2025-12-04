@@ -3,6 +3,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+// Calling add http client to enable IHttpClientFactory usage in the application (to the container).
+//builder.Services.AddHttpClient();
+
+//Adding own httpClient with name
+//builder.Services.AddHttpClient("CalculatorAPI", httpClient =>
+//{
+//    httpClient.BaseAddress = new Uri("http://localhost:5062");
+//});
+
+//TODO: Adding own implementation of httpClient
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
