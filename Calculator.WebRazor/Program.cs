@@ -12,6 +12,11 @@ builder.Services.AddRazorPages();
 //    httpClient.BaseAddress = new Uri("http://localhost:5062");
 //});
 
+//builder.Services.AddHttpClient("WeatherForecastApi", httpClient =>
+//{
+//    httpClient.BaseAddress = new Uri("http://www.weatherforecast.com");
+//});
+
 //TODO: Adding own implementation of httpClient
 
 
