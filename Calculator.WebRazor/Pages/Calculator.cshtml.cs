@@ -9,16 +9,17 @@ namespace Calculator.WebRazor.Pages
     public class CalculatorModel : PageModel
     {
         private readonly ILogger<CalculatorModel> _logger;
-        private readonly HttpClient _client;
+        private readonly LocalhostCalculatorApiClient _client;
         public int Hodnota1 { get; set; }
         public int Hodnota2 { get; set; }
         public OperationEnum Operand { get; set; }
         public string Result { get; set; }
 
-        public CalculatorModel(ILogger<CalculatorModel> logger, IHttpClientFactory httpClientFactory)
+        public CalculatorModel(ILogger<CalculatorModel> logger, LocalhostCalculatorApiClient localhostCalculatorApiHttpClient)
         {
             _logger = logger;
-            _client = httpClientFactory.CreateClient("CalculatorAPI");
+            //_client = httpClientFactory.CreateClient("CalculatorAPI");
+            _client = localhostCalculatorApiHttpClient;
         }
 
         public void OnGet()
@@ -44,9 +45,8 @@ namespace Calculator.WebRazor.Pages
             //Port you can find in CalculatorApi project->Properties->launchSettings-> 'http' part
             //client.BaseAddress = new Uri("http://localhost:5062");
 
-            var response = await _client.PostAsJsonAsync<InputData>("/Calculator",data);
-            var resultResponse = await response.Content.ReadFromJsonAsync<double>();
-            Result = resultResponse.ToString(CultureInfo.InvariantCulture);
+            var response = await _client.GetCalculationResultAsync(data);
+            Result = response.ToString(CultureInfo.InvariantCulture);
            
             //TODO exception(error response)
         }

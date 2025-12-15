@@ -1,3 +1,5 @@
+using Calculator.WebRazor;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,7 +20,7 @@ builder.Services.AddRazorPages();
 //});
 
 //TODO: Adding own implementation of httpClient
-
+builder.Services.AddHttpClient<LocalhostCalculatorApiClient>();
 
 var app = builder.Build();
 
