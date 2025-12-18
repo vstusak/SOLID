@@ -19,10 +19,10 @@ builder.Services.AddRazorPages();
 //    httpClient.BaseAddress = new Uri("http://www.weatherforecast.com");
 //});
 
-//TODO: Adding own implementation of httpClient
 builder.Services.AddHttpClient<LocalhostCalculatorApiClient>();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

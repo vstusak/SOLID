@@ -14,11 +14,16 @@ namespace Calculator.WebRazor
             _httpClient.BaseAddress = new Uri("http://localhost:5062");
         }
 
-      public async Task<double> GetCalculationResultAsync(InputData inputData)
-      {
-          var response = await _httpClient.PostAsJsonAsync<InputData>("/Calculator", inputData);
-          return await response.Content.ReadFromJsonAsync<double>();
-      }
+        public async Task<double> GetCalculationResultAsync(InputData inputData)
+        {
+            var response = await _httpClient.PostAsJsonAsync<InputData>("/Calculator", inputData);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception(await response.Content.ReadAsStringAsync());
+            }
+            return await response.Content.ReadFromJsonAsync<double>();
+        }
     }
 }
 //TODO - First option NOT to do: - we can reveal http client directly for usage 
