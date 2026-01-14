@@ -26,5 +26,5 @@ namespace Calculator.WebRazor
         }
     }
 }
-//TODO - First option NOT to do: - we can reveal http client directly for usage 
-//TODO - Implement POST method (follow MS example - https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-10.0)
+//DONE - First option NOT to do: - we can reveal http client directly for usage 
+//DONE - Implement POST method (follow MS example - https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-10.0)

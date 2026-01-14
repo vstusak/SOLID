@@ -26,8 +26,7 @@ public class CalculatorController: ControllerBase
     [HttpPost]
     public double Post([FromBody]InputData inputData)
     {
-        //var result = _calculatorApiHandler.Execute(inputData);
-        //return result;
-        throw new Exception();
+        var result = _calculatorApiHandler.Execute(inputData);
+        return result;
     }
 }
