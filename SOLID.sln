@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.10.35201.131
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SOLID", "SOLID\SOLID.csproj", "{FC9E95F2-A517-4283-BBEE-D65AD0F5F596}"
 EndProject
@@ -36,6 +36,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.WebRazor", "Calculator.WebRazor\Calculator.WebRazor.csproj", "{43126C73-1DF4-47B5-9BDC-87D64FED9B6B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Contracts", "Calculator.Contracts\Calculator.Contracts.csproj", "{DB39CDFE-DD07-49AC-A542-FB91F9C698C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.BlazorServer", "Calculator.BlazorServer\Calculator.BlazorServer.csproj", "{B8DB279B-78FA-4D38-A4E2-556183CC96CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +109,10 @@ Global
 		{DB39CDFE-DD07-49AC-A542-FB91F9C698C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB39CDFE-DD07-49AC-A542-FB91F9C698C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB39CDFE-DD07-49AC-A542-FB91F9C698C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
