@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.1.11312.151 d18.0
+VisualStudioVersion = 18.1.11312.151
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SOLID", "SOLID\SOLID.csproj", "{FC9E95F2-A517-4283-BBEE-D65AD0F5F596}"
 EndProject
@@ -38,6 +38,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Contracts", "Calculator.Contracts\Calculator.Contracts.csproj", "{DB39CDFE-DD07-49AC-A542-FB91F9C698C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.BlazorServer", "Calculator.BlazorServer\Calculator.BlazorServer.csproj", "{B8DB279B-78FA-4D38-A4E2-556183CC96CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.BlazorWebAssembly", "Calculator.BlazorWebAssembly\Calculator.BlazorWebAssembly\Calculator.BlazorWebAssembly.csproj", "{459D4A03-4FF1-4D81-8B2F-F18CCAF6889F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.BlazorWebAssembly.Client", "Calculator.BlazorWebAssembly\Calculator.BlazorWebAssembly.Client\Calculator.BlazorWebAssembly.Client.csproj", "{5B548C47-0193-4449-9727-DB0D1854B9D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,6 +117,14 @@ Global
 		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{459D4A03-4FF1-4D81-8B2F-F18CCAF6889F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{459D4A03-4FF1-4D81-8B2F-F18CCAF6889F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{459D4A03-4FF1-4D81-8B2F-F18CCAF6889F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{459D4A03-4FF1-4D81-8B2F-F18CCAF6889F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B548C47-0193-4449-9727-DB0D1854B9D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B548C47-0193-4449-9727-DB0D1854B9D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B548C47-0193-4449-9727-DB0D1854B9D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B548C47-0193-4449-9727-DB0D1854B9D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
