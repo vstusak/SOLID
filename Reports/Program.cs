@@ -11,7 +11,7 @@
 //      1. b) DataReader class: Načíst stav skladu db
 //      1. c) TimeProvider class: Nastavit (získat) aktuální datum a čas //timeProvider
 // 2. Printer - vypíše report na consoli
-// 3. Třída pro ukládání dat na disk - FileReportWritter
+// 3. Třída pro ukládání dat na disk - FileReportWriter
 // 4. Test coverage
 // 5. Refactoring -> move everything to Main
 // 6. Připojit DataReader na reálnou DB
