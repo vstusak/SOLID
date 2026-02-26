@@ -1,6 +1,6 @@
 ﻿using Calculator;
 using Calculator.Contracts;
-using CalculatorApi.Controllers;
+using Calculator.WebApi.Controllers;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Newtonsoft.Json.Linq;

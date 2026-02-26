@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CalculatorApi\CalculatorApi.csproj" />
-    <ProjectReference Include="..\Calculator\Calculator.csproj" />
+    <ProjectReference Include="..\CalculatorApi\Calculator.WebApi.csproj" />
+    <ProjectReference Include="..\Calculator\Calculator.Core.csproj" />
   </ItemGroup>
 
 </Project>

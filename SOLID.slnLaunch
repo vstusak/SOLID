@@ -3,11 +3,11 @@
     "Name": "CalculatorWebRazorPlusApi",
     "Projects": [
       {
-        "Path": "CalculatorApi\\CalculatorApi.csproj",
+        "Path": "CalculatorApi\\Calculator.WebApi.csproj",
         "Action": "Start"
       },
       {
-        "Path": "Calculator.WebRazor\\Calculator.WebRazor.csproj",
+        "Path": "Calculator.WebRazor\\Calculator.WebApp.Razor.csproj",
         "Action": "Start"
       }
     ]

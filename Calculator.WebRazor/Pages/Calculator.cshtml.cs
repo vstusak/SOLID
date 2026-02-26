@@ -1,10 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel;
 using System.Globalization;
 using Calculator.Contracts;
+using Calculator.WebApi.Client;
 
-namespace Calculator.WebRazor.Pages
+namespace Calculator.WebApp.Razor.Pages
 {
     public class CalculatorModel : PageModel
     {

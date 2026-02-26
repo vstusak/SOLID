@@ -25,23 +25,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reports", "Reports\Reports.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report.Tests", "Report.Tests\Report.Tests.csproj", "{CAF00C45-2A1B-4328-BB2C-F9447AFACC70}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator\Calculator.csproj", "{E1F4F307-DC1C-4796-95FE-398A27A0C5BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.Core", "Calculator\Calculator.Core.csproj", "{E1F4F307-DC1C-4796-95FE-398A27A0C5BB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.Tests", "Calculator.Tests\Calculator.Tests.csproj", "{82C8B017-2642-4DE6-B4F8-34B51E5AD8F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorApi", "CalculatorApi\CalculatorApi.csproj", "{F05796BB-0BE8-4147-AC0B-A1566B0061C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.WebApi", "CalculatorApi\Calculator.WebApi.csproj", "{F05796BB-0BE8-4147-AC0B-A1566B0061C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorApi.Tests", "CalculatorApi.Tests\CalculatorApi.Tests.csproj", "{571D4B3D-E298-4557-BC47-2276F4C0194C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.WebRazor", "Calculator.WebRazor\Calculator.WebRazor.csproj", "{43126C73-1DF4-47B5-9BDC-87D64FED9B6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.WebApp.Razor", "Calculator.WebRazor\Calculator.WebApp.Razor.csproj", "{43126C73-1DF4-47B5-9BDC-87D64FED9B6B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Contracts", "Calculator.Contracts\Calculator.Contracts.csproj", "{DB39CDFE-DD07-49AC-A542-FB91F9C698C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.BlazorServer", "Calculator.BlazorServer\Calculator.BlazorServer.csproj", "{B8DB279B-78FA-4D38-A4E2-556183CC96CF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.BlazorWebAssembly", "Calculator.BlazorWebAssembly\Calculator.BlazorWebAssembly\Calculator.BlazorWebAssembly.csproj", "{459D4A03-4FF1-4D81-8B2F-F18CCAF6889F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.BlazorWebAssembly.Client", "Calculator.BlazorWebAssembly\Calculator.BlazorWebAssembly.Client\Calculator.BlazorWebAssembly.Client.csproj", "{5B548C47-0193-4449-9727-DB0D1854B9D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.WebApi.Client", "Calculator.WebApi.Client\Calculator.WebApi.Client.csproj", "{7479A5C8-F2DB-4AEB-8F9E-DF71DB57A34C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,18 +109,10 @@ Global
 		{DB39CDFE-DD07-49AC-A542-FB91F9C698C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB39CDFE-DD07-49AC-A542-FB91F9C698C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB39CDFE-DD07-49AC-A542-FB91F9C698C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8DB279B-78FA-4D38-A4E2-556183CC96CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{459D4A03-4FF1-4D81-8B2F-F18CCAF6889F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{459D4A03-4FF1-4D81-8B2F-F18CCAF6889F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{459D4A03-4FF1-4D81-8B2F-F18CCAF6889F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{459D4A03-4FF1-4D81-8B2F-F18CCAF6889F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B548C47-0193-4449-9727-DB0D1854B9D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B548C47-0193-4449-9727-DB0D1854B9D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B548C47-0193-4449-9727-DB0D1854B9D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B548C47-0193-4449-9727-DB0D1854B9D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7479A5C8-F2DB-4AEB-8F9E-DF71DB57A34C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7479A5C8-F2DB-4AEB-8F9E-DF71DB57A34C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7479A5C8-F2DB-4AEB-8F9E-DF71DB57A34C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7479A5C8-F2DB-4AEB-8F9E-DF71DB57A34C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

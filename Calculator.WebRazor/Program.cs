@@ -1,4 +1,4 @@
-﻿using Calculator.WebRazor;
+﻿using Calculator.WebApi.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,10 +19,7 @@ builder.Services.AddRazorPages();
 //    httpClient.BaseAddress = new Uri("http://www.weatherforecast.com");
 //});
 
-// TODO clean up project namings xxx.yyy (e.g. CalculatorApi -> Calculator.WebApi)
-//TODO extract API client to new project related to API server project (Calculator.WebApi.Client)
 
-//TODO why it should not be in web application project
 //TODO in new project create extension method for using here instead of following row - example in OCTOCAT
 builder.Services.AddHttpClient<LocalhostCalculatorApiClient>();
 

@@ -1,7 +1,7 @@
 using Calculator;
 using Calculator.Contracts;
 using Microsoft.AspNetCore.Mvc;
-namespace CalculatorApi.Controllers;
+namespace Calculator.WebApi.Controllers;
 
 //TODO: Run from Swagger - resolve exception!
 /// <summary>

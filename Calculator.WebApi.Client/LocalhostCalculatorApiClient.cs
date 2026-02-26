@@ -1,7 +1,7 @@
-﻿using Calculator.Contracts;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Net.Http.Json;
+using Calculator.Contracts;
 
-namespace Calculator.WebRazor
+namespace Calculator.WebApi.Client
 {
     public class LocalhostCalculatorApiClient
     {
