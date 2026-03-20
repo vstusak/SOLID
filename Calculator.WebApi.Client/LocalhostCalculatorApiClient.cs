@@ -3,6 +3,8 @@ using Calculator.Contracts;
 
 namespace Calculator.WebApi.Client
 {
+    //Providing the client for calling API server (Calculator.WebApi) - we can use it in any project (e.g. in Razor Pages project) to call API server and get the result of calculation.
+    //The goal was to separate implementation of web API from usages on web pages.
     public class LocalhostCalculatorApiClient
     {
         private readonly HttpClient _httpClient;

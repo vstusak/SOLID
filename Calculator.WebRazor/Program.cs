@@ -22,6 +22,9 @@ builder.Services.AddRazorPages();
 
 //TODO in new project create extension method for using here instead of following row - example in OCTOCAT
 builder.Services.AddHttpClient<LocalhostCalculatorApiClient>();
+builder.Services.AddHttpClient<LocalhostCalculatorApiClient>();
+
+builder.Services.AddCalculatorApiClients();
 
 var app = builder.Build();
 
