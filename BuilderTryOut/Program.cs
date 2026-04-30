@@ -11,11 +11,11 @@ switch (choice)
 {
     case "1":
         Console.WriteLine("You chose Simple Report.");
-        reportDtoResult = new ReportBuilder().AddDate().Build();
+        reportDtoResult = new ReportBuilder().AddCurrentDate().Build();
         break;
     case "2":
         Console.WriteLine("You chose Full Report.");
-        reportDtoResult = new ReportBuilder().AddDate().AddGreeting().Build();
+        reportDtoResult = new ReportBuilder().AddCurrentDate().UpdateGreeting().Build();
         break;
     case "3":
         Console.WriteLine("You chose Pretty Report.");
@@ -41,20 +41,38 @@ public class ReportDto
 
 public class ReportBuilder
 {
-    private readonly ReportDto _reportDto = new ReportDto();
-    public ReportBuilder AddDate()
+    private string _date;
+    private string _greeting = "Hello!";
+    private string _address;
+    private string _valediction;
+    private string _signature;
+    private string _stamp;
+
+    public ReportBuilder AddCurrentDate()
     {
-        _reportDto.Header = _reportDto.Header + DateTime.Now.ToString();
+        _date = DateTime.Now.ToString();
         return this;
     }
-    public ReportBuilder AddGreeting()
+    public ReportBuilder UpdateGreeting(string greeting ) //optional parameter with default value
     {
-        _reportDto.Header = _reportDto.Header + " - Hello!";
+        _greeting = greeting;
+        return this;
+    }
+    public ReportBuilder AddAddress(string address = "Brno") //optional parameter with default value
+    {
+        _address = address;
         return this;
     }
 
+    //TODO: Finish all needed and test it + find bugs in the code and fix them
+
     public ReportDto Build()
     {
-        return _reportDto;
+        return new ReportDto
+        {
+            Header = _date + _greeting + _address,
+            Body = "",
+            Footer = _valediction + _signature + _stamp
+        };
     }
 }
