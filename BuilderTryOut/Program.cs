@@ -29,6 +29,12 @@ switch (choice)
         break;
     case "3":
         Console.WriteLine("You chose Pretty Report.");
+        reportDtoResult = new PrettyReportBuilder()
+            .AddCurrentDate()
+            .UpdateGreeting()
+            .AddUnHealthyChildren(unHealthyChildren)
+            .AddHealthyChildren(healthyChildren)
+            .Build();
         break;
     default:
         Console.WriteLine("Invalid choice.");
@@ -46,6 +52,15 @@ public class ReportDto
     public override  string ToString()
     {
         return $"{Header}\n{Body}\n{Footer}";
+    }
+}
+
+public class PrettyReportBuilder : ReportBuilder
+{
+    public PrettyReportBuilder()
+    {
+        Console.BackgroundColor = ConsoleColor.Cyan;
+        Console.ForegroundColor = ConsoleColor.Magenta;
     }
 }
 
@@ -85,10 +100,6 @@ public class ReportBuilder
         _unHealthyChildrenList = unHealthyChildrenList;
         return this;
     }
-
-
-    //TODO: Finish all needed and test it + find bugs in the code and fix them
-
     public ReportDto Build()
     {
         return new ReportDto

@@ -20,3 +20,22 @@ namespace Calculator.WebApi.Client
 //DONE: we finished with factory, show example and refactor for builder
 //DONE: we should finish with something like this: rowsBuilder.WithUserRows().WithProjectRows().WithTaskRows().GetRows()
 //great example suggestion - factory GetRows and get specific rows with various types
+
+namespace Testing
+{
+    public class Row()
+    {
+        public int Id;
+        public string Name;
+        public string Type;
+        public DateTime CreatedAt;
+    }
+    public class RowsCollection:List<Row>
+    {
+        public List<Row> GetUserRows()
+        {
+            return this.Where(r=>r.Type == "User").ToList() as RowsCollection;
+        }
+
+    }
+}
