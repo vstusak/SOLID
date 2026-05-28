@@ -35,7 +35,8 @@ namespace Calculator.WebApp.Razor.Pages
             _logger.LogWarning("We are in method post.");
             _logger.LogInformation(
                 $"[{nameof(data.Value1)}] is [{data.Value1}], [{nameof(data.Operation)}] is [{data.Operation}], [{nameof(data.Value2)}] is [{data.Value2}]");
-            Hodnota1 = (data.Value1); //TODO create validations, handle errors
+            //TODO create validations, handle errors
+            Hodnota1 = (data.Value1); 
             Hodnota2 = (data.Value2);
             Operand = data.Operation;
 
