@@ -25,6 +25,7 @@ builder.Services.AddRazorPages();
 //builder.Services.AddHttpClient<LocalhostCalculatorApiClient>();
 
 builder.Services.AddCalculatorApiClients();
+builder.Services.AddValidation();
 
 var app = builder.Build();
 
