@@ -1,8 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Globalization;
 using Calculator.Contracts;
 using Calculator.WebApi.Client;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Globalization;
 
 namespace Calculator.WebApp.Razor.Pages
 {
@@ -11,6 +11,7 @@ namespace Calculator.WebApp.Razor.Pages
         private readonly ILogger<CalculatorModel> _logger;
         private readonly LocalhostCalculatorApiClient _client;
 
+        [BindProperty]
         public InputData InputData { get; set; } = new InputData();
         public string Result { get; set; }
 
@@ -30,28 +31,34 @@ namespace Calculator.WebApp.Razor.Pages
         //{
         //    _logger.LogWarning("We are in method First post.");
         //}
-        public async Task OnPostAsync(InputData data)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 _logger.LogWarning("Model state is not valid.");
-                return;
+                return Page();
+            }
+            if (InputData.Operation == OperationEnum.Div && InputData.Value2 <= 0)
+            {
+                _logger.LogWarning("Division by zero is not allowed.");
+                ModelState.AddModelError(string.Empty, "Division by zero is not allowed.");
+                return Page();
             }
             _logger.LogWarning("We are in method post.");
             _logger.LogInformation(
-                $"[{nameof(data.Value1)}] is [{data.Value1}], [{nameof(data.Operation)}] is [{data.Operation}], [{nameof(data.Value2)}] is [{data.Value2}]");
+                $"[{nameof(InputData.Value1)}] is [{InputData.Value1}], [{nameof(InputData.Operation)}] is [{InputData.Operation}], [{nameof(InputData.Value2)}] is [{InputData.Value2}]");
             //TODO create validations, handle errors
-            InputData = data;
 
             //var client = new HttpClient(); // remove this hard dependency
 
             //Port you can find in CalculatorApi project->Properties->launchSettings-> 'http' part
             //client.BaseAddress = new Uri("http://localhost:5062");
 
-            var response = await _client.GetCalculationResultAsync(data);
+            var response = await _client.GetCalculationResultAsync(InputData);
             Result = response.ToString(CultureInfo.InvariantCulture);
            
             //TODO exception(error response)
+            return Page();
         }
     }
 }
