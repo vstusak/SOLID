@@ -5,22 +5,29 @@
     ViewData["Title"] = "Calculator page";
 }
 <form method="post">
-    <input type="text" name="Value1" value="@Model.Hodnota1" />
-    <br />
-    
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <label asp-for="InputData.Value1"> Enter first value:</label>
+    <input asp-for="InputData.Value1" value="@Model.InputData.Value1"/>
+    <span asp-validation-for="InputData.Value1" class="text-danger"></span>
+    <br/>
+
     <label for="OperandDropdown"> Choose operand:</label>
-    
+
     <select name="Operation" id="OperandDropdown">
-        <option value="Add" selected="@(Model.Operand == OperationEnum.Add ? "selected" : null)">+</option>
-        <option value="Sub" selected="@(Model.Operand == OperationEnum.Sub ? "selected" : null)">−</option>
-        <option value="Mult" selected="@(Model.Operand == OperationEnum.Mult ? "selected" : null)">×</option>
-        <option value="Div" selected="@(Model.Operand == OperationEnum.Div ? "selected" : null)">÷</option>
+        <option value="Add" selected="@(Model.InputData.Operation == OperationEnum.Add ? "selected" : null)">+</option>
+        <option value="Sub" selected="@(Model.InputData.Operation == OperationEnum.Sub ? "selected" : null)">−</option>
+        <option value="Mult" selected="@(Model.InputData.Operation == OperationEnum.Mult ? "selected" : null)">×</option>
+        <option value="Div" selected="@(Model.InputData.Operation == OperationEnum.Div ? "selected" : null)">÷</option>
     </select>
- 
-    <br />
-    <input type="text" name="Value2" value="@Model.Hodnota2" />
-    <br />
-    <input type="submit" />
+
+
+    <br/>
+    @*<input type="text" name="Value2" value="@Model.InputData.Value2"/>*@
+    <label asp-for="InputData.Value2"> Enter second value:</label>
+    <input asp-for="InputData.Value2" value="@Model.InputData.Value2"/>
+    <span asp-validation-for="InputData.Value2" class="text-danger"></span>
+    <br/>
+    <input type="submit"/>
 </form>
 
 @Model.Result

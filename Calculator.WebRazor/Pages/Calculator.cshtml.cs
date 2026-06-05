@@ -10,13 +10,8 @@ namespace Calculator.WebApp.Razor.Pages
     {
         private readonly ILogger<CalculatorModel> _logger;
         private readonly LocalhostCalculatorApiClient _client;
-        
-        [Required]
-        [Range(0,100)]
-        public int Hodnota1 { get; set; }
 
-        public int Hodnota2 { get; set; }
-        public OperationEnum Operand { get; set; }
+        public InputData InputData { get; set; } = new InputData();
         public string Result { get; set; }
 
         public CalculatorModel(ILogger<CalculatorModel> logger, LocalhostCalculatorApiClient localhostCalculatorApiHttpClient)
@@ -46,12 +41,10 @@ namespace Calculator.WebApp.Razor.Pages
             _logger.LogInformation(
                 $"[{nameof(data.Value1)}] is [{data.Value1}], [{nameof(data.Operation)}] is [{data.Operation}], [{nameof(data.Value2)}] is [{data.Value2}]");
             //TODO create validations, handle errors
-            Hodnota1 = (data.Value1); 
-            Hodnota2 = (data.Value2);
-            Operand = data.Operation;
+            InputData = data;
 
             //var client = new HttpClient(); // remove this hard dependency
-            
+
             //Port you can find in CalculatorApi project->Properties->launchSettings-> 'http' part
             //client.BaseAddress = new Uri("http://localhost:5062");
 
