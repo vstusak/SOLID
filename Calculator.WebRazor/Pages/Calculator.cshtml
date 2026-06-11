@@ -6,27 +6,28 @@
 }
 <form method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
-    <label asp-for="InputData.Value1"> Enter first value:</label>
+    <label> Enter first value:</label>
     <input asp-for="InputData.Value1" value="@Model.InputData.Value1" />
     <span asp-validation-for="InputData.Value1" class="text-danger"></span>
     <br />
 
-    <label for="OperandDropdown"> Choose operand:</label>
-
+    <label asp-for="InputData.Operation"> Choose operand:</label>
+    <select asp-for="InputData.Operation" asp-items="Html.GetEnumSelectList<OperationEnum>()" value="@Model.InputData.Operation"></select>
+    <span asp-validation-for="InputData.Operation" class="text-danger"></span>
+    <!-- TODO: add validation for undefined operation not supported -->
     @* <select name="Operation" id="OperandDropdown">
         <option value="Add" selected="@(Model.InputData.Operation == OperationEnum.Add ? "selected" : null)">+</option>
         <option value="Sub" selected="@(Model.InputData.Operation == OperationEnum.Sub ? "selected" : null)">−</option>
         <option value="Mult" selected="@(Model.InputData.Operation == OperationEnum.Mult ? "selected" : null)">×</option>
         <option value="Div" selected="@(Model.InputData.Operation == OperationEnum.Div ? "selected" : null)">÷</option>
-        //TODO: replace with input asp-format="InputData.Operation" and use enum values as options
     </select> *@
 
 
     <br />
     @*<input type="text" name="Value2" value="@Model.InputData.Value2"/>*@
     <label asp-for="InputData.Value2"> Enter second value:</label>
-    <input asp-for="InputData.Value2" value="@Model.InputData.Value2" />
-    <span asp-validation-for="InputData.Value2" class="text-danger"></span>
+    <input asp-for="InputData.Value2" value="@Model.InputData.Value2" /> <!-- html comment -->
+    <span asp-validation-for="InputData.Value2" class="text-danger"></span> <!-- tag helpers: asp-for, asp-validation-for...  -->
     <br />
     <input type="submit" />
 </form>
