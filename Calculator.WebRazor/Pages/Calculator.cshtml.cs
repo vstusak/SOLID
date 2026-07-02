@@ -33,27 +33,31 @@ namespace Calculator.WebApp.Razor.Pages
         //}
         public async Task<IActionResult> OnPostAsync()
         {
+      
+            if (InputData.Operation == OperationEnum.Div && InputData.Value2 <= 0)
+            {
+                _logger.LogWarning("Division by zero is not allowed.");
+                ModelState.AddModelError(string.Empty, "Division by zero is not allowed.");
+            }
+
+            _logger.LogWarning("We are in method post.");
+            
+            //TODO add validation for value1
+
+            //var client = new HttpClient(); // re  move this hard dependency
+
+            //Port you can find in CalculatorApi project->Properties->launchSettings-> 'http' part
+            //client.BaseAddress = new Uri("http://localhost:5062");
+            
             if (!ModelState.IsValid)
             {
                 _logger.LogWarning("Model state is not valid.");
                 return Page();
             }
-            if (InputData.Operation == OperationEnum.Div && InputData.Value2 <= 0)
-            {
-                _logger.LogWarning("Division by zero is not allowed.");
-                ModelState.AddModelError(string.Empty, "Division by zero is not allowed.");
-                return Page();
-            }
-            _logger.LogWarning("We are in method post.");
+            
             _logger.LogInformation(
                 $"[{nameof(InputData.Value1)}] is [{InputData.Value1}], [{nameof(InputData.Operation)}] is [{InputData.Operation}], [{nameof(InputData.Value2)}] is [{InputData.Value2}]");
-            //TODO create validations, handle errors
-
-            //var client = new HttpClient(); // remove this hard dependency
-
-            //Port you can find in CalculatorApi project->Properties->launchSettings-> 'http' part
-            //client.BaseAddress = new Uri("http://localhost:5062");
-
+            
             var response = await _client.GetCalculationResultAsync(InputData);
             Result = response.ToString(CultureInfo.InvariantCulture);
            
