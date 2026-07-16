@@ -40,9 +40,8 @@ namespace Calculator.WebApp.Razor.Pages
                 ModelState.AddModelError(string.Empty, "Division by zero is not allowed.");
             }
 
-            _logger.LogWarning("We are in method post.");
-            
-            //TODO add validation for value1
+            _logger.LogWarning("We are in method post.");          
+
 
             //var client = new HttpClient(); // re  move this hard dependency
 

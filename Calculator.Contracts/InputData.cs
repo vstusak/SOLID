@@ -5,7 +5,9 @@ namespace Calculator.Contracts
     public class InputData
     {
         [DeniedValues(OperationEnum.Undefined, ErrorMessage = "Value 'Undefined' is not allowed.")]
-        public OperationEnum Operation { get; set; } 
+        public OperationEnum Operation { get; set; }
+
+        [Required]
         public int Value1 { get; set; }
 
         [Required]
