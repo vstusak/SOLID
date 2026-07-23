@@ -1,0 +1,12 @@
+1. Vysvetlit si Docker (Podman)
+2. Novy projekt s REST API:
+	- Vytvorit HTTP clienta
+	- CRUD operace pro polozky
+	- Repository pro polozky
+	- Polozky by mely byt ulozeny v DB (Entity framework, MS SQL v Docker)
+	- Migrace a seedovani:
+		seedovani - prvni spusteni DB, vlozeni testovacich dat
+		migrace - zmena struktury DB, pridani nove tabulky, sloupce, atd.
+3. Microsoft Aspire - vsechny existujici projekty spoustet pres Aspire
+4. UI pro polozky (Blazor)
+
