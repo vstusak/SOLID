@@ -9,4 +9,7 @@
 		migrace - zmena struktury DB, pridani nove tabulky, sloupce, atd.
 3. Microsoft Aspire - vsechny existujici projekty spoustet pres Aspire
 4. UI pro polozky (Blazor)
+5. Vytvorit testy pro REST API a UI - test containers + integration tests
+
+(6.) explain development mode (ASP Core) and production mode (ASP.NET Core) and how to switch between them
 
