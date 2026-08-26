@@ -1,4 +1,4 @@
-1. Vysvetlit si Docker (Podman)
+1. Vysvetlit si Docker (Podman) - done
 2. Novy projekt s REST API:
 	- Vytvorit HTTP clienta
 	- CRUD operace pro polozky
@@ -11,5 +11,5 @@
 4. UI pro polozky (Blazor)
 5. Vytvorit testy pro REST API a UI - test containers + integration tests
 
-(6.) explain development mode (ASP Core) and production mode (ASP.NET Core) and how to switch between them
+(6.) explain development mode (ASP Core) and production mode (ASP.NET Core) and how to switch between them - done
 
