@@ -1,9 +1,12 @@
 1. Vysvetlit si Docker (Podman) - done
 2. Novy projekt s REST API:
+	- Vytvořit /api/v2/ kontroler pro weatherForecast a mít v1 i v2 aktivní 
+	- Přidat Swagger
 	- Vytvorit HTTP clienta
 	- CRUD operace pro polozky
 	- Repository pro polozky
 	- Polozky by mely byt ulozeny v DB (Entity framework, MS SQL v Docker)
+	- minimal API (přidat endpointy)
 	- Migrace a seedovani:
 		seedovani - prvni spusteni DB, vlozeni testovacich dat
 		migrace - zmena struktury DB, pridani nove tabulky, sloupce, atd.

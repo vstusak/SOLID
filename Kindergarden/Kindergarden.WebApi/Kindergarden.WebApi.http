@@ -1,0 +1,6 @@
+@Kindergarden.WebApi_HostAddress = http://localhost:5274
+
+GET {{Kindergarden.WebApi_HostAddress}}/api/v1/weatherforecast/
+Accept: application/json
+
+###
