@@ -1,4 +1,6 @@
 
+using Asp.Versioning;
+
 namespace Kindergarden.WebApi
 {
     public class Program
@@ -12,6 +14,12 @@ namespace Kindergarden.WebApi
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            builder.Services.AddApiVersioning(options =>
+            {
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ReportApiVersions = true;
+            });
 
             var app = builder.Build();
 

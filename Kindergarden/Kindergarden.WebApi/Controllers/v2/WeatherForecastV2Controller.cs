@@ -1,14 +1,16 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Kindergarden.WebApi.Controllers
+namespace Kindergarden.WebApi.Controllers.v2
 {
     [ApiController]
-    [Route("/api/v1/[controller]")]
-    public class WeatherForecastController : ControllerBase
+    [ApiVersion("2.0")]
+    [Route("/api/v{version:apiVersion}/weather")]
+    public class WeatherForecastV2Controller : ControllerBase
     {
         private static readonly string[] Summaries =
         [
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Freezing2", "Bracing2", "Chilly2", "Cool2", "Mild2", "Warm2", "Balmy2", "Hot2", "Sweltering2", "Scorching2"
         ];
 
         [HttpGet(Name = "GetWeatherForecast")]
