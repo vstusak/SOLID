@@ -1,9 +1,9 @@
 @Kindergarden.WebApi_HostAddress = http://localhost:5274
 
-GET {{Kindergarden.WebApi_HostAddress}}/api/v1/Weather/
+GET {{Kindergarden.WebApi_HostAddress}}/api/v1/WeatherForecast/
 Accept: application/json
 ###
 
-GET {{Kindergarden.WebApi_HostAddress}}/api/v2/weather/
+GET {{Kindergarden.WebApi_HostAddress}}/api/v2/weatherForecast/
 Accept: application/json
 ###

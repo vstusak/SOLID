@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Kindergarden.WebApi.Controllers.v1
 {
+    //NOTE:Control name of endpoint, class name (also for different namespaces) and route for different versions of API
     [ApiController]
-    [ApiVersion("1.0")]
-    [Route("/api/v{version:apiVersion}/weather")]
+    [Route("/api/v1/WeatherForecast")]
     public class WeatherForecastV1Controller : ControllerBase
     {
         private static readonly string[] Summaries =
@@ -13,7 +13,7 @@ namespace Kindergarden.WebApi.Controllers.v1
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         ];
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet(Name = "GetWeatherForecastV1")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
