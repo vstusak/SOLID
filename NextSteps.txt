@@ -1,7 +1,9 @@
 1. Vysvetlit si Docker (Podman) - done
 2. Novy projekt s REST API:
-	+/- Vytvořit /api/v2/ kontroler pro weatherForecast a mít v1 i v2 aktivní - DONE (TODO - improve following Program.cs)
+	+/- Vytvořit /api/v2/ kontroler pro weatherForecast a mít v1 i v2 aktivní - DONE 
+		(TODO - improve following Program.cs)
 	+ Přidat Swagger - DONE
+		(Pridano automaticke spusteni swaggeru v browseru - Project Propertirs -> Debug -> Launch browser)
 	- Vytvorit HTTP clienta
 	- CRUD operace pro polozky
 	- Repository pro polozky
