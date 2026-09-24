@@ -50,6 +50,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kindergarden.WebApi", "Kind
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kindergarden", "Kindergarden", "{57737DF0-C225-49DB-B45E-AA3933FDAE4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kindergarden.WebApi.Client", "Kindergarden.WebApi.Client\Kindergarden.WebApi.Client.csproj", "{38104590-779E-445A-93BA-D85D3632A3DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kindergarden.Contracts", "Kindergarden.Contracts\Kindergarden.Contracts.csproj", "{10A93A24-ED2C-4BC5-AFDC-9BB7D682A6AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,6 +136,14 @@ Global
 		{4A289604-5A6B-42C0-A37F-5795EEE3BAE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A289604-5A6B-42C0-A37F-5795EEE3BAE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A289604-5A6B-42C0-A37F-5795EEE3BAE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38104590-779E-445A-93BA-D85D3632A3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38104590-779E-445A-93BA-D85D3632A3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38104590-779E-445A-93BA-D85D3632A3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38104590-779E-445A-93BA-D85D3632A3DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10A93A24-ED2C-4BC5-AFDC-9BB7D682A6AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10A93A24-ED2C-4BC5-AFDC-9BB7D682A6AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10A93A24-ED2C-4BC5-AFDC-9BB7D682A6AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10A93A24-ED2C-4BC5-AFDC-9BB7D682A6AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,6 +155,8 @@ Global
 		{82C8B017-2642-4DE6-B4F8-34B51E5AD8F8} = {B026C972-6AE9-4B0E-AE56-FB30AE58DC71}
 		{571D4B3D-E298-4557-BC47-2276F4C0194C} = {B026C972-6AE9-4B0E-AE56-FB30AE58DC71}
 		{4A289604-5A6B-42C0-A37F-5795EEE3BAE6} = {57737DF0-C225-49DB-B45E-AA3933FDAE4F}
+		{38104590-779E-445A-93BA-D85D3632A3DB} = {57737DF0-C225-49DB-B45E-AA3933FDAE4F}
+		{10A93A24-ED2C-4BC5-AFDC-9BB7D682A6AB} = {57737DF0-C225-49DB-B45E-AA3933FDAE4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06D4C238-5C66-46B4-B9AF-1B44E87FF3CA}
