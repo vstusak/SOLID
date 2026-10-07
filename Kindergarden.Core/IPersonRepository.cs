@@ -13,6 +13,7 @@ namespace Kindergarden.Core
         public async Task<Person> AddPersonAsync(Person person)
         {
             //TODO: implement logic to add person to the database or any storage (Entity framework)
+            //TODO: pridej indexy na tabulce Persons (az ji vytvorime)
             return person;
         }
     }
